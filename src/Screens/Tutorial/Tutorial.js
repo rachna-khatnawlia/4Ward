@@ -1,6 +1,6 @@
 //import liraries
 import React, { useState } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, SafeAreaView } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import imagePath from '../../constants/imagePath';
@@ -39,17 +39,18 @@ const Tutorial = ({ navigation }) => {
         // console.log(item.description);
         return (
             <View style={introStyles.tutMainStyle}>
-                <View style={{ justifyContent: 'center' }}>
-                    <Image source={item.image} style={introStyles.tutImage} />
-                </View>
-                <View style={introStyles.titleDesContainer}>
-                    <View style={introStyles.tittleTextView} >
-                        <Text style={introStyles.tittleText}>{item.tittle} </Text>
+               
+                    <View style={{ justifyContent: 'center' }}>
+                        <Image source={item.image} style={introStyles.tutImage} />
                     </View>
-                    <View style={{ marginHorizontal: moderateScale(25) }}>
-                        <Text style={introStyles.desText}>{item.description}</Text>
+                    <View style={introStyles.titleDesContainer}>
+                        <View style={introStyles.tittleTextView} >
+                            <Text style={introStyles.tittleText}>{item.tittle} </Text>
+                        </View>
+                        <View style={{ marginHorizontal: moderateScale(25) }}>
+                            <Text style={introStyles.desText}>{item.description}</Text>
+                        </View>
                     </View>
-                </View>
 
             </View>
         )
@@ -65,6 +66,8 @@ const Tutorial = ({ navigation }) => {
 
     return (
         <View style={introStyles.mainDiv}>
+             <SafeAreaView style={{flex:1}}>
+
             <AppIntroSlider
                 data={slides}
                 renderItem={renderItem}
@@ -72,6 +75,7 @@ const Tutorial = ({ navigation }) => {
                 activeDotStyle={{ height: moderateScale(4), width: moderateScale(32), backgroundColor: colors.themeredColor, }}
                 dotStyle={{ height: moderateScale(4), width: moderateScale(16), backgroundColor: 'grey' }}
             />
+            </SafeAreaView>
         </View>
     );
 };

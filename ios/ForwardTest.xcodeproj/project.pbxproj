@@ -14,6 +14,13 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-ForwardTest-ForwardTestTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-ForwardTest-ForwardTestTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		38223194257B4F0D9855F32F /* Barlow-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B198A444EAED4E20B0F2E244 /* Barlow-Bold.ttf */; };
+		E66BD34A220E4B39AC14390E /* Barlow-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1CD4EDDADD540A69960DAEE /* Barlow-Medium.ttf */; };
+		52A61CB7D92F4CBA89494970 /* Barlow-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88BA5399C5934D9D80C6175C /* Barlow-Regular.ttf */; };
+		A1F0156F76DB4157AEDCB30B /* Barlow-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EBE5A86C5BAD44E0B9006F24 /* Barlow-SemiBold.ttf */; };
+		B90214AAD6564F2FB86387EF /* CircularStd-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DCCFBBFEC1A84C9EBE6DDDF6 /* CircularStd-Bold.ttf */; };
+		EAF24649FBA0498B9CB604AF /* CircularStd-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 900B98CE5AC44B1D93A509F5 /* CircularStd-Book.otf */; };
+		7E18D6B673464C0198B571B5 /* CircularStd-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 46AA92F1EEB7421D90E0B93B /* CircularStd-Medium.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +51,13 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ForwardTest/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-ForwardTest-ForwardTestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ForwardTest-ForwardTestTests.release.xcconfig"; path = "Target Support Files/Pods-ForwardTest-ForwardTestTests/Pods-ForwardTest-ForwardTestTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		B198A444EAED4E20B0F2E244 /* Barlow-Bold.ttf */ = {isa = PBXFileReference; name = "Barlow-Bold.ttf"; path = "../src/assets/fonts/Barlow-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A1CD4EDDADD540A69960DAEE /* Barlow-Medium.ttf */ = {isa = PBXFileReference; name = "Barlow-Medium.ttf"; path = "../src/assets/fonts/Barlow-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		88BA5399C5934D9D80C6175C /* Barlow-Regular.ttf */ = {isa = PBXFileReference; name = "Barlow-Regular.ttf"; path = "../src/assets/fonts/Barlow-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EBE5A86C5BAD44E0B9006F24 /* Barlow-SemiBold.ttf */ = {isa = PBXFileReference; name = "Barlow-SemiBold.ttf"; path = "../src/assets/fonts/Barlow-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DCCFBBFEC1A84C9EBE6DDDF6 /* CircularStd-Bold.ttf */ = {isa = PBXFileReference; name = "CircularStd-Bold.ttf"; path = "../src/assets/fonts/CircularStd-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		900B98CE5AC44B1D93A509F5 /* CircularStd-Book.otf */ = {isa = PBXFileReference; name = "CircularStd-Book.otf"; path = "../src/assets/fonts/CircularStd-Book.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		46AA92F1EEB7421D90E0B93B /* CircularStd-Medium.otf */ = {isa = PBXFileReference; name = "CircularStd-Medium.otf"; path = "../src/assets/fonts/CircularStd-Medium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +136,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				7730F0994B1F47BF8C0200A3 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -147,6 +162,21 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		7730F0994B1F47BF8C0200A3 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				B198A444EAED4E20B0F2E244 /* Barlow-Bold.ttf */,
+				A1CD4EDDADD540A69960DAEE /* Barlow-Medium.ttf */,
+				88BA5399C5934D9D80C6175C /* Barlow-Regular.ttf */,
+				EBE5A86C5BAD44E0B9006F24 /* Barlow-SemiBold.ttf */,
+				DCCFBBFEC1A84C9EBE6DDDF6 /* CircularStd-Bold.ttf */,
+				900B98CE5AC44B1D93A509F5 /* CircularStd-Book.otf */,
+				46AA92F1EEB7421D90E0B93B /* CircularStd-Medium.otf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -244,6 +274,13 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				38223194257B4F0D9855F32F /* Barlow-Bold.ttf in Resources */,
+				E66BD34A220E4B39AC14390E /* Barlow-Medium.ttf in Resources */,
+				52A61CB7D92F4CBA89494970 /* Barlow-Regular.ttf in Resources */,
+				A1F0156F76DB4157AEDCB30B /* Barlow-SemiBold.ttf in Resources */,
+				B90214AAD6564F2FB86387EF /* CircularStd-Bold.ttf in Resources */,
+				EAF24649FBA0498B9CB604AF /* CircularStd-Book.otf in Resources */,
+				7E18D6B673464C0198B571B5 /* CircularStd-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
