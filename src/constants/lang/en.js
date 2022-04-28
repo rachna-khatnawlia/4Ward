@@ -13,7 +13,7 @@ export default {
     FIRST_NAME: 'First name',
     LAST_NAME: 'Last name',
     NEXT: 'NEXT',
-    SEND_OTP: 'Enter the 4-digit code sent to you at 875 364 8947',
+    SEND_OTP: 'Enter the 4-digit code sent to you at',
     EDIT_OTP_NO: 'Edit my mobile number',
     REESEND_CODE: 'Resend code in 0:14',
     VERIFY: 'VERIFY',

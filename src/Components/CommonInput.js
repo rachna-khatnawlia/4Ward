@@ -9,7 +9,8 @@ import { moderateScale, moderateScaleVertical, textScale } from '../styles/respo
 const CommonInput = ({
     placeholderTxt,
     secureTextEntry, 
-    inputContainer, input
+    inputContainer, input,
+    onChangeTxt
 }) => {
     return (
         <View style={{
@@ -21,7 +22,7 @@ const CommonInput = ({
                 placeholder={placeholderTxt}
                 placeholderTextColor={colors.white}
                 secureTextEntry={secureTextEntry}
-
+                onChangeText={onChangeTxt}
             />
             <View style={styles.showBox}>
                 {

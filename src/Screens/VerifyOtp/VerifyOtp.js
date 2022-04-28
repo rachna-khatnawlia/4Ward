@@ -5,26 +5,26 @@ import Button from '../../Components/ButtonComponent';
 import CommonInput from '../../Components/CommonInput';
 import BackWardArrow from '../../Components/GoBackArrowComponent';
 import strings from '../../constants/lang';
-import navigationStrings from '../../navigation/navigationStrings';
 import colors from '../../styles/colors';
 import { commonStyle } from '../../styles/commonStyles';
 import fontFamily from '../../styles/fontFamily';
 import { moderateScale, moderateScaleVertical, textScale } from '../../styles/responsiveSize';
 
 // create a component
-const VerifyOtp = ({ navigation }) => {
+const VerifyOtp = ({ navigation, route }) => {
+    const phoneNumber = route?.params?.phone
+    console.log("phone number entered by user is", phoneNumber)
     return (
         <ScrollView style={{ flex: 1, backgroundColor: colors.themeColor }}>
             <SafeAreaView>
                 <BackWardArrow />
                 <View style={commonStyle.welcome}>
-                    <Text style={styles.showNo}>{strings.SEND_OTP}</Text>
+                    <Text style={styles.showNo}>{strings.SEND_OTP} {phoneNumber}</Text>
                     <Text style={styles.editNo}>{strings.EDIT_OTP_NO}</Text>
                 </View>
 
                 <View style={styles.otpPassword}>
                     <View style={styles.flexView}>
-                        {/* <Text>hello</Text> */}
                         <CommonInput
                             secureTextEntry={false}
                             inputContainer={{ width: moderateScale(50) }}
@@ -32,7 +32,6 @@ const VerifyOtp = ({ navigation }) => {
                         />
                     </View>
                     <View style={styles.flexView}>
-                        {/* <Text>hello</Text> */}
                         <CommonInput
                             secureTextEntry={false}
                             inputContainer={{ width: moderateScale(50) }}
@@ -40,7 +39,6 @@ const VerifyOtp = ({ navigation }) => {
                         />
                     </View>
                     <View style={styles.flexView}>
-                        {/* <Text>hello</Text> */}
                         <CommonInput
                             secureTextEntry={false}
                             inputContainer={{ width: moderateScale(50) }}
@@ -48,7 +46,6 @@ const VerifyOtp = ({ navigation }) => {
                         />
                     </View>
                     <View style={styles.flexView}>
-                        {/* <Text>hello</Text> */}
                         <CommonInput
                             secureTextEntry={false}
                             inputContainer={{ width: moderateScale(50) }}
@@ -68,7 +65,7 @@ const VerifyOtp = ({ navigation }) => {
                             <Button
                                 ButtonText={strings.VERIFY}
                                 btnStyle={{ marginVertical: moderateScale(12) }}
-                                onPress={() => navigation.navigate(navigationStrings.SET_PASSWORD)}
+                                // onPress={() => navigation.navigate(navigationStrings.SET_PASSWORD)}
                             />
                         </View>
                     </KeyboardAvoidingView>

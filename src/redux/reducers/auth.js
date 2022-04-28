@@ -1,23 +1,28 @@
-import types from '../types';
+import { removeLoginLocally, setLoginLocally } from "../../utils/utils";
+import types from "../types";
 
-const initial_state = {
-  userData: {},
+const initialState = {
+    userLoginState: {}
 };
 
-export default function (state = initial_state, action) {
-  switch (action.type) {
-    case types.LOGIN: {
-      const data = action.payload;
-      console.log(data, 'this login data');
-      return {userData: data};
-    }
-    case types.USER_LOGOUT: {
-      const data = action.payload;
-      return {userData: undefined};
-    }
+export const UserStatus = (state = initialState, action) => {
+    switch (action.type) {
+        case types.LOGIN: {
+            const data = action.payload;
+            console.log("data on action type login", data);
+            // setLoginLocally(data);
+            return {
+                userLoginState: data
+            }
+        }
 
-    default: {
-      return {...state};
+        case types.USER_LOGOUT: {
+            // removeLoginLocally();
+            return { 
+                userLoginState: undefined
+             }
+        }
+
+        default: return state
     }
-  }
 }

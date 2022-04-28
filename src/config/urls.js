@@ -1,5 +1,6 @@
-// export const API_BASE_URL = 'https://api.rostaging.com/api/v1';
+export const API_BASE_URL = 'http://192.168.100.101:8002/api';
 
-// export const getApiUrl = endpoint => API_BASE_URL + endpoint;
+export  const getApiUrl = (endpoint) => API_BASE_URL + endpoint;
 
-// export const HOMEPAGE_DATA_URL = getApiUrl('/homepage');
+export const LOGIN_API = getApiUrl('/userlogin');
+export const SIGNUP_API = getApiUrl('/signup');
