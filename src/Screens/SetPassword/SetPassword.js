@@ -19,8 +19,8 @@ const SetPassword = ({ navigation }) => {
 
                 {/* -------------Welcome Page Text--------------- */}
                 <View style={commonStyle.welcome}>
-                    <Text style={commonStyle.welcomeHeading}>{strings.CR_NW_ACCOUNT}</Text>
-                    <Text style={commonStyle.welcomeDes}>{strings.CR_NW_ACCOUNT_TEXT}</Text>
+                    <Text style={commonStyle.welcomeHeading}>{strings.SET_PASSWORD}</Text>
+                    <Text style={commonStyle.welcomeDes}>{strings.SET_PASSWORD_TXT}</Text>
                 </View>
 
                 <View style={styles.loginContainer}>

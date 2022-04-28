@@ -40,11 +40,12 @@ const styles = StyleSheet.create({
     inputContainer: {
         flexDirection: 'row',
         flex:1,
-        width: moderateScale(328),
+        // width: moderateScale(328),
         backgroundColor: colors.inputColor,
         alignItems: 'center',
         borderRadius:moderateScale(8),
-        marginVertical:moderateScale(12)
+        marginVertical:moderateScale(12),
+        marginHorizontal:moderateScale(23)
     },
     input: {
         height: moderateScale(48),

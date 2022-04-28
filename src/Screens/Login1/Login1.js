@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView, SafeAreaView, TouchableOpacity, Image, KeyboardAvoidingView, Platform } from 'react-native';
 import Button from '../../Components/ButtonComponent';
 import CommonInput from '../../Components/CommonInput';
+import CountryCodePicker from '../../Components/CountryCodePicker';
 import BackWardArrow from '../../Components/GoBackArrowComponent';
 import strings from '../../constants/lang';
 import navigationStrings from '../../navigation/navigationStrings';
@@ -23,6 +24,19 @@ const Login1 = ({ navigation }) => {
                 </View>
 
                 <View style={styles.loginContainer}>
+
+                    <View style={commonStyle.phoneInputBox}>
+                        <View style={commonStyle.countryPickerBg}>
+                            <CountryCodePicker />
+                        </View>
+                        <View style={{ flex: 0.7, alignItems: 'flex-end',}}>
+                            <CommonInput
+                                placeholderTxt={strings.MOBILE_NUMBER}
+                                inputContainer={{ marginRight:moderateScale(0),}}
+                            />
+                        </View>
+                    </View>
+
                     <CommonInput
                         placeholderTxt='Password'
                         secureTextEntry={true}
@@ -76,7 +90,8 @@ const styles = StyleSheet.create({
         color: colors.Forgot,
         fontSize: textScale(13),
         fontFamily: fontFamily.barlowRegular
-    }
+    },
+
 });
 //make this component available to the app
 export default Login1;

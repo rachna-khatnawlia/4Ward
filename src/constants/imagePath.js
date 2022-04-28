@@ -9,4 +9,6 @@ export default {
   backwardArrow: require('../assets/images/ic_back_arrow.png'),
   backwardArrow2: require('../assets/images/ic_back_arrow_2x.png'),
 
+  downwardArrow: require('../assets/images/ic_down.png')
+
 };

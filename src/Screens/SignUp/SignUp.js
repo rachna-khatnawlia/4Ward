@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView, SafeAreaView, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native';
 import Button from '../../Components/ButtonComponent';
 import CommonInput from '../../Components/CommonInput';
+import CountryCodePicker from '../../Components/CountryCodePicker';
 import BackWardArrow from '../../Components/GoBackArrowComponent';
 import strings from '../../constants/lang';
 import navigationStrings from '../../navigation/navigationStrings';
@@ -27,20 +28,18 @@ const SignUp = ({ navigation }) => {
                 <View style={styles.loginContainer}>
                     {/* -------------First Name & Last Name--------------- */}
                     <View style={styles.TwoInputFields}>
-                        <View style={{ flex: 0.5, marginRight: moderateScale(10) }}>
-                            {/* <Text>hello</Text> */}
+                        <View style={{ flex: 0.5, }}>
                             <CommonInput
                                 placeholderTxt={strings.FIRST_NAME}
                                 secureTextEntry={false}
-                                inputContainer={{ width: moderateScale(156) }}
+                                inputContainer={{ marginRight: moderateScale(15) }}
                             />
                         </View>
-                        <View style={{ flex: 0.5, marginLeft: moderateScale(10) }}>
-                            {/* <Text style={{}}>hello</Text> */}
+                        <View style={{ flex: 0.5, }}>
                             <CommonInput
                                 placeholderTxt={strings.LAST_NAME}
                                 secureTextEntry={false}
-                                inputContainer={{ width: moderateScale(156) }}
+                                inputContainer={{ marginLeft: moderateScale(0) }}
                             />
                         </View>
                     </View>
@@ -50,12 +49,26 @@ const SignUp = ({ navigation }) => {
                         placeholderTxt={strings.EMAIL}
                         secureTextEntry={false}
                     />
-                    {/* ----------------------Next Button----------------- */}
+
+                    {/* -------------Phone Input--------------- */}
+                    <View style={commonStyle.phoneInputBox}>
+                        <View style={commonStyle.countryPickerBg}>
+                            <CountryCodePicker />
+                        </View>
+                        <View style={{ flex: 0.7, alignItems: 'flex-end',}}>
+                            <CommonInput
+                                placeholderTxt={strings.MOBILE_NUMBER}
+                                inputContainer={{ marginRight:moderateScale(0),}}
+                            />
+                        </View>
+                    </View>
+
+                    {/* ------------------Next Button----------------- */}
                     <KeyboardAvoidingView>
                         <Button
                             ButtonText={strings.NEXT}
                             btnStyle={{ marginVertical: moderateScale(12) }}
-                            onPress={()=>navigation.navigate(navigationStrings.VERIFY_OTP)}
+                            onPress={() => navigation.navigate(navigationStrings.VERIFY_OTP)}
                         />
                     </KeyboardAvoidingView>
                 </View>
@@ -71,8 +84,6 @@ const styles = StyleSheet.create({
     },
     TwoInputFields: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginHorizontal: moderateScale(27),
         justifyContent: 'space-between',
     }
 });
