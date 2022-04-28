@@ -1,4 +1,4 @@
-import { View, Text, Image, ScrollView, SafeAreaView } from 'react-native';
+import { View, Text, Image, ScrollView, SafeAreaView,TouchableOpacity } from 'react-native';
 import React from 'react';
 import { styles } from './styles';
 import imagePath from '../../constants/imagePath';
@@ -6,10 +6,11 @@ import Button from '../../Components/ButtonComponent';
 import { moderateScale, textScale } from '../../styles/responsiveSize';
 import colors from '../../styles/colors';
 import { commonStyle } from '../../styles/commonStyles';
+import navigationStrings from '../../navigation/navigationStrings';
 
-export default function Login() {
+export default function Login({ navigation }) {
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: colors.themeColor}}>
+    <ScrollView style={{ flex: 1, backgroundColor: colors.themeColor }}>
 
       <SafeAreaView style={styles.loginContainer}>
 
@@ -26,8 +27,8 @@ export default function Login() {
         {/* ----------------------login with phone number----------------- */}
         <Button
           ButtonText="Log In with Phone number"
-          btnStyle={{ marginVertical: moderateScale(12), }}
-        // onPress={() => alert('button onpress')}
+          btnStyle={{ marginVertical: moderateScale(12) }}
+          onPress={() => { navigation.navigate(navigationStrings.LOGIN1) }}
         />
 
         <View style={styles.orBox}>
@@ -38,7 +39,7 @@ export default function Login() {
           ButtonText="Log In with Google"
           btnStyle={{ marginVertical: moderateScale(12), backgroundColor: colors.white }}
           buttonTxt={{ color: colors.loginWith }}
-          btnIcon= {imagePath.googleIcon}
+          btnIcon={imagePath.googleIcon}
         // onPress={() => alert('button onpress')}
         />
 
@@ -46,7 +47,7 @@ export default function Login() {
           ButtonText="Log In with Facebook"
           btnStyle={{ marginVertical: moderateScale(12), backgroundColor: colors.white }}
           buttonTxt={{ color: colors.loginWith }}
-          btnIcon= {imagePath.fbIcon}
+          btnIcon={imagePath.fbIcon}
         // onPress={() => alert('button onpress')}
         />
 
@@ -54,16 +55,18 @@ export default function Login() {
           ButtonText="Log In with Apple"
           btnStyle={{ marginVertical: moderateScale(12), backgroundColor: colors.white }}
           buttonTxt={{ color: colors.loginWith }}
-          btnIcon= {imagePath.appleIcon}
+          btnIcon={imagePath.appleIcon}
         // onPress={() => alert('button onpress')}
         />
 
-        <View style={[commonStyle.flexRow,styles.signUpTxtBox]}>
-          <Text style={{color:colors.white, fontSize:textScale(14)}}>New here? </Text>
-          <Text style={styles.signUpTxt}>Sign Up</Text>
+        <View style={[commonStyle.flexRow, styles.signUpTxtBox]}>
+          <Text style={{ color: colors.white, fontSize: textScale(14) }}>New here? </Text>
+          <TouchableOpacity onPress={()=>{navigation.navigate(navigationStrings.SIGNUP)}}>
+            <Text style={styles.signUpTxt}>Sign Up</Text>
+          </TouchableOpacity>
         </View>
 
-        </SafeAreaView>
+      </SafeAreaView>
     </ScrollView>
   );
 }
