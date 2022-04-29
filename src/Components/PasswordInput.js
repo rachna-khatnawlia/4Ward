@@ -1,17 +1,26 @@
 //import liraries
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import colors from '../styles/colors';
 import fontFamily from '../styles/fontFamily';
 import { moderateScale, moderateScaleVertical, textScale } from '../styles/responsiveSize';
 
 // create a component
-const CommonInput = ({
+const PasswordInput = ({
     placeholderTxt,
-    secureTextEntry, 
-    inputContainer, input,
+    inputContainer, 
+    input,
     onChangeTxt
 }) => {
+    //--------------------Handle Password Visibility using Eye Button----------------
+  const [passwordVisible, setPasswordVisible] = useState(true)
+  function handlePasswordEye() {
+    if (passwordVisible) {
+      setPasswordVisible(false)
+    } else {
+      setPasswordVisible(true)
+    }
+  }
     return (
         <View style={{
             ...styles.inputContainer,
@@ -21,12 +30,12 @@ const CommonInput = ({
                 style={{...styles.input,...input}}
                 placeholder={placeholderTxt}
                 placeholderTextColor={colors.white}
-                secureTextEntry={secureTextEntry}
+                secureTextEntry={passwordVisible}
                 onChangeText={onChangeTxt}
             />
             <View style={styles.showBox}>
                 {
-                        <View></View>
+                    <TouchableOpacity onPress={handlePasswordEye}><Text style={styles.showText}>{(passwordVisible) ? "Show" : "Hide"}</Text></TouchableOpacity>
                 }
             </View>
         </View>
@@ -61,7 +70,11 @@ const styles = StyleSheet.create({
         paddingRight: moderateScale(16),
         fontFamily: fontFamily.barlowRegular
     },
+    showText: {
+        color: colors.white,
+        fontSize: textScale(14)
+    }
 });
 
 //make this component available to the app
-export default CommonInput;
+export default PasswordInput;

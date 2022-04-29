@@ -7,6 +7,7 @@ import { moderateScale, textScale } from '../../styles/responsiveSize';
 import colors from '../../styles/colors';
 import { commonStyle } from '../../styles/commonStyles';
 import navigationStrings from '../../navigation/navigationStrings';
+import { googleLogin } from '../../../App';
 
 export default function Login({ navigation }) {
   return (
@@ -40,7 +41,7 @@ export default function Login({ navigation }) {
           btnStyle={{ marginVertical: moderateScale(12), backgroundColor: colors.white }}
           buttonTxt={{ color: colors.loginWith }}
           btnIcon={imagePath.googleIcon}
-        // onPress={() => alert('button onpress')}
+          onPress={googleLogin}
         />
 
         <Button

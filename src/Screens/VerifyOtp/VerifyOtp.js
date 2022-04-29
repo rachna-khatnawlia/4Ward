@@ -12,14 +12,15 @@ import { moderateScale, moderateScaleVertical, textScale } from '../../styles/re
 
 // create a component
 const VerifyOtp = ({ navigation, route }) => {
-    const phoneNumber = route?.params?.phone
-    console.log("phone number entered by user is", phoneNumber)
+    const phoneNumber = route?.params?.phone;
+    const phoneCode = route?.params?.code
+
     return (
         <ScrollView style={{ flex: 1, backgroundColor: colors.themeColor }}>
             <SafeAreaView>
                 <BackWardArrow />
                 <View style={commonStyle.welcome}>
-                    <Text style={styles.showNo}>{strings.SEND_OTP} {phoneNumber}</Text>
+                    <Text style={styles.showNo}>{strings.SEND_OTP} {phoneCode}  {phoneNumber}</Text>
                     <Text style={styles.editNo}>{strings.EDIT_OTP_NO}</Text>
                 </View>
 

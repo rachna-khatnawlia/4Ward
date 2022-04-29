@@ -5,6 +5,7 @@ import Button from '../../Components/ButtonComponent';
 import CommonInput from '../../Components/CommonInput';
 import CountryCodePicker from '../../Components/CountryCodePicker';
 import BackWardArrow from '../../Components/GoBackArrowComponent';
+import PasswordInput from '../../Components/PasswordInput';
 import strings from '../../constants/lang';
 import navigationStrings from '../../navigation/navigationStrings';
 import actions from '../../redux/actions';
@@ -20,10 +21,10 @@ const SignUp = ({ navigation }) => {
         lastName: '',
         email: '',
         phone: '',
-        phoneCode: '',
-        countryCode: '',
-        deviceToken: '',
-        deviceType: '',
+        phoneCode: '+91',
+        countryCode: 'IN',
+        deviceToken: 'dtLFa9OM6UEbsHD1Cv_S-O:APA91bEO2rU_o3T5DkrZ32zzQwpbATBOf4kw0ASjzVmiKRDaDcOfrtv_fQVmF24Z7OLILBehOJob9V43i4og7LgPwrWE0TuECQaiDHRT3GBp9rMwbfya51vgbn8BovWFo4wiuY0KB6Cw',
+        deviceType: Platform.OS == 'ios' ? 'IOS' : 'ANDROID',
         password: ''
     })
 
@@ -38,17 +39,20 @@ const SignUp = ({ navigation }) => {
             last_name: lastName,
             email: email,
             phone: phone,
-            phone_code: '91',
-            country_code: 'IN',
-            device_token: 'dtLFa9OM6UEbsHD1Cv_S-O:APA91bEO2rU_o3T5DkrZ32zzQwpbATBOf4kw0ASjzVmiKRDaDcOfrtv_fQVmF24Z7OLILBehOJob9V43i4og7LgPwrWE0TuECQaiDHRT3GBp9rMwbfya51vgbn8BovWFo4wiuY0KB6Cw',
-            device_type: Platform.OS == 'ios' ? 'IOS' : 'ANDROID',
+            phone_code: phoneCode,
+            country_code: countryCode,
+            device_token: deviceToken,
+            device_type: deviceType,
             password: password
         }
         console.log("Signup data : ", signUpAPIData)
         try {
             const res = await actions.SignUp(signUpAPIData)
             console.log("singnup api res_+++++", res)
-            navigation.navigate(navigationStrings.VERIFY_OTP, {phone:phone})
+            navigation.navigate(navigationStrings.VERIFY_OTP, {
+                phone:phone, 
+                code: phoneCode
+            })
             alert("User signup successfully....!!!")
         } catch (error) {
             console.log("error raised", error)
@@ -75,7 +79,6 @@ const SignUp = ({ navigation }) => {
                         <View style={{ flex: 0.5, }}>
                             <CommonInput
                                 placeholderTxt={strings.FIRST_NAME}
-                                secureTextEntry={false}
                                 inputContainer={{ marginRight: moderateScale(15) }}
                                 onChangeTxt={(firstName) => updateState({ firstName })}
                                 />
@@ -83,7 +86,6 @@ const SignUp = ({ navigation }) => {
                         <View style={{ flex: 0.5, }}>
                             <CommonInput
                                 placeholderTxt={strings.LAST_NAME}
-                                secureTextEntry={false}
                                 inputContainer={{ marginLeft: moderateScale(0) }}
                                 onChangeTxt={(lastName) => updateState({ lastName })}
                             />
@@ -93,7 +95,6 @@ const SignUp = ({ navigation }) => {
                     {/* -------------Email Field--------------- */}
                     <CommonInput
                         placeholderTxt={strings.EMAIL}
-                        secureTextEntry={false}
                         onChangeTxt={(email) => updateState({ email })}
                     />
 
@@ -107,20 +108,20 @@ const SignUp = ({ navigation }) => {
                                 placeholderTxt={strings.MOBILE_NUMBER}
                                 inputContainer={{ marginRight: moderateScale(0) }}
                                 onChangeTxt={(phone) => updateState({ phone })}
+                                keyBoardType="numeric"
+                                keyboardAppearance='dark'
                             />
                         </View>
                     </View>
 
                     {/* -------------Password Field--------------- */}
-                    <CommonInput
+                    <PasswordInput
                         placeholderTxt={strings.PASSWORD}
-                        secureTextEntry={true}
                         onChangeTxt={(password) => updateState({ password })}
                     />
                     {/* -------------Confirm Field--------------- */}
-                    <CommonInput
+                    <PasswordInput
                         placeholderTxt={strings.CFRM_PASSWORD}
-                        secureTextEntry={true}
                     />
 
                     {/* ------------------Next Button----------------- */}

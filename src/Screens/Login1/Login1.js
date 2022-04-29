@@ -5,6 +5,7 @@ import Button from '../../Components/ButtonComponent';
 import CommonInput from '../../Components/CommonInput';
 import CountryCodePicker from '../../Components/CountryCodePicker';
 import BackWardArrow from '../../Components/GoBackArrowComponent';
+import PasswordInput from '../../Components/PasswordInput';
 import strings from '../../constants/lang';
 import navigationStrings from '../../navigation/navigationStrings';
 import colors from '../../styles/colors';
@@ -29,17 +30,16 @@ const Login1 = ({ navigation }) => {
                         <View style={commonStyle.countryPickerBg}>
                             <CountryCodePicker />
                         </View>
-                        <View style={{ flex: 0.7, alignItems: 'flex-end',}}>
+                        <View style={{ flex: 0.7, alignItems: 'flex-end'}}>
                             <CommonInput
                                 placeholderTxt={strings.MOBILE_NUMBER}
-                                inputContainer={{ marginRight:moderateScale(0),}}
+                                inputContainer={{ marginRight:moderateScale(0)}}
                             />
                         </View>
                     </View>
 
-                    <CommonInput
+                    <PasswordInput
                         placeholderTxt='Password'
-                        secureTextEntry={true}
                     />
                     <View style={styles.otpPassword}>
                         <View style={styles.otpPassword1}>
