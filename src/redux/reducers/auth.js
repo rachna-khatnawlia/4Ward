@@ -10,14 +10,14 @@ export const UserStatus = (state = initialState, action) => {
         case types.LOGIN: {
             const data = action.payload;
             console.log("data on action type login", data);
-            // setLoginLocally(data);
+            setLoginLocally(data);
             return {
                 userLoginState: data
             }
         }
 
         case types.USER_LOGOUT: {
-            // removeLoginLocally();
+            removeLoginLocally();
             return { 
                 userLoginState: undefined
              }

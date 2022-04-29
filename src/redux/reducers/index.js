@@ -1,9 +1,11 @@
 import { combineReducers } from "redux"
+// import { Intro } from "../actions/appIntroAction";
 import types from "../types";
 import { UserStatus } from "./auth";
 
 const appReducer = combineReducers({
     UserStatus, 
+    // Intro
 });
 
 

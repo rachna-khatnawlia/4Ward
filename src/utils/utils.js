@@ -3,6 +3,40 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { store } from "../redux/store";
 import types from "../redux/types";
 
+//-------------------------------Store and get login on Async storage--------------------------------
+export const setLoginLocally = async (loginData) => {
+    try {
+        let jsonValue = JSON.stringify(loginData)
+        await AsyncStorage.setItem('LoginLocalStatus', jsonValue)
+        return jsonValue;
+    } catch (error) {
+        console.log("error rasied to store login locally")
+    }
+}
+
+export const getLoginLocally = async () => {
+    try {
+        const savedItem = await AsyncStorage.getItem('LoginLocalStatus');
+        let paresSavedItem = JSON.parse(savedItem);
+        console.log("getItemLocallyConsole---------", paresSavedItem);
+        return paresSavedItem;
+
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const removeLoginLocally = async () => {
+    try {
+        await AsyncStorage.removeItem('LoginLocalStatus');
+        console.log("remove login");
+
+    } catch (error) {
+        console.log("error", error);
+    }
+};
+
+
 
 //---------------------------Working with API---------------------------------
 const { dispatch, getState } = store;

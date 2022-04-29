@@ -7,9 +7,34 @@ import { moderateScale, textScale } from '../../styles/responsiveSize';
 import colors from '../../styles/colors';
 import { commonStyle } from '../../styles/commonStyles';
 import navigationStrings from '../../navigation/navigationStrings';
-import { googleLogin } from '../../../App';
+import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
+import actions from '../../redux/actions';
+
 
 export default function Login({ navigation }) {
+  const googleLogin = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      const data = userInfo?.user;
+      console.log("console after google Login---",data);
+      actions.loginFunction(data);
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+        console.log(error);
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        // operation (e.g. sign in) is in progress already
+        console.log(error);
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+        console.log(error);
+      } else {
+        // some other error happened
+        console.log(error);
+      }
+    }
+  };
   return (
     <ScrollView style={{ flex: 1, backgroundColor: colors.themeColor }}>
 

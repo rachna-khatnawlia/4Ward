@@ -5,6 +5,7 @@ import Button from '../../Components/ButtonComponent';
 import CommonInput from '../../Components/CommonInput';
 import BackWardArrow from '../../Components/GoBackArrowComponent';
 import strings from '../../constants/lang';
+import navigationStrings from '../../navigation/navigationStrings';
 import colors from '../../styles/colors';
 import { commonStyle } from '../../styles/commonStyles';
 import fontFamily from '../../styles/fontFamily';
@@ -66,7 +67,7 @@ const VerifyOtp = ({ navigation, route }) => {
                             <Button
                                 ButtonText={strings.VERIFY}
                                 btnStyle={{ marginVertical: moderateScale(12) }}
-                                // onPress={() => navigation.navigate(navigationStrings.SET_PASSWORD)}
+                                onPress={() => navigation.navigate(navigationStrings.LOGIN1)}
                             />
                         </View>
                     </KeyboardAvoidingView>
