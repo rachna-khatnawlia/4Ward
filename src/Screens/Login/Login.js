@@ -1,4 +1,4 @@
-import { View, Text, Image, ScrollView, SafeAreaView,TouchableOpacity } from 'react-native';
+import { View, Text, Image, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { styles } from './styles';
 import imagePath from '../../constants/imagePath';
@@ -9,6 +9,7 @@ import { commonStyle } from '../../styles/commonStyles';
 import navigationStrings from '../../navigation/navigationStrings';
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
 import actions from '../../redux/actions';
+import { LoginManager,GraphRequest, GraphRequestManager } from 'react-native-fbsdk';
 
 
 export default function Login({ navigation }) {
@@ -17,7 +18,7 @@ export default function Login({ navigation }) {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       const data = userInfo?.user;
-      console.log("console after google Login---",data);
+      console.log("console after google Login---", data);
       actions.loginFunction(data);
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -35,6 +36,50 @@ export default function Login({ navigation }) {
       }
     }
   };
+  const fbLogin = (resCallBack) => {
+    LoginManager.logOut();
+    return LoginManager.logInWithPermissions(['email', 'public_profile']).then(
+      result => {
+        console.log("FB_LOGIN_RESULT =====>", result);
+        if (result.declinedPermissions && result.declinedPermissions.includes('email')) {
+          resCallBack({ message: "email is required" })
+        }
+        if (result.isCancelled) {
+          console.log("error")
+        } else {
+          const infoResquest = new GraphRequest(
+            '/me?fields = email, name, picture',
+            null,
+            resCallBack
+          );
+          new GraphRequestManager().addRequest(infoResquest).start()
+        }
+      },
+      function (error) {
+        console.log("login failed with error", error)
+      }
+    )
+  }
+
+  const onFbLogin = async () => {
+    try {
+      await fbLogin(resInfoCallBack)
+    } catch (error) {
+      console.log("error", error)
+    }
+  }
+
+  const resInfoCallBack = async (error, result) => {
+    if (error) {
+      console.log("Login Error", error)
+    } else {
+      const userData = result;
+      console.log("your data is", userData)
+      actions.loginFunction(data);
+    }
+  }
+
+
   return (
     <ScrollView style={{ flex: 1, backgroundColor: colors.themeColor }}>
 
@@ -74,7 +119,7 @@ export default function Login({ navigation }) {
           btnStyle={{ marginVertical: moderateScale(12), backgroundColor: colors.white }}
           buttonTxt={{ color: colors.loginWith }}
           btnIcon={imagePath.fbIcon}
-        // onPress={() => alert('button onpress')}
+          onPress={onFbLogin}
         />
 
         <Button
@@ -87,7 +132,7 @@ export default function Login({ navigation }) {
 
         <View style={[commonStyle.flexRow, styles.signUpTxtBox]}>
           <Text style={{ color: colors.white, fontSize: textScale(14) }}>New here? </Text>
-          <TouchableOpacity onPress={()=>{navigation.navigate(navigationStrings.SIGNUP)}}>
+          <TouchableOpacity onPress={() => { navigation.navigate(navigationStrings.SIGNUP) }}>
             <Text style={styles.signUpTxt}>Sign Up</Text>
           </TouchableOpacity>
         </View>

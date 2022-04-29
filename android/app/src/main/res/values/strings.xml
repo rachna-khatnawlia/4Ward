@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ForwardTest</string>
+
+<string name="facebook_app_id">933118164037218</string>
+<string name="fb_login_protocol_scheme">fb933118164037218</string>
+<string name="facebook_client_token">86b8cdd9c5df7b3ae664592fd605569c</string>
+
+
 </resources>

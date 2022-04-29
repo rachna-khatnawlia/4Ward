@@ -14,7 +14,8 @@ import types from './src/redux/types';
 
 
 const App = () => {
-  
+  const { dispatch } = store;
+
   useEffect(() => {
     GoogleSignin.configure();
 
@@ -33,7 +34,7 @@ const App = () => {
     })
 
 
-    
+
 
   }, [])
 
