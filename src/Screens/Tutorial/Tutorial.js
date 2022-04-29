@@ -8,7 +8,7 @@ import strings from '../../constants/lang';
 import navigationStrings from '../../navigation/navigationStrings';
 import actions from '../../redux/actions';
 import colors from '../../styles/colors';
-import { moderateScale } from '../../styles/responsiveSize';
+import { height, moderateScale } from '../../styles/responsiveSize';
 import { introStyles } from './styles';
 
 const Tutorial = ({ navigation }) => {
@@ -46,7 +46,7 @@ const Tutorial = ({ navigation }) => {
                     </View>
                     <View style={introStyles.titleDesContainer}>
                         <View style={introStyles.tittleTextView} >
-                            <Text style={introStyles.tittleText}>{item.tittle} </Text>
+                            <Text style={introStyles.tittleText}>{item.title} </Text>
                         </View>
                         <View style={{ marginHorizontal: moderateScale(25) }}>
                             <Text style={introStyles.desText}>{item.description}</Text>
@@ -73,8 +73,8 @@ const Tutorial = ({ navigation }) => {
                 data={slides}
                 renderItem={renderItem}
                 renderDoneButton={renderDoneButton}
-                activeDotStyle={{ height: moderateScale(4), width: moderateScale(32), backgroundColor: colors.themeredColor, }}
-                dotStyle={{ height: moderateScale(4), width: moderateScale(16), backgroundColor: 'grey' }}
+                activeDotStyle={{ height: moderateScale(5), width: moderateScale(32), backgroundColor: colors.themeredColor, bottom: height/100, right: moderateScale(100) }}
+                dotStyle={{ height: moderateScale(5), width: moderateScale(16), backgroundColor: 'grey', bottom: height/100, right: moderateScale(100) }}
             />
             </SafeAreaView>
         </View>
