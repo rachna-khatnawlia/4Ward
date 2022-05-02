@@ -1,42 +1,33 @@
 //import liraries
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, SafeAreaView, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native';
-import Button from '../../Components/ButtonComponent';
-import actions from '../../redux/actions';
+import { View, Text, StyleSheet, ScrollView, SafeAreaView, FlatList } from 'react-native';
+import HomeHeader from '../../Components/HomeHeader';
+import { DATA, HomePageFlatList } from '../../Components/HomePageFlatList';
 import colors from '../../styles/colors';
-import { removeLoginLocally } from '../../utils/utils';
-
+import { moderateScale } from '../../styles/responsiveSize';
 
 // create a component
 const Home = ({ navigation }) => {
-    const handleLogout = async () =>{
-        try{
-            await GoogleSignin.signOut();
-            actions.Logout();
-        }
-        catch(error){
-            console.log("handleLogout Error", error);
-        }
-    }
     return (
-        <ScrollView style={{ flex: 1, backgroundColor: colors.themeColor }}>
-            <SafeAreaView>
+        <SafeAreaView style={{ flex: 1, backgroundColor: colors.themeColor }}>
+            <HomeHeader logoImage={true} locationImage={true} />
+
+            <ScrollView>
                 <View>
-                  <Text>HomeScreen</Text>
-                  <Button
-                    ButtonText="logout"
-                    onPress={handleLogout}
+                    <FlatList
+                        data={DATA}
+                        renderItem={HomePageFlatList}
                     />
+
                 </View>
 
-            </SafeAreaView>
-        </ScrollView >
+            </ScrollView >
+        </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
-   
+    
 });
 
 //make this component available to the app

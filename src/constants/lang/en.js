@@ -18,6 +18,10 @@ export default {
     REESEND_CODE: 'Resend code in 0:14',
     VERIFY: 'VERIFY',
     MOBILE_NUMBER:'Mobile Number',
+    PROFILE:'Profile',
+    SELECT_PIC:'Select Photo',
+    SEARCH:'Search',
+    NOTIFICATION:'Notification',
 
 
 

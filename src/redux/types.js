@@ -7,6 +7,6 @@ export default {
   EDIT_TO_DO: 'Edit_TODO',
   EDIT_TO_DO_DATA: 'Edit_TODO_Data',
   CLEAR_REDUX_STATE: 'CLEAR_REDUX_STATE',
-  INTRO: 'appIntroSlider'
+  // INTRO: 'appIntroSlider'
 };
 

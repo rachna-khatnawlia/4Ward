@@ -6,5 +6,7 @@ export default {
   loginWith: '#17171A',
   skyBlue: '#41CCFF',
   inputColor: '#4C4C4C',
-  Forgot: '#32C5FF'
+  Forgot: '#32C5FF',
+  greyLocation:'#AEAEAE',
+  greyUploadTime:'#BFBFBF',
 };

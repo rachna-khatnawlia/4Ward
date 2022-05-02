@@ -36,6 +36,23 @@ export const removeLoginLocally = async () => {
     }
 };
 
+//-----------------------------App Intro Slider------------------------------
+export function setItem(key, data) {
+    data = JSON.stringify(data);
+    console.log("data set locally", data)
+    return AsyncStorage.setItem(key, data);
+
+}
+
+export function getItem(key) {
+    return new Promise((resolve, reject) => {
+        AsyncStorage.getItem(key).then(data => {
+            resolve(JSON.parse(data));
+        });
+    });
+}
+
+
 
 
 //---------------------------Working with API---------------------------------

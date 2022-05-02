@@ -1,69 +1,54 @@
 //import liraries
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, SafeAreaView, KeyboardAvoidingView, Platform } from 'react-native';
+import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
 import Button from '../../Components/ButtonComponent';
-import CommonInput from '../../Components/CommonInput';
 import BackWardArrow from '../../Components/GoBackArrowComponent';
 import strings from '../../constants/lang';
 import navigationStrings from '../../navigation/navigationStrings';
 import colors from '../../styles/colors';
 import { commonStyle } from '../../styles/commonStyles';
 import fontFamily from '../../styles/fontFamily';
-import { moderateScale, moderateScaleVertical, textScale } from '../../styles/responsiveSize';
+import { height, moderateScale, moderateScaleVertical, textScale } from '../../styles/responsiveSize';
 
 // create a component
 const VerifyOtp = ({ navigation, route }) => {
     const phoneNumber = route?.params?.phone;
     const phoneCode = route?.params?.code
 
+    const [code, setCode] = useState('');
     return (
-        <ScrollView style={{ flex: 1, backgroundColor: colors.themeColor }}>
-            <SafeAreaView>
-                <BackWardArrow />
-                <View style={commonStyle.welcome}>
-                    <Text style={styles.showNo}>{strings.SEND_OTP} {phoneCode}  {phoneNumber}</Text>
-                    <Text style={styles.editNo}>{strings.EDIT_OTP_NO}</Text>
-                </View>
+        <SafeAreaView style={{ flex: 1, backgroundColor: colors.themeColor }}>
+            <BackWardArrow />
+            <ScrollView >
+                <View style={{ height: height }}>
 
-                <View style={styles.otpPassword}>
-                    <View style={styles.flexView}>
-                        <CommonInput
-                            secureTextEntry={false}
-                            inputContainer={{ width: moderateScale(50) }}
-                            input={{ paddingHorizontal: 12 }}
-                        />
+                    <View style={commonStyle.welcome}>
+                        <Text style={styles.showNo}>{strings.SEND_OTP} {phoneCode}  {phoneNumber}</Text>
+                        <Text style={styles.editNo}>{strings.EDIT_OTP_NO}</Text>
                     </View>
-                    <View style={styles.flexView}>
-                        <CommonInput
-                            secureTextEntry={false}
-                            inputContainer={{ width: moderateScale(50) }}
-                            input={{ paddingHorizontal: 12 }}
-                        />
-                    </View>
-                    <View style={styles.flexView}>
-                        <CommonInput
-                            secureTextEntry={false}
-                            inputContainer={{ width: moderateScale(50) }}
-                            input={{ paddingHorizontal: 12 }}
-                        />
-                    </View>
-                    <View style={styles.flexView}>
-                        <CommonInput
-                            secureTextEntry={false}
-                            inputContainer={{ width: moderateScale(50) }}
-                            input={{ paddingHorizontal: 12 }}
+
+                    <View style={{ marginHorizontal: moderateScale(40) }}>
+                        <SmoothPinCodeInput
+                            value={code}
+                            onTextChange={code => setCode(code)}
+                            cellStyle={{
+                                borderRadius: moderateScale(5),
+                                marginLeft: moderateScale(15),
+                                backgroundColor: colors.inputColor
+                            }}
                         />
                     </View>
 
                 </View>
-
-                <Text style={styles.resendeOtp}>{strings.REESEND_CODE}</Text>
-
-
+            </ScrollView >
+            <View>
 
                 <View style={styles.loginContainer}>
+                    <Text style={styles.resendeOtp}>{strings.REESEND_CODE}</Text>
                     <KeyboardAvoidingView enabled={true} behavior={Platform.OS == 'android' ? 'height' : 'padding'}>
-                        <View style={{ paddingBottom: Platform.OS === 'ios' ? moderateScaleVertical(45) : moderateScaleVertical(20) }}>
+
+                        <View style={{ paddingBottom: Platform.OS === 'ios' ? moderateScaleVertical(45) : moderateScaleVertical(100) }}>
                             <Button
                                 ButtonText={strings.VERIFY}
                                 btnStyle={{ marginVertical: moderateScale(12) }}
@@ -72,9 +57,9 @@ const VerifyOtp = ({ navigation, route }) => {
                         </View>
                     </KeyboardAvoidingView>
                 </View>
+            </View>
 
-            </SafeAreaView>
-        </ScrollView >
+        </SafeAreaView>
     );
 };
 

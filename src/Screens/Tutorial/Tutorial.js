@@ -6,76 +6,82 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import imagePath from '../../constants/imagePath';
 import strings from '../../constants/lang';
 import navigationStrings from '../../navigation/navigationStrings';
-import actions from '../../redux/actions';
 import colors from '../../styles/colors';
-import { height, moderateScale } from '../../styles/responsiveSize';
+import { height, moderateScale, moderateScaleVertical } from '../../styles/responsiveSize';
 import { introStyles } from './styles';
+const slides = [
+    {
+        key: '1',
+        image: imagePath.tutorialpic,
+        title: 'Hendrerit vulputate sem',
+        description: 'Aenean et convallis nulla. Donec in efficitur nisi, et vestibulum quam aenean.'
+    },
+    {
+        key: '2',
+        image: imagePath.tutorialpic,
+        title: 'Hendrerit vulputate sem',
+        description: 'Aenean et convallis nulla. Donec in efficitur nisi, et vestibulum quam aenean.'
+
+    },
+    {
+        key: '3',
+        image: imagePath.tutorialpic,
+        title: 'Hendrerit vulputate sem',
+        description: 'Aenean et convallis nulla. Donec in efficitur nisi, et vestibulum quam aenean.'
+
+    }
+];
 
 const Tutorial = ({ navigation }) => {
-    const [showSlider, setShowSlider] = useState(true)
-    const slides = [
-        {
-            key: '1',
-            image: imagePath.tutorialpic,
-            title: 'Hendrerit vulputate sem',
-            description: 'Aenean et convallis nulla. Donec in efficitur nisi, et vestibulum quam aenean.'
-        },
-        {
-            key: '2',
-            image: imagePath.tutorialpic,
-            title: 'Hendrerit vulputate sem',
-            description: 'Aenean et convallis nulla. Donec in efficitur nisi, et vestibulum quam aenean.'
-
-        },
-        {
-            key: '3',
-            image: imagePath.tutorialpic,
-            title: 'Hendrerit vulputate sem',
-            description: 'Aenean et convallis nulla. Donec in efficitur nisi, et vestibulum quam aenean.'
-
-        }
-    ];
 
     const renderItem = ({ item }) => {
-        // console.log(item.description);
         return (
-            <View style={introStyles.tutMainStyle}>
-               
-                    <View style={{ justifyContent: 'center' }}>
-                        <Image source={item.image} style={introStyles.tutImage} />
-                    </View>
-                    <View style={introStyles.titleDesContainer}>
-                        <View style={introStyles.tittleTextView} >
-                            <Text style={introStyles.tittleText}>{item.title} </Text>
-                        </View>
-                        <View style={{ marginHorizontal: moderateScale(25) }}>
-                            <Text style={introStyles.desText}>{item.description}</Text>
-                        </View>
+            <View style={introStyles.container}>
+                <View style={introStyles.divideIntroArea}>
+                    <Image source={item.image} style={introStyles.image} />
+                </View>
+                <View style={introStyles.divideIntroArea}>
+                    <View>
+                        <Text style={introStyles.tittle}>{item.title}</Text>
                     </View>
 
+                    <View style={introStyles.textview}>
+                        <Text style={introStyles.text}>{item.text}</Text>
+                    </View>
+                </View>
             </View>
-        )
-    }
-
-    const renderDoneButton = () => {
+        );
+    };
+    const _renderDoneButton = () => {
         return (
-            <TouchableOpacity onPress={actions.Intro()}>
-                <Text style={introStyles.getStartStyle}>GET STARTED</Text>
+            <TouchableOpacity onPress={() => navigation.navigate(navigationStrings.LOGIN)}>
+                <Text style={introStyles.getStartStyle}>{strings.GET_STARTED}</Text>
             </TouchableOpacity>
         );
     };
 
     return (
         <View style={introStyles.mainDiv}>
-             <SafeAreaView style={{flex:1}}>
-
-            <AppIntroSlider
-                data={slides}
-                renderItem={renderItem}
-                renderDoneButton={renderDoneButton}
-                activeDotStyle={{ height: moderateScale(5), width: moderateScale(32), backgroundColor: colors.themeredColor, bottom: height/100, right: moderateScale(100) }}
-                dotStyle={{ height: moderateScale(5), width: moderateScale(16), backgroundColor: 'grey', bottom: height/100, right: moderateScale(100) }}
-            />
+            <SafeAreaView style={{ flex: 1 }}>
+                <AppIntroSlider
+                    data={slides}
+                    renderItem={renderItem}
+                    renderDoneButton={_renderDoneButton}
+                    activeDotStyle={{
+                        height: moderateScale(4),
+                        width: moderateScale(40),
+                        bottom: 4,
+                        right: moderateScale(90),
+                        backgroundColor: 'red',
+                    }}
+                    dotStyle={{
+                        width: moderateScale(21),
+                        height: moderateScale(4),
+                        backgroundColor: colors.white,
+                        bottom: 4,
+                        right: moderateScale(90),
+                    }}
+                />
             </SafeAreaView>
         </View>
     );

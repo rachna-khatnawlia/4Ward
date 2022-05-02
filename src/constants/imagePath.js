@@ -9,6 +9,20 @@ export default {
   backwardArrow: require('../assets/images/ic_back_arrow.png'),
   backwardArrow2: require('../assets/images/ic_back_arrow_2x.png'),
 
-  downwardArrow: require('../assets/images/ic_down.png')
+  downwardArrow: require('../assets/images/ic_down.png'),
 
+  //bottom tab icons
+  home: require('../assets/images/ic_red_home.png'),
+  search: require('../assets/images/ic_srch.png'),
+  add: require('../assets/images/ic_add.png'),
+  notification: require('../assets/images/ic_notify.png'),
+  profile: require('../assets/images/ic_user.png'),
+  brandName: require('../assets/images/ic_home_icon.png'),
+  location: require('../assets/images/ic_loc.png'),
+  profilePic1: require('../assets/images/profilePic1.jpeg'),
+  profilePic2: require('../assets/images/profilePic2.jpeg'),
+  dots: require('../assets/images/ic_dots.png'),
+
+  homeFlatListPic1: require('../assets/images/trafficPic.jpeg'),
+  share: require('../assets/images/ic_direction.png')
 };

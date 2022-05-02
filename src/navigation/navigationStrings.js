@@ -6,4 +6,8 @@ export default {
   SIGNUP: 'signup',
   VERIFY_OTP: 'verifyOtp',
   SET_PASSWORD: 'set_password',
+  PROFILE:'profile',
+  ADD:'add',
+  SEARCH:'search',
+  NOTIFICATION:'notification',
 };

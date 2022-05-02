@@ -1,9 +1,6 @@
 import * as React from 'react';
-import { useState } from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import imagePath from '../constants/imagePath';
 import colors from '../styles/colors';
-import fontFamily from '../styles/fontFamily';
 import { moderateScale, textScale } from '../styles/responsiveSize';
 
 export default function Button({

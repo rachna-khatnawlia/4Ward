@@ -26,7 +26,7 @@ const CommonInput = ({
             />
             <View style={styles.showBox}>
                 {
-                        <View></View>
+                    <View></View>
                 }
             </View>
         </View>
