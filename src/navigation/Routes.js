@@ -9,6 +9,8 @@ import Authstack from './AuthStack';
 import IntroStack from './IntroStack';
 
 import { useSelector } from 'react-redux';
+import navigationStrings from './navigationStrings';
+import { SetPassword } from '../Screens';
 
 const Stack = createStackNavigator();
 
@@ -23,7 +25,9 @@ const Routes = () => {
     <NavigationContainer>
       <Stack.Navigator>
         {/* {!!intro ? IntroStack(Stack)  : Authstack(Stack)} */}
+
         {userData ? MainStack(Stack) : Authstack(Stack)}
+        <Stack.Screen name={navigationStrings.SET_PASSWORD} component={SetPassword} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

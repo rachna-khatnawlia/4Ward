@@ -1,10 +1,9 @@
 //import liraries
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, SafeAreaView, FlatList } from 'react-native';
+import React from 'react';
+import { View, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import HomeHeader from '../../Components/HomeHeader';
-import { DATA, HomePageFlatList } from '../../Components/HomePageFlatList';
+import { HomePageFlatList } from '../../Components/HomePageFlatList';
 import colors from '../../styles/colors';
-import { moderateScale } from '../../styles/responsiveSize';
 
 // create a component
 const Home = ({ navigation }) => {
@@ -14,20 +13,15 @@ const Home = ({ navigation }) => {
 
             <ScrollView>
                 <View>
-                    <FlatList
-                        data={DATA}
-                        renderItem={HomePageFlatList}
-                    />
-
+                    <HomePageFlatList />
                 </View>
-
             </ScrollView >
         </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
-    
+
 });
 
 //make this component available to the app

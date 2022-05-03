@@ -6,8 +6,10 @@ export default {
   SIGNUP: 'signup',
   VERIFY_OTP: 'verifyOtp',
   SET_PASSWORD: 'set_password',
-  PROFILE:'profile',
-  ADD:'add',
-  SEARCH:'search',
-  NOTIFICATION:'notification',
+  PROFILE: 'profile',
+  ADD: 'add',
+  SEARCH: 'search',
+  NOTIFICATION: 'notification',
+  BOTTOM_TAB: 'bottomTab',
+  POST_DETAILS: 'postDetails'
 };

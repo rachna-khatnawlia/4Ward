@@ -11,7 +11,6 @@ export default function (Stack) {
       <Stack.Screen name={navigationStrings.LOGIN1} component={Login1} options={{ headerShown: false }} />
       <Stack.Screen name={navigationStrings.SIGNUP} component={SignUp} options={{ headerShown: false }} />
       <Stack.Screen name={navigationStrings.VERIFY_OTP} component={verifyOtp} options={{ headerShown: false }} />
-      <Stack.Screen name={navigationStrings.SET_PASSWORD} component={SetPassword} options={{ headerShown: false }} />
     </>
   );
 }

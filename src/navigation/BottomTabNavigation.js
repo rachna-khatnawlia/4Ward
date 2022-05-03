@@ -15,9 +15,9 @@ export default function BottomTabNavigation() {
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
-                headerShown: false, tabBarShowLabel: false, 
-                tabBarStyle: { 
-                    height: moderateScale(80), 
+                headerShown: false, tabBarShowLabel: false,
+                tabBarStyle: {
+                    height: moderateScale(80),
                     backgroundColor: colors.inputColor,
                     borderTopWidth: 0,
                     borderTopLeftRadius: 12,

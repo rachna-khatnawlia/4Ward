@@ -80,7 +80,7 @@ const Login1 = ({ navigation }) => {
                         <View style={styles.otpPassword1}>
                             <Text style={styles.otpPassword1Txt}> Use OTP</Text>
                         </View>
-                        <TouchableOpacity style={styles.otpPassword2}>
+                        <TouchableOpacity style={styles.otpPassword2} onPress={()=>navigation.navigate(navigationStrings.SET_PASSWORD)}>
                             <Text style={styles.otpPassword2Txt}>Forgot Password? </Text>
                         </TouchableOpacity>
                     </View>

@@ -17,7 +17,6 @@ const DATA = [
         profile: imagePath.profilePic1,
         title: 'Russell Gordon ',
         time: '20 min ago'
-        // onPress:
     },
     {
         id: "2",

@@ -24,6 +24,9 @@ export default {
   dots: require('../assets/images/ic_dots.png'),
 
   homeFlatListPic1: require('../assets/images/trafficPic.jpeg'),
+  homeFlatListPic2: require('../assets/images/wallpaper1.jpeg'),
+  homeFlatListPic3: require('../assets/images/wallpaper2.jpeg'),
+
   share: require('../assets/images/ic_direction.png'),
   userProfile: require('../assets/images/ic_usrr_1.png'),
   key: require('../assets/images/ic_key.png'),
