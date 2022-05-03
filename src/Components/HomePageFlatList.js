@@ -6,7 +6,7 @@ import imagePath from '../constants/imagePath';
 
 import colors from '../styles/colors';
 import fontFamily from '../styles/fontFamily';
-import { moderateScale, moderateScaleVertical, textScale } from '../styles/responsiveSize';
+import { height, moderateScale, moderateScaleVertical, textScale, width } from '../styles/responsiveSize';
 
 export const DATA = [
     {
@@ -47,10 +47,11 @@ export const DATA = [
 
 // create a component
 export const HomePageFlatList = ({ item }) => {
+    console.log(height, width)
     return (
         <View style={styles.flatListContainer}>
 
-            <View style={styles.profileName}>
+            <View style={styles.profileNameContainer}>
                 <View style={styles.profilePhotoBox}>
                     <Image source={item.profile} style={styles.profilePhoto} />
                 </View>
@@ -77,7 +78,9 @@ export const HomePageFlatList = ({ item }) => {
                 <View style={styles.likeComment}>
                     <Text style={styles.likeCommentTxt}>{item.comments}</Text>
                     <Text style={styles.likeCommentTxt}>{item.likes}</Text>
-                        <Image source={imagePath.share} style={styles.shareImg}/>
+                    <TouchableOpacity style={{alignSelf:'center'}}>
+                        <Image source={imagePath.share}/>
+                    </TouchableOpacity>
                 </View>
             </View>
         </View>
@@ -86,24 +89,26 @@ export const HomePageFlatList = ({ item }) => {
 
 const styles = StyleSheet.create({
     flatListContainer: {
+        // marginHorizontal: moderateScale(24),
+        // paddingHorizontal: moderateScale(8),
         backgroundColor: colors.inputColor,
-        marginHorizontal: moderateScale(24),
         borderRadius: moderateScale(8),
-        marginVertical: moderateScaleVertical(12),
-        paddingHorizontal: moderateScale(8),
+        marginVertical: moderateScaleVertical(10),
+        width:width-46,
+        alignSelf:'center'
     },
-    profileName: {
+    profileNameContainer: {
         flex: 0.05,
         flexDirection: 'row',
-        marginVertical: moderateScaleVertical(16)
+        marginVertical: moderateScaleVertical(16),
+        paddingHorizontal:moderateScale(12)
     },
     profilePhotoBox: {
-        marginLeft: moderateScale(5),
         marginRight: moderateScale(16),
     },
     profilePhoto: {
-        height: moderateScale(40),
-        width: moderateScale(40),
+        height: height/20,
+        width: width/10,
         borderRadius: moderateScale(50),
         resizeMode: 'cover',
     },
@@ -135,13 +140,13 @@ const styles = StyleSheet.create({
     },
     postedPic: {
         alignSelf: 'center',
-        height: moderateScale(400),
+        height: height/2.5,
         resizeMode: 'cover',
-        width: moderateScale(315)
+        width: width-62,
     },
     captionArea:{
         paddingVertical:moderateScaleVertical(12),
-        paddingHorizontal:moderateScale(10)
+        paddingHorizontal:width/20
     },
     captionTxt:{
         fontFamily:fontFamily.barlowRegular,
@@ -162,8 +167,5 @@ const styles = StyleSheet.create({
         color:colors.white,
         paddingRight:moderateScale(16)
     },
-    shareImg:{
-        alignSelf:'center',
-    }
 
 });

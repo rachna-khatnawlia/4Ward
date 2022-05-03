@@ -34,13 +34,7 @@ export const commonStyle = StyleSheet.create({
         marginVertical:moderateScale(12),
         borderRadius:moderateScale(8)
     },
-    homeHeaderBox: {
-        backgroundColor: colors.themeColor,
-        height:moderateScale(60),
-        // paddingBottom:moderateScale(15),
-        justifyContent:'center',
-        paddingHorizontal:moderateScale(23)
-    },
+    
     rowSpaceBetween:{
         flexDirection:'row', 
         justifyContent:'space-between'

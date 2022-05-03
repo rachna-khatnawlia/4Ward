@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import colors from '../styles/colors';
-import { moderateScale, textScale } from '../styles/responsiveSize';
+import { moderateScale, textScale, width } from '../styles/responsiveSize';
 
 export default function Button({
     ButtonText = '',
@@ -36,12 +36,13 @@ export default function Button({
 const styles = StyleSheet.create({
     btnStyle: {
         height: moderateScale(48),
-        width: moderateScale(328),
-        backgroundColor: '#F43738',
+        width: width-46,
+        backgroundColor: colors.themeredColor,
         borderRadius: moderateScale(8),
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        alignSelf:'center'
     },
     buttonTxt: {
         fontSize: textScale(14),
@@ -50,7 +51,6 @@ const styles = StyleSheet.create({
         color: colors.white,
     },
     imgIcon: {
-        // position: 'absolute',
         marginLeft: moderateScale(19)
     }
 });

@@ -5,7 +5,7 @@ import imagePath from '../constants/imagePath';
 import colors from '../styles/colors';
 import { commonStyle } from '../styles/commonStyles';
 import fontFamily from '../styles/fontFamily';
-import { textScale } from '../styles/responsiveSize';
+import { moderateScale, textScale, width } from '../styles/responsiveSize';
 
 // create a component
 const HomeHeader = ({
@@ -14,7 +14,7 @@ const HomeHeader = ({
     headerText
 }) => {
     return (
-        <View style={commonStyle.homeHeaderBox}>
+        <View style={styles.homeHeaderBox}>
             <View style={commonStyle.rowSpaceBetween}>
                 <View style={{ alignSelf: 'center' }}>
                     {
@@ -39,6 +39,13 @@ const HomeHeader = ({
 
 // define your styles
 const styles = StyleSheet.create({
+    homeHeaderBox: {
+        backgroundColor: colors.themeColor,
+        height:moderateScale(60),
+        // paddingBottom:moderateScale(15),
+        justifyContent:'center',
+        paddingHorizontal:width/15
+    },
     headerTxtStyle: {
         fontFamily: fontFamily.barlowMedium,
         fontSize: textScale(16),

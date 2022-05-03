@@ -23,7 +23,7 @@ const SignUp = ({ navigation }) => {
         phone: '',
         phoneCode: '+91',
         countryCode: 'IN',
-        deviceToken: 'dtLFa9OM6UEbsHD1Cv_S-O:APA91bEO2rU_o3T5DkrZ32zzQwpbATBOf4kw0ASjzVmiKRDaDcOfrtv_fQVmF24Z7OLILBehOJob9V43i4og7LgPwrWE0TuECQaiDHRT3GBp9rMwbfya51vgbn8BovWFo4wiuY0KB6Cw',
+        deviceToken: '132456',
         deviceType: Platform.OS == 'ios' ? 'IOS' : 'ANDROID',
         password: ''
     })
