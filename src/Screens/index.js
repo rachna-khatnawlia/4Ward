@@ -9,4 +9,5 @@ export {default as Profile} from './Profile/Profile';
 export {default as Add} from './Add/Add';
 export {default as Search} from './Search/Search'
 export {default as Notification} from './Notification/Notification';
-export {default as PostDetails} from './PostDetails/PostDetails'
+export {default as PostDetails} from './PostDetails/PostDetails';
+export {default as EditProfile} from './EditProfile/EditProfile';

@@ -24,11 +24,6 @@ const CommonInput = ({
                 secureTextEntry={secureTextEntry}
                 onChangeText={onChangeTxt}
             />
-            <View style={styles.showBox}>
-                {
-                    <View></View>
-                }
-            </View>
         </View>
     );
 };
@@ -38,7 +33,6 @@ const styles = StyleSheet.create({
     inputContainer: {
         flexDirection: 'row',
         flex:1,
-        // width: moderateScale(328),
         backgroundColor: colors.inputColor,
         alignItems: 'center',
         borderRadius:moderateScale(8),
@@ -49,16 +43,8 @@ const styles = StyleSheet.create({
         height: moderateScale(48),
         marginVertical: moderateScaleVertical(5),
         paddingHorizontal: moderateScale(16),
-        flex: 0.8,
+        flex: 1,
         fontSize: textScale(14),
-        fontFamily: fontFamily.barlowRegular
-    },
-    showBox: {
-        height: moderateScale(48),
-        flex: 0.2,
-        justifyContent: 'center',
-        alignItems: 'flex-end',
-        paddingRight: moderateScale(16),
         fontFamily: fontFamily.barlowRegular
     },
 });

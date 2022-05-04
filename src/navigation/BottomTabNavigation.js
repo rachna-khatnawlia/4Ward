@@ -23,7 +23,8 @@ export default function BottomTabNavigation() {
                     borderTopLeftRadius: 12,
                     borderTopRightRadius: 12,
                     borderColor: colors,
-                    position: 'absolute'
+                    position: 'absolute',
+
                 },
             })}
         >

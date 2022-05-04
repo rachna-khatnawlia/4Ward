@@ -1,9 +1,8 @@
 //import liraries
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, Image, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, SafeAreaView, Image, TouchableOpacity } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import Button from '../../Components/ButtonComponent';
 import HomeHeader from '../../Components/HomeHeader';
 import imagePath from '../../constants/imagePath';
 import strings from '../../constants/lang';
@@ -21,7 +20,7 @@ const Profile = ({ navigation }) => {
             id: "1",
             icon: imagePath.userProfile,
             title: 'Edit Profile',
-            // onPress:
+            action: () => editProfile()
         },
         {
             id: "2",
@@ -36,6 +35,11 @@ const Profile = ({ navigation }) => {
             action: () => handleLogout()
         },
     ];
+
+    const editProfile = () =>{
+        navigation.navigate(navigationStrings.EDIT_PROFILE)
+    }
+
     const changePassword = () => {
         navigation.navigate(navigationStrings.SET_PASSWORD)
     }

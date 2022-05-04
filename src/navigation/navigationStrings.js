@@ -11,5 +11,6 @@ export default {
   SEARCH: 'search',
   NOTIFICATION: 'notification',
   BOTTOM_TAB: 'bottomTab',
-  POST_DETAILS: 'postDetails'
+  POST_DETAILS: 'postDetails',
+  EDIT_PROFILE: 'editProfile',
 };
