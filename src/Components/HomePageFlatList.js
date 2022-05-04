@@ -18,20 +18,19 @@ export const HomePageFlatList = () => {
             id: "1",
             profile: imagePath.profilePic1,
             name: 'Russell Gordon',
-            image: imagePath.homeFlatListPic1,
+            image: imagePath.homeFlatListPic4,
             location: 'Sector 28D, Chandigarh',
             caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in turpis luctus.',
             uploaded: '1 hr ago',
             comments: 'Comments 1,254',
             likes: 'Likes 44,686',
-            // action: () => PostDetailScreen()
         },
         {
             id: "2",
             profile: imagePath.profilePic2,
             name: 'Lelia Walker',
             location: 'Sector 28D, Chandigarh',
-            image: imagePath.homeFlatListPic2,
+            image: imagePath.homeFlatListPic1,
             caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in turpis luctus.',
             uploaded: '1 hr ago',
             comments: 'Comments 1,254',
@@ -50,10 +49,6 @@ export const HomePageFlatList = () => {
         },
     ];
 
-    const PostDetailScreen = () => {
-        console.log(profile)
-        navigation.navigate(navigationStrings.POST_DETAILS,{profile:item.profile})
-    }
     const navigation = useNavigation()
     const renderItem = ({ item }) => {
         return (
@@ -61,7 +56,7 @@ export const HomePageFlatList = () => {
 
                 <View style={styles.profileNameContainer}>
                     <View style={styles.profilePhotoBox}>
-                        <Image source={item.profile} style={styles.profilePhoto} />
+                        <Image source={item.profile} style={styles.profilePhoto} resizeMode='contain'/>
                     </View>
                     <View style={styles.nameLocation}>
                         <View>
@@ -77,7 +72,7 @@ export const HomePageFlatList = () => {
                 </View>
 
                 <TouchableOpacity onPress={()=>navigation.navigate(navigationStrings.POST_DETAILS,{item:item})}>
-                    <Image source={item.image} style={styles.postedPic} />
+                    <Image source={item.image} style={styles.postedPic} resizeMode="cover"/>
                 </TouchableOpacity>
 
                 <View style={styles.captionArea}>
@@ -105,8 +100,6 @@ export const HomePageFlatList = () => {
 
 const styles = StyleSheet.create({
     flatListContainer: {
-        // marginHorizontal: moderateScale(24),
-        // paddingHorizontal: moderateScale(8),
         backgroundColor: colors.inputColor,
         borderRadius: moderateScale(8),
         marginVertical: moderateScaleVertical(10),
@@ -126,7 +119,6 @@ const styles = StyleSheet.create({
         height: height / 20,
         width: width / 10,
         borderRadius: moderateScale(50),
-        resizeMode: 'cover',
     },
     nameLocation: {
         flex: 0.9,
@@ -157,7 +149,6 @@ const styles = StyleSheet.create({
     postedPic: {
         alignSelf: 'center',
         height: height / 2.5,
-        resizeMode: 'cover',
         width: width - 62,
     },
     captionArea: {

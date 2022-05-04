@@ -22,7 +22,7 @@ export default {
     SELECT_PIC:'Select Photo',
     SEARCH:'Search',
     NOTIFICATION:'Notification',
-
+    VIEW_MAP:'VIEW MAP',
 
 
 }   

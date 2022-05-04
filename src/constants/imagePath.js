@@ -23,13 +23,17 @@ export default {
   profilePic2: require('../assets/images/profilePic2.jpeg'),
   dots: require('../assets/images/ic_dots.png'),
 
-  homeFlatListPic1: require('../assets/images/trafficPic.jpeg'),
+  homeFlatListPic1: require('../assets/images/wallpaper5.jpg'),
   homeFlatListPic2: require('../assets/images/wallpaper1.jpeg'),
-  homeFlatListPic3: require('../assets/images/wallpaper2.jpeg'),
+  homeFlatListPic3: require('../assets/images/wallpaper4.jpg'),
+  homeFlatListPic4: require('../assets/images/wallpaper3.jpg'),
+
 
   share: require('../assets/images/ic_direction.png'),
   userProfile: require('../assets/images/ic_usrr_1.png'),
   key: require('../assets/images/ic_key.png'),
-  logout: require('../assets/images/ic_logout.png'),
+  logout: require('../assets/images/ic_logout.png'),  
+  cross: require('../assets/images/ic_cross.png'),
+
 
 };

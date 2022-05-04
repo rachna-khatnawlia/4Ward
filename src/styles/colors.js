@@ -8,6 +8,5 @@ export default {
   inputColor: '#4C4C4C',
   Forgot: '#32C5FF',
   greyLocation: '#AEAEAE',
-  greyUploadTime: '#BFBFBF',
   greyUploadTime: '#B5B0B0'
 };
