@@ -23,7 +23,10 @@ export const commonStyle = StyleSheet.create({
         fontSize:textScale(13.5),
         marginBottom:moderateScaleVertical(10)
     },
-    phoneInputBox:{ flexDirection: 'row', marginHorizontal: moderateScale(23) },
+    phoneInputBox:{ 
+        flexDirection: 'row', 
+        marginHorizontal: moderateScale(23) 
+    },
     countryPickerBg:{
         flex:0.3,
         height:moderateScale(58),
@@ -34,7 +37,6 @@ export const commonStyle = StyleSheet.create({
         marginVertical:moderateScale(12),
         borderRadius:moderateScale(8)
     },
-    
     rowSpaceBetween:{
         flexDirection:'row', 
         justifyContent:'space-between'

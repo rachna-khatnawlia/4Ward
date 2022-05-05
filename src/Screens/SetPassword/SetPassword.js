@@ -1,6 +1,7 @@
 //import liraries
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, SafeAreaView, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native';
+import { styles } from './style';
+import { View, Text, ScrollView, SafeAreaView, KeyboardAvoidingView } from 'react-native';
 import { useSelector } from 'react-redux';
 import Button from '../../Components/ButtonComponent';
 import BackWardArrow from '../../Components/GoBackArrowComponent';
@@ -15,7 +16,7 @@ import { moderateScale } from '../../styles/responsiveSize';
 const SetPassword = ({ navigation }) => {
     const userData = useSelector(state => state.UserStatus.userLoginState);
     console.log("userDetails on updatepassword page", userData, userData?.id, userData?.password);
-    //-------------------------------SignUp data-------------------------------------
+    //-------------------------------Update Password data-------------------------------------
     const [UpdatePasswordData, setUpdatePasswordData] = useState({
         currentPass: '',
         pass: '',
@@ -29,7 +30,6 @@ const SetPassword = ({ navigation }) => {
         if (pass.length <= 4) {
             alert("Password length Must be atleast 4")
         } else {
-
             if (pass === cPass) {
                 let updateAPIdata = {
                     user_id: userData?.id,
@@ -53,8 +53,9 @@ const SetPassword = ({ navigation }) => {
     }
 
     return (
-        <ScrollView style={{ flex: 1, backgroundColor: colors.themeColor }}>
-            <SafeAreaView>
+        <SafeAreaView style={{ flex: 1, backgroundColor: colors.themeColor }}>
+            <ScrollView>
+
                 {/* -------------Backward Arrow--------------- */}
                 <BackWardArrow />
 
@@ -83,31 +84,20 @@ const SetPassword = ({ navigation }) => {
                         value={cPass}
                         onChangeTxt={(cPass) => updateState({ cPass })}
                     />
-                    {/* ----------------------Next Button----------------- */}
-                    <KeyboardAvoidingView>
-                        <Button
-                            ButtonText={strings.GET_STARTED}
-                            btnStyle={{ marginVertical: moderateScale(12) }}
-                            onPress={UpdatePassword}
-                        />
-                    </KeyboardAvoidingView>
                 </View>
 
-            </SafeAreaView>
-        </ScrollView >
+            </ScrollView >
+            {/* ----------------------Next Button----------------- */}
+            <KeyboardAvoidingView enabled={true} behavior={Platform.OS == 'android' ? 'height' : 'padding'}>
+                <Button
+                    ButtonText={strings.GET_STARTED}
+                    btnStyle={{ marginVertical: moderateScale(12) }}
+                    onPress={UpdatePassword}
+                />
+            </KeyboardAvoidingView>
+        </SafeAreaView>
     );
 };
 
-const styles = StyleSheet.create({
-    loginContainer: {
-        alignItems: 'center',
-    },
-    TwoInputFields: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginHorizontal: moderateScale(27),
-        justifyContent: 'space-between',
-    }
-});
 //make this component available to the app
 export default SetPassword;

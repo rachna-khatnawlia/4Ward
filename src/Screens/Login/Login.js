@@ -1,6 +1,6 @@
-import { View, Text, Image, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { styles } from './styles';
+import { View, Text, Image, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
 import imagePath from '../../constants/imagePath';
 import Button from '../../Components/ButtonComponent';
 import { moderateScale, textScale } from '../../styles/responsiveSize';
@@ -10,9 +10,12 @@ import navigationStrings from '../../navigation/navigationStrings';
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
 import actions from '../../redux/actions';
 import { LoginManager,GraphRequest, GraphRequestManager } from 'react-native-fbsdk';
+import strings from '../../constants/lang';
 
 
 export default function Login({ navigation }) {
+
+  // ----------------------Google Login----------------
   const googleLogin = async () => {
     try {
       await GoogleSignin.hasPlayServices();
@@ -36,6 +39,8 @@ export default function Login({ navigation }) {
       }
     }
   };
+
+  // ----------------------Fb Login----------------
   const fbLogin = (resCallBack) => {
     LoginManager.logOut();
     return LoginManager.logInWithPermissions(['email', 'public_profile']).then(
@@ -82,7 +87,6 @@ export default function Login({ navigation }) {
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: colors.themeColor }}>
-
       <SafeAreaView style={styles.loginContainer}>
 
         {/* ---------------logo------------------*/}
@@ -92,12 +96,12 @@ export default function Login({ navigation }) {
 
         {/* ----------------terms and conditions for login-------- */}
         <View style={styles.loginTC}>
-          <Text style={styles.loginTCtxt}>By clicking “Log In”, you agree with our Terms. Learn how we process your data in our Privacy policy.</Text>
+          <Text style={styles.loginTCtxt}>{strings.LOGIN_TC}</Text>
         </View>
 
         {/* ----------------------login with phone number----------------- */}
         <Button
-          ButtonText="Log In with Phone number"
+          ButtonText={strings.PHONE_LOGIN}
           btnStyle={{ marginVertical: moderateScale(12) }}
           onPress={() => { navigation.navigate(navigationStrings.LOGIN1) }}
         />
@@ -106,32 +110,34 @@ export default function Login({ navigation }) {
           <Text style={styles.orTxt}>or</Text>
         </View>
 
+        {/* -----------------Log In with Google----------------------- */}
         <Button
-          ButtonText="Log In with Google"
+          ButtonText={strings.GOOGLE_LOGIN}
           btnStyle={{ marginVertical: moderateScale(12), backgroundColor: colors.white }}
           buttonTxt={{ color: colors.loginWith }}
           btnIcon={imagePath.googleIcon}
           onPress={googleLogin}
         />
 
+        {/* -----------------Log In with Fb----------------------- */}
         <Button
-          ButtonText="Log In with Facebook"
+          ButtonText={strings.FB_LOGIN}
           btnStyle={{ marginVertical: moderateScale(12), backgroundColor: colors.white }}
           buttonTxt={{ color: colors.loginWith }}
           btnIcon={imagePath.fbIcon}
           onPress={onFbLogin}
         />
 
+        {/* -----------------Log In with Apple----------------------- */}
         <Button
-          ButtonText="Log In with Apple"
+          ButtonText={strings.APPLE_LOGIN}
           btnStyle={{ marginVertical: moderateScale(12), backgroundColor: colors.white }}
           buttonTxt={{ color: colors.loginWith }}
           btnIcon={imagePath.appleIcon}
-        // onPress={() => alert('button onpress')}
         />
 
         <View style={[commonStyle.flexRow, styles.signUpTxtBox]}>
-          <Text style={{ color: colors.white, fontSize: textScale(14) }}>New here? </Text>
+          <Text style={styles.newHereTxt}>New here? </Text>
           <TouchableOpacity onPress={() => { navigation.navigate(navigationStrings.SIGNUP) }}>
             <Text style={styles.signUpTxt}>Sign Up</Text>
           </TouchableOpacity>

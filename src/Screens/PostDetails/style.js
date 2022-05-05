@@ -15,11 +15,9 @@ export const styles = StyleSheet.create({
         justifyContent: 'flex-end'
     },
     nameLocationContainer: {
-        // backgroundColor: 'red',
         width: width - 46,
         flexDirection: 'row',
         alignSelf: 'center',
-        // marginTop: moderateScale(15),
     },
     profilePhotoBox: {
         marginRight: moderateScale(16),

@@ -1,6 +1,6 @@
 //import liraries
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TextInput } from 'react-native';
 import colors from '../styles/colors';
 import fontFamily from '../styles/fontFamily';
 import { moderateScale, moderateScaleVertical, textScale } from '../styles/responsiveSize';
@@ -8,12 +8,13 @@ import { moderateScale, moderateScaleVertical, textScale } from '../styles/respo
 // create a component
 const CommonInput = ({
     placeholderTxt,
-    secureTextEntry, 
+    secureTextEntry,
     inputContainer, input,
     onChangeTxt,
     value,
     editable,
-    selectTextOnFocus
+    selectTextOnFocus,
+    keyboardType
 }) => {
     return (
         <View style={{
@@ -21,7 +22,7 @@ const CommonInput = ({
             ...inputContainer
         }}>
             <TextInput
-                style={{...styles.input,...input}}
+                style={{ ...styles.input, ...input }}
                 placeholder={placeholderTxt}
                 placeholderTextColor={colors.white}
                 secureTextEntry={secureTextEntry}
@@ -29,6 +30,7 @@ const CommonInput = ({
                 value={value}
                 editable={editable}
                 selectTextOnFocus={selectTextOnFocus}
+                keyboardType={keyboardType}
             />
         </View>
     );
@@ -38,12 +40,12 @@ const CommonInput = ({
 const styles = StyleSheet.create({
     inputContainer: {
         flexDirection: 'row',
-        flex:1,
+        flex: 1,
         backgroundColor: colors.inputColor,
         alignItems: 'center',
-        borderRadius:moderateScale(8),
-        marginVertical:moderateScale(12),
-        marginHorizontal:moderateScale(23)
+        borderRadius: moderateScale(8),
+        marginVertical: moderateScale(12),
+        marginHorizontal: moderateScale(23)
     },
     input: {
         height: moderateScale(48),

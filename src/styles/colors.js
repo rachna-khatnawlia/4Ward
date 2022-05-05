@@ -10,5 +10,6 @@ export default {
   greyLocation: '#AEAEAE',
   greyUploadTime: '#B5B0B0',
   greyManualLocation: '#A5A5A5',
-  greyLocation: '#C7C8C7'
+  greyLocation: '#C7C8C7',
+  greyTutText:  '#999999'
 };

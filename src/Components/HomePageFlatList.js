@@ -4,6 +4,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import imagePath from '../constants/imagePath';
+import strings from '../constants/lang';
 import navigationStrings from '../navigation/navigationStrings';
 import colors from '../styles/colors';
 import fontFamily from '../styles/fontFamily';
@@ -17,35 +18,35 @@ export const HomePageFlatList = () => {
         {
             id: "1",
             profile: imagePath.profilePic1,
-            name: 'Russell Gordon',
+            name: strings.HOME_NAME1,
+            location: strings.HOME_LOC,
             image: imagePath.homeFlatListPic4,
-            location: 'Sector 28D, Chandigarh',
-            caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in turpis luctus.',
-            uploaded: '1 hr ago',
-            comments: 'Comments 1,254',
-            likes: 'Likes 44,686',
+            caption: strings.HOME_CAPTION,
+            uploaded: strings.HOME_UPLOAD_TIME,
+            comments: strings.HOME_COMMENTS,
+            likes: strings.HOME_LIKES,
         },
         {
             id: "2",
             profile: imagePath.profilePic2,
-            name: 'Lelia Walker',
-            location: 'Sector 28D, Chandigarh',
+            name: strings.HOME_NAME2,
+            location: strings.HOME_LOC,
             image: imagePath.homeFlatListPic1,
-            caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in turpis luctus.',
-            uploaded: '1 hr ago',
-            comments: 'Comments 1,254',
-            likes: 'Likes 44,686'
+            caption: strings.HOME_CAPTION,
+            uploaded: strings.HOME_UPLOAD_TIME,
+            comments: strings.HOME_COMMENTS,
+            likes: strings.HOME_LIKES,
         },
         {
             id: "3",
             profile: imagePath.profilePic1,
-            name: 'Fannie Kim',
-            location: 'Sector 28D, Chandigarh',
+            name: strings.HOME_NAME3,
+            location: strings.HOME_LOC,
             image: imagePath.homeFlatListPic3,
-            caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in turpis luctus.',
-            uploaded: '1 hr ago',
-            comments: 'Comments 1,254',
-            likes: 'Likes 44,686',
+            caption: strings.HOME_CAPTION,
+            uploaded: strings.HOME_UPLOAD_TIME,
+            comments: strings.HOME_COMMENTS,
+            likes: strings.HOME_LIKES,
         },
     ];
 
@@ -54,9 +55,10 @@ export const HomePageFlatList = () => {
         return (
             <View style={styles.flatListContainer}>
 
+                {/* -------------------------Profile Photo, name, location and options icon------------ */}
                 <View style={styles.profileNameContainer}>
                     <View style={styles.profilePhotoBox}>
-                        <Image source={item.profile} style={styles.profilePhoto} resizeMode='contain'/>
+                        <Image source={item.profile} style={styles.profilePhoto} resizeMode='contain' />
                     </View>
                     <View style={styles.nameLocation}>
                         <View>
@@ -71,10 +73,12 @@ export const HomePageFlatList = () => {
                     </TouchableOpacity>
                 </View>
 
-                <TouchableOpacity onPress={()=>navigation.navigate(navigationStrings.POST_DETAILS,{item:item})}>
-                    <Image source={item.image} style={styles.postedPic} resizeMode="cover"/>
+                {/* ---------------------------------------Posted Image------------------------------- */}
+                <TouchableOpacity onPress={() => navigation.navigate(navigationStrings.POST_DETAILS, { item: item })}>
+                    <Image source={item.image} style={styles.postedPic} resizeMode="cover" />
                 </TouchableOpacity>
 
+                {/* -----------------------------------Caption area---------------------------------- */}
                 <View style={styles.captionArea}>
                     <Text style={styles.captionTxt}>{item.caption}</Text>
                     <Text style={styles.uploadTimeTxt}>{item.uploaded}</Text>
@@ -133,7 +137,6 @@ const styles = StyleSheet.create({
         fontFamily: fontFamily.barlowRegular,
         fontSize: textScale(13),
         color: colors.greyLocation,
-        // paddingTop:moderateScale(1)
     },
     likeComment: {
         flexDirection: 'row',

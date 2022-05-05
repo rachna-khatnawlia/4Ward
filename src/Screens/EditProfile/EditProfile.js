@@ -1,5 +1,6 @@
 //import liraries
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
+import { styles } from './style';
 import { View, Text, StyleSheet, ScrollView, SafeAreaView, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native';
 import Button from '../../Components/ButtonComponent';
 import CommonInput from '../../Components/CommonInput';
@@ -9,7 +10,7 @@ import imagePath from '../../constants/imagePath';
 import strings from '../../constants/lang';
 import colors from '../../styles/colors';
 import { commonStyle } from '../../styles/commonStyles';
-import { height, moderateScale, moderateScaleVertical, width } from '../../styles/responsiveSize';
+import { moderateScale, moderateScaleVertical } from '../../styles/responsiveSize';
 import { useSelector } from 'react-redux';
 import actions from '../../redux/actions/'
 import ImagePicker from 'react-native-image-crop-picker';
@@ -17,10 +18,11 @@ import ImagePicker from 'react-native-image-crop-picker';
 // create a component
 const EditProfile = ({ navigation }) => {
     const userData = useSelector(state => state.UserStatus.userLoginState);
-    console.log("userDeatils on home page",userData);
-    // -------------------------------SignUp data-------------------------------------
+    console.log("userDeatils on home page", userData);
+    // -------------------------------Updata API data-------------------------------------
     const [upDateData, setUpdateData] = useState({
-        profilePic: imagePath.profilePic2,
+        profileImage: '',
+        imageType: null,
         firstName: userData?.first_name,
         lastName: userData?.last_name,
         email: userData?.email,
@@ -28,50 +30,53 @@ const EditProfile = ({ navigation }) => {
         phoneCode: '+91',
     })
 
-    const { firstName, lastName, email, phone, phoneCode, profilePic } = upDateData;
+    const { firstName, lastName, email, phone, phoneCode, profileImage } = upDateData;
     const updateState = (data) => setUpdateData(() => ({ ...upDateData, ...data }))
 
+    // ------------------------------Update Entered Password Function----------------------
     const onEditProfile = async () => {
+        
         let editAPIdata = {
+            image: profileImage,
             first_name: firstName,
             last_name: lastName,
             email: email,
         }
-        console.log("Signup data : ", editAPIdata)
+        console.log("Edit API data : ", editAPIdata)
         try {
             const res = await actions.Edit(editAPIdata)
             console.log("Edit api res_+++++", res)
-            navigation.navigate(navigationStrings.PROFILE)
-            alert("User data updated successfully....!!!")
+            // navigation.goBack();
+            alert("Password Updated successfully....!!!")
         } catch (error) {
             console.log("error raised", error)
             alert(error?.message)
         }
     }
-    
 
-    const ImgPicker = () =>{
+    //--------------------------Image Picker Function------------------- 
+    const ImgPicker = () => {
         ImagePicker.openPicker({
-          width: 300,
-          height: 400,
-          cropping: true
+            width: 300,
+            height: 400,
+            cropping: true
         }).then(image => {
-          console.log(image,"my image>>>>>>");
-          updateState({
-            profilePic:image?.sourceURL || image?.path,
-            imageType:image?.mime
-          })
+            console.log(image, "my image>>>>>>");
+            updateState({
+                profileImage: image?.sourceURL || image?.path,
+                imageType: image?.mime
+            })
         });
-      }
+    }
 
     return (
-        <ScrollView style={{ flex: 1, backgroundColor: colors.themeColor }}>
-            <SafeAreaView>
+        <SafeAreaView style={{ flex: 1, backgroundColor: colors.themeColor }}>
+            <ScrollView >
                 {/* -------------Backward Arrow--------------- */}
                 <BackWardArrow txtOnHeader={strings.PROFILE} />
 
                 <View style={{ marginVertical: moderateScaleVertical(20) }}>
-                    <Image source={profilePic} style={styles.profileImage} resizeMode='contain' />
+                    <Image source={(profileImage) ? { uri: profileImage } : imagePath.profilePic2} style={styles.profileImage} resizeMode='stretch' />
                     <TouchableOpacity onPress={ImgPicker}>
                         <Image source={imagePath.edit} style={styles.editProfile} />
                     </TouchableOpacity>
@@ -110,7 +115,7 @@ const EditProfile = ({ navigation }) => {
                         <View style={commonStyle.countryPickerBg}>
                             <CountryCodePicker />
                         </View>
-                        <View style={{ flex: 0.7, alignItems: 'flex-end', }}>
+                        <View style={{ flex: 0.7, alignItems: 'flex-end' }}>
                             <CommonInput
                                 placeholderTxt={strings.MOBILE_NUMBER}
                                 inputContainer={{ marginRight: moderateScale(0) }}
@@ -124,44 +129,22 @@ const EditProfile = ({ navigation }) => {
                         </View>
                     </View>
 
-
-                    {/* ------------------Next Button----------------- */}
-                    <KeyboardAvoidingView>
-                        <Button
-                            ButtonText={strings.SAVE_CHANGES}
-                            btnStyle={{ marginVertical: moderateScale(12) }}
-                            onPress={onEditProfile}
-                        />
-                    </KeyboardAvoidingView>
                 </View>
 
-            </SafeAreaView>
-        </ScrollView >
+            </ScrollView >
+            {/* ------------------Next Button----------------- */}
+            <KeyboardAvoidingView enabled={true} behavior={Platform.OS == 'android' ? 'height' : 'padding'}>
+                <Button
+                    ButtonText={strings.SAVE_CHANGES}
+                    btnStyle={{ marginVertical: moderateScale(12) }}
+                    onPress={onEditProfile}
+                />
+            </KeyboardAvoidingView>
+
+        </SafeAreaView>
     );
 };
 
-const styles = StyleSheet.create({
-    loginContainer: {
-        alignItems: 'center',
-    },
-    TwoInputFields: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-    profileImage: {
-        height: height / 8,
-        width: height / 8,
-        // height:moderateScale(100),
-        // width:moderateScale(100),
-        borderRadius: width / 2,
-        alignSelf: 'center',
-        position: 'relative'
-    },
-    editProfile: {
-        position: 'absolute',
-        bottom: moderateScale(5),
-        right: moderateScale(150)
-    }
-});
+
 //make this component available to the app
 export default EditProfile;

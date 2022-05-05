@@ -1,6 +1,6 @@
 //import liraries
-import React, { Component, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, SafeAreaView, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, SafeAreaView,  KeyboardAvoidingView } from 'react-native';
 import Button from '../../Components/ButtonComponent';
 import CommonInput from '../../Components/CommonInput';
 import CountryCodePicker from '../../Components/CountryCodePicker';
@@ -33,6 +33,7 @@ const SignUp = ({ navigation }) => {
 
     console.log("usestate value", firstName)
 
+    //-------------------------------SignUp API function------------------------
     const onSignUp = async () => {
         let signUpAPIData = {
             first_name: firstName,
@@ -49,10 +50,7 @@ const SignUp = ({ navigation }) => {
         try {
             const res = await actions.SignUp(signUpAPIData)
             console.log("singnup api res_+++++", res)
-            navigation.navigate(navigationStrings.VERIFY_OTP, {
-                phone:phone, 
-                code: phoneCode
-            })
+            navigation.navigate(navigationStrings.VERIFY_OTP)
             alert("User signup successfully....!!!")
         } catch (error) {
             console.log("error raised", error)
@@ -62,8 +60,8 @@ const SignUp = ({ navigation }) => {
 
 
     return (
-        <ScrollView style={{ flex: 1, backgroundColor: colors.themeColor }}>
-            <SafeAreaView>
+        <SafeAreaView style={{ flex: 1, backgroundColor: colors.themeColor }}>
+            <ScrollView>
                 {/* -------------Backward Arrow--------------- */}
                 <BackWardArrow />
 
@@ -76,14 +74,14 @@ const SignUp = ({ navigation }) => {
                 <View style={styles.loginContainer}>
                     {/* -------------First Name & Last Name--------------- */}
                     <View style={styles.TwoInputFields}>
-                        <View style={{ flex: 0.5, }}>
+                        <View style={{ flex: 0.5 }}>
                             <CommonInput
                                 placeholderTxt={strings.FIRST_NAME}
                                 inputContainer={{ marginRight: moderateScale(15) }}
                                 onChangeTxt={(firstName) => updateState({ firstName })}
-                                />
+                            />
                         </View>
-                        <View style={{ flex: 0.5, }}>
+                        <View style={{ flex: 0.5 }}>
                             <CommonInput
                                 placeholderTxt={strings.LAST_NAME}
                                 inputContainer={{ marginLeft: moderateScale(0) }}
@@ -124,18 +122,18 @@ const SignUp = ({ navigation }) => {
                         placeholderTxt={strings.CFRM_PASSWORD}
                     />
 
-                    {/* ------------------Next Button----------------- */}
-                    <KeyboardAvoidingView>
-                        <Button
-                            ButtonText={strings.NEXT}
-                            btnStyle={{ marginVertical: moderateScale(12) }}
-                            onPress={onSignUp}
-                        />
-                    </KeyboardAvoidingView>
                 </View>
 
-            </SafeAreaView>
-        </ScrollView >
+            </ScrollView >
+            {/* ------------------Next Button----------------- */}
+            <KeyboardAvoidingView enabled={true} behavior={Platform.OS == 'android' ? 'height' : 'padding'}>
+                <Button
+                    ButtonText={strings.NEXT}
+                    btnStyle={{ marginVertical: moderateScale(12) }}
+                    onPress={onSignUp}
+                />
+            </KeyboardAvoidingView>
+        </SafeAreaView>
     );
 };
 

@@ -1,6 +1,6 @@
 //import liraries
-import React, { Component, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, SafeAreaView, TouchableOpacity, Image, KeyboardAvoidingView, Platform } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, ScrollView, SafeAreaView, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
 import Button from '../../Components/ButtonComponent';
 import CommonInput from '../../Components/CommonInput';
 import CountryCodePicker from '../../Components/CountryCodePicker';
@@ -10,13 +10,14 @@ import strings from '../../constants/lang';
 import navigationStrings from '../../navigation/navigationStrings';
 import colors from '../../styles/colors';
 import { commonStyle } from '../../styles/commonStyles';
-import fontFamily from '../../styles/fontFamily';
 import actions from '../../redux/actions';
-
-import { moderateScale, moderateScaleVertical, textScale } from '../../styles/responsiveSize';
+import { moderateScale } from '../../styles/responsiveSize';
+import { styles } from './style';
 
 // create a component
 const Login1 = ({ navigation }) => {
+
+    //--------------Fields ustate---------------
     const [loginData, setloginData] = useState({
         phone: '',
         password: '',
@@ -26,9 +27,8 @@ const Login1 = ({ navigation }) => {
     const { phone, password, loginType } = loginData;
     const updateState = (data) => setloginData(() => ({ ...loginData, ...data }))
 
+    //---------------Login Function-------------
     const handleLogin = async (data) => {
-        console.log("loginData", phone, password)
-
         let apiData = {
             phone: phone,
             phone_code: "+91",
@@ -46,88 +46,61 @@ const Login1 = ({ navigation }) => {
             console.log("error raised", error)
             alert(error?.message)
         }
-
     }
+
     return (
-        <ScrollView style={{ flex: 1, backgroundColor: colors.themeColor }}>
-            <SafeAreaView>
+        <SafeAreaView style={{ flex: 1, backgroundColor: colors.themeColor }}>
+            <ScrollView>
                 <BackWardArrow />
                 <View style={commonStyle.welcome}>
-                    <Text style={commonStyle.welcomeHeading}>Welcome Back!</Text>
-                    <Text style={commonStyle.welcomeDes}>We are happy to see. You can login to continue.</Text>
+                    <Text style={commonStyle.welcomeHeading}>{strings.WELCOME_BACK}</Text>
+                    <Text style={commonStyle.welcomeDes}>{strings.LOGIN1_MSG}</Text>
                 </View>
 
                 <View style={styles.loginContainer}>
 
                     <View style={commonStyle.phoneInputBox}>
+                        {/* -------------------Phone no-------------------- */}
                         <View style={commonStyle.countryPickerBg}>
                             <CountryCodePicker />
                         </View>
                         <View style={{ flex: 0.7, alignItems: 'flex-end' }}>
                             <CommonInput
                                 placeholderTxt={strings.MOBILE_NUMBER}
+                                keyboardType="numeric"
                                 inputContainer={{ marginRight: moderateScale(0) }}
                                 onChangeTxt={(phone) => updateState({ phone })}
                             />
                         </View>
                     </View>
 
+                    {/* ---------------------Password Input------------ */}
                     <PasswordInput
                         placeholderTxt='Password'
                         onChangeTxt={(password) => updateState({ password })}
                     />
+                    {/* --------------OTP and Forget Password------------ */}
                     <View style={styles.otpPassword}>
                         <View style={styles.otpPassword1}>
-                            <Text style={styles.otpPassword1Txt}> Use OTP</Text>
+                            <Text style={styles.otpPassword1Txt}>{strings.USE_OTP}</Text>
                         </View>
-                        <TouchableOpacity style={styles.otpPassword2} onPress={()=>navigation.navigate(navigationStrings.SET_PASSWORD)}>
-                            <Text style={styles.otpPassword2Txt}>Forgot Password? </Text>
+                        <TouchableOpacity style={styles.otpPassword2} onPress={() => navigation.navigate(navigationStrings.SET_PASSWORD)}>
+                            <Text style={styles.otpPassword2Txt}>{strings.FORGET_PASS}</Text>
                         </TouchableOpacity>
                     </View>
-                    <KeyboardAvoidingView enabled={true} behavior={Platform.OS == 'android' ? 'height' : 'padding'}>
-                        <View style={{ paddingBottom: Platform.OS === 'ios' ? moderateScaleVertical(45) : moderateScaleVertical(20) }}>
-                            <Button
-                                ButtonText={strings.LOGIN}
-                                btnStyle={{ marginVertical: moderateScale(12) }}
-                                onPress={handleLogin}
-                            />
-                        </View>
-                    </KeyboardAvoidingView>
                 </View>
+            </ScrollView >
 
-            </SafeAreaView>
-        </ScrollView >
+            <KeyboardAvoidingView enabled={true} behavior={Platform.OS == 'android' ? 'height' : 'padding'}>
+                <Button
+                    ButtonText={strings.LOGIN}
+                    btnStyle={{ marginVertical: moderateScale(12) }}
+                    onPress={handleLogin}
+                />
+            </KeyboardAvoidingView>
+        </SafeAreaView>
     );
 };
 
-const styles = StyleSheet.create({
-    loginContainer: {
-        alignItems: 'center',
-    },
-    otpPassword: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginHorizontal: moderateScale(24),
-        marginBottom: moderateScale(15)
-    },
-    otpPassword1: {
-        flex: 0.5
-    },
-    otpPassword1Txt: {
-        color: colors.white,
-        fontSize: textScale(13),
-        fontFamily: fontFamily.barlowRegular
-    },
-    otpPassword2: {
-        flex: 0.5,
-        alignItems: 'flex-end',
-    },
-    otpPassword2Txt: {
-        color: colors.Forgot,
-        fontSize: textScale(13),
-        fontFamily: fontFamily.barlowRegular
-    },
-
-});
 //make this component available to the app
 export default Login1;

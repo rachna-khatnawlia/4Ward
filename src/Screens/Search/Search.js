@@ -2,7 +2,6 @@
 import React from 'react';
 import { styles } from './style';
 import { View, Text, SafeAreaView, ScrollView, } from 'react-native';
-
 import { FlatList } from 'react-native-gesture-handler';
 import CommonInput from '../../Components/CommonInput';
 import HomeHeader from '../../Components/HomeHeader';
@@ -38,6 +37,7 @@ const Search = () => {
         },
     ]
 
+    //------------render View--------------------
     const renderItem = ({ item }) => {
         return (
             <View style={styles.listView}>
