@@ -10,7 +10,10 @@ const CommonInput = ({
     placeholderTxt,
     secureTextEntry, 
     inputContainer, input,
-    onChangeTxt
+    onChangeTxt,
+    value,
+    editable,
+    selectTextOnFocus
 }) => {
     return (
         <View style={{
@@ -23,6 +26,9 @@ const CommonInput = ({
                 placeholderTextColor={colors.white}
                 secureTextEntry={secureTextEntry}
                 onChangeText={onChangeTxt}
+                value={value}
+                editable={editable}
+                selectTextOnFocus={selectTextOnFocus}
             />
         </View>
     );

@@ -46,6 +46,15 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+  	<string>Require Camera Permission</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Require Microphone Permission</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Require Gallery Permission</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Require Gallery Permission</string>
+
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>UIAppFonts</key>

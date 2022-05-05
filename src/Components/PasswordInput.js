@@ -10,7 +10,8 @@ const PasswordInput = ({
     placeholderTxt,
     inputContainer, 
     input,
-    onChangeTxt
+    onChangeTxt,
+    value
 }) => {
     //--------------------Handle Password Visibility using Eye Button----------------
   const [passwordVisible, setPasswordVisible] = useState(true)
@@ -32,6 +33,7 @@ const PasswordInput = ({
                 placeholderTextColor={colors.white}
                 secureTextEntry={passwordVisible}
                 onChangeText={onChangeTxt}
+                value={value}
             />
             <View style={styles.showBox}>
                 {

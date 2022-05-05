@@ -10,64 +10,71 @@ import strings from '../../constants/lang';
 import colors from '../../styles/colors';
 import { commonStyle } from '../../styles/commonStyles';
 import { height, moderateScale, moderateScaleVertical, width } from '../../styles/responsiveSize';
+import { useSelector } from 'react-redux';
+import actions from '../../redux/actions/'
+import ImagePicker from 'react-native-image-crop-picker';
 
 // create a component
 const EditProfile = ({ navigation }) => {
+    const userData = useSelector(state => state.UserStatus.userLoginState);
+    console.log("userDeatils on home page",userData);
     // -------------------------------SignUp data-------------------------------------
     const [upDateData, setUpdateData] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
+        profilePic: imagePath.profilePic2,
+        firstName: userData?.first_name,
+        lastName: userData?.last_name,
+        email: userData?.email,
+        phone: userData?.phone,
         phoneCode: '+91',
-        countryCode: 'IN',
-        deviceToken: '132456',
-        deviceType: Platform.OS == 'ios' ? 'IOS' : 'ANDROID',
-        password: ''
     })
 
-    const { firstName, lastName, email, phone, phoneCode, countryCode, deviceToken, deviceType, password } = upDateData;
+    const { firstName, lastName, email, phone, phoneCode, profilePic } = upDateData;
     const updateState = (data) => setUpdateData(() => ({ ...upDateData, ...data }))
 
-    // console.log("usestate value", firstName)
+    const onEditProfile = async () => {
+        let editAPIdata = {
+            first_name: firstName,
+            last_name: lastName,
+            email: email,
+        }
+        console.log("Signup data : ", editAPIdata)
+        try {
+            const res = await actions.Edit(editAPIdata)
+            console.log("Edit api res_+++++", res)
+            navigation.navigate(navigationStrings.PROFILE)
+            alert("User data updated successfully....!!!")
+        } catch (error) {
+            console.log("error raised", error)
+            alert(error?.message)
+        }
+    }
+    
 
-    // const onSignUp = async () => {
-    //     let signUpAPIData = {
-    //         first_name: firstName,
-    //         last_name: lastName,
-    //         email: email,
-    //         phone: phone,
-    //         phone_code: phoneCode,
-    //         country_code: countryCode,
-    //         device_token: deviceToken,
-    //         device_type: deviceType,
-    //         password: password
-    //     }
-    //     console.log("Signup data : ", signUpAPIData)
-    //     try {
-    //         const res = await actions.SignUp(signUpAPIData)
-    //         console.log("singnup api res_+++++", res)
-    //         navigation.navigate(navigationStrings.VERIFY_OTP, {
-    //             phone:phone, 
-    //             code: phoneCode
-    //         })
-    //         alert("User signup successfully....!!!")
-    //     } catch (error) {
-    //         console.log("error raised", error)
-    //         alert(error?.message)
-    //     }
-    // }
-
+    const ImgPicker = () =>{
+        ImagePicker.openPicker({
+          width: 300,
+          height: 400,
+          cropping: true
+        }).then(image => {
+          console.log(image,"my image>>>>>>");
+          updateState({
+            profilePic:image?.sourceURL || image?.path,
+            imageType:image?.mime
+          })
+        });
+      }
 
     return (
         <ScrollView style={{ flex: 1, backgroundColor: colors.themeColor }}>
             <SafeAreaView>
                 {/* -------------Backward Arrow--------------- */}
-                <BackWardArrow txtOnHeader={strings.PROFILE}/>
+                <BackWardArrow txtOnHeader={strings.PROFILE} />
 
-                <View style={{marginVertical:moderateScaleVertical(20)}}>
-                    <Image source={imagePath.profilePic2} style={styles.profileImage} resizeMode='contain'/>
-                    <Image source={imagePath.edit} style={styles.editProfile}/>
+                <View style={{ marginVertical: moderateScaleVertical(20) }}>
+                    <Image source={profilePic} style={styles.profileImage} resizeMode='contain' />
+                    <TouchableOpacity onPress={ImgPicker}>
+                        <Image source={imagePath.edit} style={styles.editProfile} />
+                    </TouchableOpacity>
                 </View>
 
                 <View style={styles.loginContainer}>
@@ -77,13 +84,15 @@ const EditProfile = ({ navigation }) => {
                             <CommonInput
                                 placeholderTxt={strings.FIRST_NAME}
                                 inputContainer={{ marginRight: moderateScale(15) }}
+                                value={firstName}
                                 onChangeTxt={(firstName) => updateState({ firstName })}
-                                />
+                            />
                         </View>
                         <View style={{ flex: 0.5, }}>
                             <CommonInput
                                 placeholderTxt={strings.LAST_NAME}
                                 inputContainer={{ marginLeft: moderateScale(0) }}
+                                value={lastName}
                                 onChangeTxt={(lastName) => updateState({ lastName })}
                             />
                         </View>
@@ -92,6 +101,7 @@ const EditProfile = ({ navigation }) => {
                     {/* -------------Email Field--------------- */}
                     <CommonInput
                         placeholderTxt={strings.EMAIL}
+                        value={email}
                         onChangeTxt={(email) => updateState({ email })}
                     />
 
@@ -104,9 +114,12 @@ const EditProfile = ({ navigation }) => {
                             <CommonInput
                                 placeholderTxt={strings.MOBILE_NUMBER}
                                 inputContainer={{ marginRight: moderateScale(0) }}
+                                value={phone}
                                 onChangeTxt={(phone) => updateState({ phone })}
                                 keyBoardType="numeric"
                                 keyboardAppearance='dark'
+                                editable={false}
+                                selectTextOnFocus={false}
                             />
                         </View>
                     </View>
@@ -117,6 +130,7 @@ const EditProfile = ({ navigation }) => {
                         <Button
                             ButtonText={strings.SAVE_CHANGES}
                             btnStyle={{ marginVertical: moderateScale(12) }}
+                            onPress={onEditProfile}
                         />
                     </KeyboardAvoidingView>
                 </View>
@@ -134,19 +148,19 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
-    profileImage:{
-        height:height/8,
-        width:height/8,
+    profileImage: {
+        height: height / 8,
+        width: height / 8,
         // height:moderateScale(100),
         // width:moderateScale(100),
-        borderRadius:width/2,
-        alignSelf:'center',
-        position:'relative'
+        borderRadius: width / 2,
+        alignSelf: 'center',
+        position: 'relative'
     },
-    editProfile:{
-        position:'absolute',
-        bottom:moderateScale(5),
-        right:moderateScale(150)
+    editProfile: {
+        position: 'absolute',
+        bottom: moderateScale(5),
+        right: moderateScale(150)
     }
 });
 //make this component available to the app
