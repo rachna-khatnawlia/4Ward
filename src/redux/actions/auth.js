@@ -43,3 +43,11 @@ export const Edit = (data) => {
 export const UpdatePassword = (data) => {
   return apiPost(UPDATE_PASSWORD_API, data)
 }
+
+export const Intro = (data) => {
+  console.log("data>>>>>>>>>>>>>>>>>>", data)
+  dispatch({
+      type: types.INTRO,
+      payload: data,
+  })
+};

@@ -6,6 +6,7 @@ import Button from '../../Components/ButtonComponent';
 import BackWardArrow from '../../Components/GoBackArrowComponent';
 import strings from '../../constants/lang';
 import navigationStrings from '../../navigation/navigationStrings';
+import actions from '../../redux/actions';
 import colors from '../../styles/colors';
 import { commonStyle } from '../../styles/commonStyles';
 import { height, moderateScale  } from '../../styles/responsiveSize';
@@ -14,9 +15,26 @@ import { styles } from './style';
 // create a component
 const VerifyOtp = ({ navigation, route }) => {
     const phoneNumber = route?.params?.phone;
-    const phoneCode = route?.params?.code
+    const phoneCode = route?.params?.code;
 
-    const [code, setCode] = useState('');
+    const apiData = route?.params?.data;
+    console.log("NEW USER DATA IS:", apiData);
+
+    const otp = apiData?.otp
+    console.log(otp, 'otpdata--');
+
+    const [code, setCode] = useState();
+
+    
+    const signupWithOtp = () =>{
+        
+        if (otp ==code) {
+            actions.loginFunction(apiData)
+            alert("Login successfully")
+        } else {
+            alert("wrong OTP")
+        }
+    }
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: colors.themeColor }}>
             <BackWardArrow />
@@ -51,7 +69,7 @@ const VerifyOtp = ({ navigation, route }) => {
                             <Button
                                 ButtonText={strings.VERIFY}
                                 btnStyle={{ marginVertical: moderateScale(12) }}
-                                onPress={() => navigation.navigate(navigationStrings.LOGIN1)}
+                                onPress={signupWithOtp}
                             />
                     </KeyboardAvoidingView>
                 </View>

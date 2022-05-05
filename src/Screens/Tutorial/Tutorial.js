@@ -6,6 +6,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import imagePath from '../../constants/imagePath';
 import strings from '../../constants/lang';
 import navigationStrings from '../../navigation/navigationStrings';
+import actions from '../../redux/actions';
 import { introStyles } from './styles';
 
 //------------------------INTRO DATA
@@ -32,6 +33,9 @@ const slides = [
 ];
 
 const Tutorial = ({ navigation }) => {
+    const data = () => {
+        actions.Intro(false);
+      };
 
     const renderItem = ({ item }) => {
         // -----------------------Render View--------------------
@@ -55,7 +59,7 @@ const Tutorial = ({ navigation }) => {
     //-------------------Next and get started----------------
     const _renderDoneButton = () => {
         return (
-            <TouchableOpacity onPress={() => navigation.navigate(navigationStrings.LOGIN)}>
+            <TouchableOpacity onPress={data}>
                 <Text style={introStyles.getStartStyle}>{strings.GET_STARTED}</Text>
             </TouchableOpacity>
         );

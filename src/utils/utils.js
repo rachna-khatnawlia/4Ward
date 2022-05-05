@@ -37,20 +37,20 @@ export const removeLoginLocally = async () => {
 };
 
 //-----------------------------App Intro Slider------------------------------
-export function setItem(key, data) {
-    data = JSON.stringify(data);
-    console.log("data set locally", data)
-    return AsyncStorage.setItem(key, data);
+// export function setItem(key, data) {
+//     data = JSON.stringify(data);
+//     console.log("data set locally", data)
+//     return AsyncStorage.setItem(key, data);
 
-}
+// }
 
-export function getItem(key) {
-    return new Promise((resolve, reject) => {
-        AsyncStorage.getItem(key).then(data => {
-            resolve(JSON.parse(data));
-        });
-    });
-}
+// export function getItem(key) {
+//     return new Promise((resolve, reject) => {
+//         AsyncStorage.getItem(key).then(data => {
+//             resolve(JSON.parse(data));
+//         });
+//     });
+// }
 
 
 
@@ -64,7 +64,7 @@ export async function getHeaders() {
         loginUser = JSON.parse(loginUser);
         //console.log(userData.accessToken, 'header')
         return {
-            authorization: `${loginUser?.access_token}`,
+            authorization: `Bearer ${loginUser?.access_token}`,
         };
     }
     return {};
@@ -109,8 +109,8 @@ export async function apiReq(
                 console.log(error)
                 console.log(error && error.response, 'the error respne')
                 if (error && error.response && error.response.status === 401) {
-                    clearUserData();
-                    clearLoginUser();
+               
+              
                     // NavigationService.resetNavigation();
                     //NavigationService.navigate('loginUsingEmailScreen');
                     dispatch({
@@ -155,18 +155,18 @@ export function apiPost(endPoint, data, headers = {}) {
 
 
 
-// export function setItem(key, data) {
-//     data = JSON.stringify(data);
-//     return AsyncStorage.setItem(key, data);
-// }
+export function setItem(key, data) {
+    data = JSON.stringify(data);
+    return AsyncStorage.setItem(key, data);
+}
 
-// export function getItem(key) {
-//     return new Promise((resolve, reject) => {
-//         AsyncStorage.getItem(key).then(data => {
-//             resolve(JSON.parse(data));
-//         });
-//     });
-// }
+export function getItem(key) {
+    return new Promise((resolve, reject) => {
+        AsyncStorage.getItem(key).then(data => {
+            resolve(JSON.parse(data));
+        });
+    });
+}
 
 // export function removeItem(key) {
 //     return AsyncStorage.removeItem(key);

@@ -19,11 +19,12 @@ const App = () => {
   useEffect(() => {
     GoogleSignin.configure();
 
-    // getItem('intro').then((res)=>{
-    //   if(!!res){
-    //     actions.Intro()
-    //   }
-    // })
+    getItem('introdata').then((res)=>{
+      console.log(res,"getItem>>>res");
+      if(res != null){
+        actions.Intro(res)
+      }
+    })
 
     getLoginLocally().then((res) => {
       console.log("GetLoginValue", res);

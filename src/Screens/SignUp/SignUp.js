@@ -50,8 +50,8 @@ const SignUp = ({ navigation }) => {
         try {
             const res = await actions.SignUp(signUpAPIData)
             console.log("singnup api res_+++++", res)
-            navigation.navigate(navigationStrings.VERIFY_OTP)
-            alert("User signup successfully....!!!")
+            navigation.navigate(navigationStrings.VERIFY_OTP,{ data: res?.data })
+            // alert("User signup successfully....!!!")
         } catch (error) {
             console.log("error raised", error)
             alert(error?.message)
@@ -118,9 +118,9 @@ const SignUp = ({ navigation }) => {
                         onChangeTxt={(password) => updateState({ password })}
                     />
                     {/* -------------Confirm Field--------------- */}
-                    <PasswordInput
+                    {/* <PasswordInput
                         placeholderTxt={strings.CFRM_PASSWORD}
-                    />
+                    /> */}
 
                 </View>
 
