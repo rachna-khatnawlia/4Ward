@@ -1,7 +1,7 @@
 import { store } from "../store";
 import types from "../types";
 import { apiPost } from "../../utils/utils";
-import { EDIT_API, LOGIN_API, SIGNUP_API, UPDATE_PASSWORD_API } from "../../config/urls";
+import { EDIT_PROFILE_API, LOGIN_API, SIGNUP_API, UPDATE_PASSWORD_API } from "../../config/urls";
 
 const { dispatch } = store;
 
@@ -36,9 +36,19 @@ export const Login = (data) => {
   });
 };
 
-export const Edit = (data) => {
-  return apiPost(EDIT_API, data);
-}
+export const editProfile = (data) => {
+  console.log(data, 'the given data for profile update');
+  return new Promise((resolve, reject) => {
+    apiPost(EDIT_PROFILE_API, data)
+      .then((res) => {
+        loginFunction(res.data);
+        resolve(res);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};
 
 export const UpdatePassword = (data) => {
   return apiPost(UPDATE_PASSWORD_API, data)

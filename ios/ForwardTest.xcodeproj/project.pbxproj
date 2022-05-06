@@ -21,6 +21,7 @@
 		B90214AAD6564F2FB86387EF /* CircularStd-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DCCFBBFEC1A84C9EBE6DDDF6 /* CircularStd-Bold.ttf */; };
 		E66BD34A220E4B39AC14390E /* Barlow-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1CD4EDDADD540A69960DAEE /* Barlow-Medium.ttf */; };
 		EAF24649FBA0498B9CB604AF /* CircularStd-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 900B98CE5AC44B1D93A509F5 /* CircularStd-Book.otf */; };
+		F8207C1328240159004E45F0 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8207C1228240159004E45F0 /* File.swift */; };
 		F8EFA174281BBA6D008DBDEA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F8EFA173281BBA6D008DBDEA /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,8 @@
 		DCCFBBFEC1A84C9EBE6DDDF6 /* CircularStd-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "CircularStd-Bold.ttf"; path = "../src/assets/fonts/CircularStd-Bold.ttf"; sourceTree = "<group>"; };
 		EBE5A86C5BAD44E0B9006F24 /* Barlow-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-SemiBold.ttf"; path = "../src/assets/fonts/Barlow-SemiBold.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F8207C1128240159004E45F0 /* ForwardTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ForwardTest-Bridging-Header.h"; sourceTree = "<group>"; };
+		F8207C1228240159004E45F0 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		F8EFA173281BBA6D008DBDEA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,6 +112,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				F8207C1228240159004E45F0 /* File.swift */,
+				F8207C1128240159004E45F0 /* ForwardTest-Bridging-Header.h */,
 			);
 			name = ForwardTest;
 			sourceTree = "<group>";
@@ -240,7 +245,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1320;
 					};
 				};
 			};
@@ -465,6 +470,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
+				F8207C1328240159004E45F0 /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -484,6 +490,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-ForwardTest-ForwardTestTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -511,6 +518,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-ForwardTest-ForwardTestTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = ForwardTestTests/Info.plist;
@@ -551,6 +559,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.forwardtest;
 				PRODUCT_NAME = ForwardTest;
+				SWIFT_OBJC_BRIDGING_HEADER = "ForwardTest-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -576,6 +585,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.forwardtest;
 				PRODUCT_NAME = ForwardTest;
+				SWIFT_OBJC_BRIDGING_HEADER = "ForwardTest-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

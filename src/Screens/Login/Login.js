@@ -80,7 +80,7 @@ export default function Login({ navigation }) {
     } else {
       const userData = result;
       console.log("your data is", userData)
-      actions.loginFunction(data);
+      actions.loginFunction(userData);
     }
   }
 

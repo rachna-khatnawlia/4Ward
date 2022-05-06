@@ -59,7 +59,7 @@ export const removeLoginLocally = async () => {
 const { dispatch, getState } = store;
 
 export async function getHeaders() {
-    let loginUser = await AsyncStorage.getItem('loginUser');
+    let loginUser = await AsyncStorage.getItem('LoginLocalStatus');
     if (loginUser) {
         loginUser = JSON.parse(loginUser);
         //console.log(userData.accessToken, 'header')

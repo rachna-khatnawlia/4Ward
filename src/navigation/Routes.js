@@ -20,7 +20,7 @@ const Routes = () => {
   const intro = useSelector(state => state?.introReducer?.introData)  
   // console.log('ruh',intro)
   // console.log("userData on route page", userData);
-
+  // console.log("access token",userData?.access_token)
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -31,11 +31,6 @@ const Routes = () => {
               ? MainStack(Stack)
               : Authstack(Stack)
         }
-
-        {/* {!!intro ? IntroStack(Stack)  : Authstack(Stack)} */}
-
-        {/* {userData ? MainStack(Stack) : Authstack(Stack)} */}
-        <Stack.Screen name={navigationStrings.SET_PASSWORD} component={SetPassword} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

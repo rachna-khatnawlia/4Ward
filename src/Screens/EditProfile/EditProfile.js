@@ -21,7 +21,7 @@ const EditProfile = ({ navigation }) => {
     console.log("userDeatils on home page", userData);
     // -------------------------------Updata API data-------------------------------------
     const [upDateData, setUpdateData] = useState({
-        profileImage: '',
+        profileImage,
         imageType: null,
         firstName: userData?.first_name,
         lastName: userData?.last_name,
@@ -35,23 +35,27 @@ const EditProfile = ({ navigation }) => {
 
     // ------------------------------Update Entered Password Function----------------------
     const onEditProfile = async () => {
-        
+
         let editAPIdata = {
-            image: profileImage,
+            // image: profileImage,
             first_name: firstName,
             last_name: lastName,
             email: email,
+            phone: phone
         }
         console.log("Edit API data : ", editAPIdata)
-        try {
-            const res = await actions.Edit(editAPIdata)
-            console.log("Edit api res_+++++", res)
-            // navigation.goBack();
-            alert("Password Updated successfully....!!!")
-        } catch (error) {
-            console.log("error raised", error)
-            alert(error?.message)
-        }
+
+        actions
+            .editProfile(editAPIdata)
+            .then(res => {
+                console.log("Edit api res_+++++", res)
+                alert("Updated Profile successfully....!!!")
+                navigation.goBack();
+            })
+            .catch(err => {
+                console.log(err, 'err');
+                alert(err?.message);
+            });
     }
 
     //--------------------------Image Picker Function------------------- 

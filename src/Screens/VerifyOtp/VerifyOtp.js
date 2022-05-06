@@ -28,7 +28,7 @@ const VerifyOtp = ({ navigation, route }) => {
     
     const signupWithOtp = () =>{
         
-        if (otp ==code) {
+        if (otp == code) {
             actions.loginFunction(apiData)
             alert("Login successfully")
         } else {

@@ -46,6 +46,29 @@
 			</dict>
 		</dict>
 	</dict>
+  
+  <key>CFBundleURLTypes</key>
+  <array>
+    <dict>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>fb933118164037218</string>
+    </array>
+    </dict>
+  </array>
+  <key>FacebookAppID</key>
+  <string>933118164037218</string>
+  <key>FacebookDisplayName</key>
+  <string>FORWARD</string>
+  
+  <key>LSApplicationQueriesSchemes</key>
+  <array>
+    <string>fbapi</string>
+    <string>fb-messenger-api</string>
+    <string>fbauth2</string>
+    <string>fbshareextension</string>
+  </array>
+  
 	<key>NSCameraUsageDescription</key>
   	<string>Require Camera Permission</string>
 	<key>NSMicrophoneUsageDescription</key>
