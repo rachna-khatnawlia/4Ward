@@ -37,7 +37,7 @@ const EditProfile = ({ navigation }) => {
     const onEditProfile = async () => {
 
         let editAPIdata = {
-            // image: profileImage,
+            image: profileImage,
             first_name: firstName,
             last_name: lastName,
             email: email,

@@ -12,6 +12,7 @@ import actions from '../../redux/actions';
 import colors from '../../styles/colors';
 import { commonStyle } from '../../styles/commonStyles';
 import { moderateScale } from '../../styles/responsiveSize';
+import validator from '../../utils/validation';
 
 // create a component
 const SignUp = ({ navigation }) => {
@@ -33,8 +34,21 @@ const SignUp = ({ navigation }) => {
 
     console.log("usestate value", firstName)
 
+    const isValidData = () => {
+        const error = validator({ firstName, lastName, email, phone, password});
+        if (error) {
+          alert(error)
+          return;
+        }
+        return true;
+      };
+
     //-------------------------------SignUp API function------------------------
     const onSignUp = async () => {
+        const checkValid = isValidData();
+        if (!checkValid) {
+          return;
+        }    
         let signUpAPIData = {
             first_name: firstName,
             last_name: lastName,
