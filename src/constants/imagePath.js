@@ -34,6 +34,8 @@ export default {
   key: require('../assets/images/ic_key.png'),
   logout: require('../assets/images/ic_logout.png'),  
   cross: require('../assets/images/ic_cross.png'),
-  edit: require('../assets/images/ic_edit.png')
+  edit: require('../assets/images/ic_edit.png'),
+  camera:require('../assets/images/camera.png'),
+  plus:require('../assets/images/ic_plus.png'),
 
 };

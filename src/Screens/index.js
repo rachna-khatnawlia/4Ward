@@ -11,3 +11,4 @@ export {default as Search} from './Search/Search'
 export {default as Notification} from './Notification/Notification';
 export {default as PostDetails} from './PostDetails/PostDetails';
 export {default as EditProfile} from './EditProfile/EditProfile';
+export {default as AddInfo} from './AddInfo/AddInfo'

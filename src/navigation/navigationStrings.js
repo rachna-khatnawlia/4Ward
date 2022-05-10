@@ -13,4 +13,5 @@ export default {
   BOTTOM_TAB: 'bottomTab',
   POST_DETAILS: 'postDetails',
   EDIT_PROFILE: 'editProfile',
+  ADD_INFO: 'AddInfo',
 };

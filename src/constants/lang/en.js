@@ -52,4 +52,10 @@ export default {
     HOME_COMMENTS:'Comments 1,254',
 
     ADDED_NEW_POST:'added a new post.',
+    GALLERY:'Gallery',
+    RECENTS:'Recents  ',
+    POST:'POST',
+    ADD_INFO:'Add info',
+    WRITE_DESCRIPTION_HERE:'Write description here...',
+    ADD_LOCATION:'Add location',
 }   

@@ -274,7 +274,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-
+    implementation project(':@react-native-community_cameraroll')
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
@@ -300,6 +300,7 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+    
 }
 
 if (isNewArchitectureEnabled()) {

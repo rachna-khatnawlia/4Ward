@@ -44,15 +44,15 @@ const styles = StyleSheet.create({
         backgroundColor: colors.inputColor,
         alignItems: 'center',
         borderRadius: moderateScale(8),
-        marginVertical: moderateScale(12),
+        marginVertical: moderateScale(8),
         marginHorizontal: moderateScale(23)
     },
     input: {
         height: moderateScale(48),
-        marginVertical: moderateScaleVertical(5),
+        marginVertical: moderateScaleVertical(4),
         paddingHorizontal: moderateScale(16),
         flex: 1,
-        fontSize: textScale(14),
+        fontSize: textScale(13),
         fontFamily: fontFamily.barlowRegular
     },
 });
