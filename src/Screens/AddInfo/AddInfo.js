@@ -1,5 +1,5 @@
 //import liraries
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, KeyboardAvoidingView, Platform, ScrollView, Alert, Image, TouchableOpacity } from 'react-native';
 import BackWardArrow from '../../Components/GoBackArrowComponent';
 import strings from '../../constants/lang';
@@ -8,7 +8,6 @@ import { moderateScale, moderateScaleVertical, width } from '../../styles/respon
 import Button from '../../Components/ButtonComponent';
 import CommonInput from '../../Components/CommonInput';
 import imagePath from '../../constants/imagePath';
-import CameraRoll from '@react-native-community/cameraroll';
 import ImageCropPicker from 'react-native-image-crop-picker';
 // create a component
 const AddInfo = ({ route }) => {
@@ -86,6 +85,7 @@ const AddInfo = ({ route }) => {
                             return (
                                 <View>
                                     <Image source={{ uri: element }} style={styles.uploadedImage} />
+                                    <Image source={imagePath.cross} style={{position:'absolute', right:-10,top:0}}/>
                                 </View>
                             )
                         }) : null
@@ -129,7 +129,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         // marginRight: moderateScale(16),
-        marginVertical: moderateScaleVertical(8)
+        marginVertical: moderateScaleVertical(8),
+        position:'relative'
     }
 });
 

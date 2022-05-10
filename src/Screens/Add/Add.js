@@ -9,6 +9,7 @@ import imagePath from '../../constants/imagePath';
 import { moderateScale, textScale, width } from '../../styles/responsiveSize';
 import navigationStrings from '../../navigation/navigationStrings';
 import fontFamily from '../../styles/fontFamily';
+import ImageCropPicker from 'react-native-image-crop-picker';
 
 // create a component
 const Add = ({ navigation }) => {
