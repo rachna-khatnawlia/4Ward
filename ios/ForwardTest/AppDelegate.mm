@@ -6,6 +6,7 @@
 #import <Firebase.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <React/RCTAppSetupUtils.h>
+#import "RNSplashScreen.h"
 
 #if RCT_NEW_ARCH_ENABLED
 #import <React/CoreModulesPlugins.h>
@@ -59,6 +60,8 @@
   [self.window makeKeyAndVisible];
   [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
+
+  [RNSplashScreen show];
   return YES;
 }
 

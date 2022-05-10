@@ -10,8 +10,7 @@ import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-si
 import { getItem, getLoginLocally } from './src/utils/utils';
 import actions from './src/redux/actions';
 import types from './src/redux/types';
-
-
+import SplashScreen from 'react-native-splash-screen'
 
 const App = () => {
   const { dispatch } = store;
@@ -33,7 +32,9 @@ const App = () => {
         payload: res
       })
     })
-
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 1000);
   }, [])
 
   return (
