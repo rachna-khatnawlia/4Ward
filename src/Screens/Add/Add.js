@@ -14,13 +14,15 @@ import ImageCropPicker from 'react-native-image-crop-picker';
 // create a component
 const Add = ({ navigation }) => {
     const [state, setState] = useState({
-        photos: []
+        photos: [],
+        selectPhoto: ''
     });
-    const { photos } = state;
 
-    useEffect(() => {
-        hasGalleryPermissions();
-    })
+    const { photos, selectPhoto } = state;
+    const updateState = (data) => setState((state) => ({ ...state, ...data }))
+    // console.log('show photo', selectPhoto);
+
+
 
     // --------------------------------Android Permissions--------------------------
     const hasAndroidPermission = async () => {
@@ -36,6 +38,7 @@ const Add = ({ navigation }) => {
     }
 
     const hasGalleryPermissions = async () => {
+
         if (Platform.OS === 'android' && !(await hasAndroidPermission())) {
             return;
         }
@@ -44,13 +47,17 @@ const Add = ({ navigation }) => {
             assetType: 'Photos',
         })
             .then(r => {
-                setState({ photos: r.edges });
-                // console.log("setstate Photo respone-------", r)
+                updateState({ photos: r.edges });
+                // console.log('image>>>>', r);
+                updateState({ selectPhoto: r.edges[0].node.image.uri });
             })
             .catch(err => {
                 console.log('erre', err);
             });
     }
+    useEffect(() => {
+        hasGalleryPermissions();
+    }, [])
 
     // --------------------------------------LAUNCH CAMERA----------------------------
     const launchCamera = () => {
@@ -60,6 +67,7 @@ const Add = ({ navigation }) => {
             cropping: true,
         }).then(image => {
             console.log(image);
+            navigation.navigate(navigationStrings.ADD_INFO, { selectPhoto: res?.path })
         });
     }
 
@@ -69,7 +77,7 @@ const Add = ({ navigation }) => {
             height: 400,
             cropping: true,
         }).then(image => {
-            console.log(image);
+            console.log("selected image from gallery", image);
         });
     }
 
@@ -88,16 +96,31 @@ const Add = ({ navigation }) => {
                     onPress: launchGallery,
 
                 },
-                { text: "Cancel", onPress: () => console.log("OK Pressed"), style: "cancel" }
+                {
+                    text: "Cancel",
+                    onPress: () => console.log("OK Pressed"),
+                    style: "cancel"
+                }
             ]
         );
 
     }
+    const imageToSwap = element => {
+        console.log("index", element.item.node.image)
+        updateState({ selectPhoto: element.item.node.image.uri });
+    };
+
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: colors.themeColor, position: 'relative' }}>
 
             <HomeHeader headerText={strings.SELECT_PIC} />
-
+            <View>
+                <Image
+                    style={styles.firstImage}
+                    // key={index}
+                    source={{ uri: selectPhoto }}
+                ></Image>
+            </View>
             <ScrollView style={{}}>
                 {/* -------------gallery AND RECENTS----------------- */}
                 <View style={styles.detailsView}>
@@ -119,35 +142,26 @@ const Add = ({ navigation }) => {
                         // console.log("element", element)
                         let index = element.index
                         // console.log("index of images is:", index)
-                        if (index == 0) {
-                            return (
-                                <View>
-                                    <Image
-                                        style={styles.firstImage}
-                                        key={index}
-                                        source={{ uri: element.item.node.image.uri }}
-                                    />
-                                </View>
-                            )
-                        }
-                        else {
-                            return (
-                                <TouchableOpacity onPress={() => navigation.navigate(navigationStrings.ADD_INFO, { image: element.item.node.image })}>
-                                    <Image
-                                        key={index}
-                                        source={{ uri: element.item.node.image.uri }}
-                                        style={styles.galleryPhoto} />
-                                </TouchableOpacity>
-                            )
-                        }
+
+                        return (
+                            <TouchableOpacity
+                                onPress={() => imageToSwap(element)}
+                            >
+                                <Image
+                                    key={index}
+                                    source={{ uri: element.item.node.image.uri }}
+                                    style={styles.galleryPhoto} />
+                            </TouchableOpacity>
+                        )
+
                     }}
                     numColumns={3}
                 />
             </ScrollView >
-                {/* ----------------------camera icon------------------- */}
-                <TouchableOpacity onPress={selectImage}>
-                    <Image source={imagePath.camera} style={styles.cameraIcon} resizeMode="contain"/>
-                </TouchableOpacity>
+            {/* ----------------------camera icon------------------- */}
+            <TouchableOpacity onPress={selectImage}>
+                <Image source={imagePath.camera} style={styles.cameraIcon} resizeMode="contain" />
+            </TouchableOpacity>
 
 
         </SafeAreaView>
@@ -166,7 +180,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderTopLeftRadius: moderateScale(9),
         borderTopRightRadius: moderateScale(9),
-        marginTop: moderateScale(5)
+        marginTop: moderateScale(2)
     },
     galleryTxt: {
         fontFamily: fontFamily.barlowMedium,
@@ -187,6 +201,7 @@ const styles = StyleSheet.create({
     firstImage: {
         width: width,
         height: width,
+        // borderRadius:width/2
     },
     galleryPhoto: {
         width: width / 3,
@@ -197,7 +212,7 @@ const styles = StyleSheet.create({
         height: width / 6,
         width: width / 6,
         position: 'relative',
-        left: moderateScale(width-100),
+        left: moderateScale(width - 100),
         bottom: moderateScale(80)
     }
 });

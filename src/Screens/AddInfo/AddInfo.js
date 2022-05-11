@@ -38,6 +38,7 @@ const AddInfo = ({ route }) => {
         });
     }
 
+    // --------------------------------------LAUNCH GALLERY----------------------------  
     const launchGallery = () => {
         ImageCropPicker.openPicker({
             width: 300,
@@ -48,8 +49,8 @@ const AddInfo = ({ route }) => {
         });
     }
 
+    // --------------------------------------SELECT OPTIONS----------------------------
     const selectImage = () => {
-
         Alert.alert(
             "Upload Image",
             "Choose an option",
@@ -80,12 +81,13 @@ const AddInfo = ({ route }) => {
                     <View>
                         <Image source={image} style={styles.uploadedImage} />
                     </View>
+
                     {
                         post ? post.map((element) => {
                             return (
                                 <View>
                                     <Image source={{ uri: element }} style={styles.uploadedImage} />
-                                    <Image source={imagePath.cross} style={{position:'absolute', right:-10,top:0}}/>
+                                    <Image source={imagePath.cross} style={{ position: 'absolute', right: -10, top: 0 }} />
                                 </View>
                             )
                         }) : null
@@ -130,7 +132,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         // marginRight: moderateScale(16),
         marginVertical: moderateScaleVertical(8),
-        position:'relative'
+        position: 'relative'
     }
 });
 
