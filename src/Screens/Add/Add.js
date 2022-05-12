@@ -11,7 +11,6 @@ import navigationStrings from '../../navigation/navigationStrings';
 import fontFamily from '../../styles/fontFamily';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import actions from '../../redux/actions';
-import RNHeicConverter from 'react-native-heic-converter';
 
 // create a component
 const Add = ({ navigation }) => {
@@ -23,8 +22,6 @@ const Add = ({ navigation }) => {
     const { photos, selectPhoto } = state;
     const updateState = (data) => setState((state) => ({ ...state, ...data }))
     // console.log('show photo', selectPhoto);
-
-
 
     // --------------------------------Android Permissions--------------------------
     const hasAndroidPermission = async () => {

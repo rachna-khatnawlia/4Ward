@@ -1,6 +1,6 @@
 //import liraries
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, KeyboardAvoidingView, Platform, ScrollView, Alert, Image, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, SafeAreaView, KeyboardAvoidingView, Platform, ScrollView, Alert, Image, TouchableOpacity } from 'react-native';
 import BackWardArrow from '../../Components/GoBackArrowComponent';
 import strings from '../../constants/lang';
 import colors from '../../styles/colors';
@@ -10,8 +10,9 @@ import CommonInput from '../../Components/CommonInput';
 import imagePath from '../../constants/imagePath';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import actions from '../../redux/actions';
+import navigationStrings from '../../navigation/navigationStrings';
 // create a component
-const AddInfo = ({ route }) => {
+const AddInfo = ({ navigation, route }) => {
     const image = route?.params?.image;
     console.log("selected image from add page>>>>>>>>>>>>>>>>>>>", image);
 
@@ -26,7 +27,7 @@ const AddInfo = ({ route }) => {
     const { description, location, post, imageType } = postData;
     const updateState = (data) => setpostData(() => ({ ...postData, ...data }))
 
-    // console.log("post selected on plus button", image);
+    console.log("concatenated array", post)
 
     // --------------------------------------LAUNCH CAMERA----------------------------
     const launchCamera = () => {
@@ -46,8 +47,8 @@ const AddInfo = ({ route }) => {
             height: 400,
             cropping: true,
         }).then(image => {
+            console.log("************************", image);
             imageUpload(image.path)
-            
         });
     }
 
@@ -80,9 +81,11 @@ const AddInfo = ({ route }) => {
         let newArray = [...post];
         newArray.splice(index, 1);
         updateState({ post: newArray });
+
     }
 
-    const imageUpload = (image) =>{
+
+    const imageUpload = (image) => {
         let apiData = new FormData()
         apiData.append('image', {
             uri: image,
@@ -102,6 +105,28 @@ const AddInfo = ({ route }) => {
                 alert(err?.message);
             });
     }
+    const _postApi = () => {
+        let apiData = {
+            images: post,
+            description: description,
+            latitude: "3.222",
+            longitude: "9.45682",
+            location_name: location,
+            type: "normal"
+        }
+        console.log("Post API data : ", apiData)
+
+        actions.post(apiData)
+            .then(res => {
+                console.log("Edit api res_+++++", res)
+                alert("post successful....!!!")
+                navigation.navigate(navigationStrings.HOME)
+            })
+            .catch(err => {
+                console.log(err, 'err');
+                alert(err?.message);
+            });
+    }
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: colors.themeColor }}>
@@ -115,7 +140,7 @@ const AddInfo = ({ route }) => {
                                 return (
                                     <View>
                                         <Image source={{ uri: element }} style={styles.uploadedImage} />
-                                        <TouchableOpacity style={{ position: 'relative' }} onPress={(index) => cancelImage(index)}>
+                                        <TouchableOpacity style={{ position: 'relative' }} onPress={() => cancelImage(index)}>
                                             <Image source={imagePath.cross} style={styles.crossIcon} />
                                         </TouchableOpacity>
                                     </View>
@@ -146,6 +171,7 @@ const AddInfo = ({ route }) => {
                 <Button
                     ButtonText={strings.POST}
                     btnStyle={{ marginVertical: moderateScale(12) }}
+                    onPress={_postApi}
                 />
             </KeyboardAvoidingView>
         </SafeAreaView>
