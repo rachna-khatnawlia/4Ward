@@ -6,6 +6,9 @@ export default {
   EDIT_TO_DO: 'Edit_TODO',
   EDIT_TO_DO_DATA: 'Edit_TODO_Data',
   CLEAR_REDUX_STATE: 'CLEAR_REDUX_STATE',
-  INTRO: 'appIntroSlider'
+  INTRO: 'appIntroSlider',
+
+  SINGLE_IMAGE_API:'Single_Image_Api',
+  SEND_POST:'Send_Post',
 };
 

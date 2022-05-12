@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, Image, FlatList, PermissionsAndroid, Alert, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, ScrollView, Image, FlatList, ImageBackground, PermissionsAndroid, Alert, TouchableOpacity } from 'react-native';
 import HomeHeader from '../../Components/HomeHeader';
 import strings from '../../constants/lang';
 import colors from '../../styles/colors';
@@ -10,6 +10,8 @@ import { moderateScale, textScale, width } from '../../styles/responsiveSize';
 import navigationStrings from '../../navigation/navigationStrings';
 import fontFamily from '../../styles/fontFamily';
 import ImageCropPicker from 'react-native-image-crop-picker';
+import actions from '../../redux/actions';
+import RNHeicConverter from 'react-native-heic-converter';
 
 // create a component
 const Add = ({ navigation }) => {
@@ -48,7 +50,7 @@ const Add = ({ navigation }) => {
         })
             .then(r => {
                 updateState({ photos: r.edges });
-                // console.log('image>>>>', r);
+                console.log('image>>>>', r);
                 updateState({ selectPhoto: r.edges[0].node.image.uri });
             })
             .catch(err => {
@@ -106,35 +108,64 @@ const Add = ({ navigation }) => {
 
     }
     const imageToSwap = element => {
-        console.log("index", element.item.node.image)
+        console.log("index", element)
         updateState({ selectPhoto: element.item.node.image.uri });
     };
+
+
+
+    const imageUpload = () => {
+   
+        let apiData = new FormData()
+        apiData.append('image', {
+            uri: selectPhoto,
+            name: `${(Math.random() + 1).toString(36).substring(7)}.jpg`,
+            type: 'image/jpeg',
+
+        })
+        console.log("single pic API data : ", apiData)
+        let header = { "Content-Type": "multipart/form-data" }
+        actions.singleImageApi(apiData, header)
+            .then(res => {
+                console.log("single image api res_+++++", res)
+             
+                // return;
+                navigation.navigate(navigationStrings.ADD_INFO, { image: res.data })
+            })
+            .catch(err => {
+                console.log(err, 'err');
+                alert(err?.message);
+            });
+
+    }
+
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: colors.themeColor, position: 'relative' }}>
 
-            <HomeHeader headerText={strings.SELECT_PIC} />
-            <View>
-                <Image
-                    style={styles.firstImage}
-                    // key={index}
-                    source={{ uri: selectPhoto }}
-                ></Image>
-            </View>
-            <ScrollView style={{}}>
-                {/* -------------gallery AND RECENTS----------------- */}
-                <View style={styles.detailsView}>
-                    <View>
-                        <Text style={styles.galleryTxt}>{strings.GALLERY}</Text>
-                    </View>
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Text style={styles.recentTxt}>{strings.RECENTS}</Text>
-                        <TouchableOpacity style={styles.downwardArrow}>
-                            <Image source={imagePath.downwardArrow} />
-                        </TouchableOpacity>
-                    </View>
+            <HomeHeader headerText={strings.SELECT_PIC} forwardImage={true}
+                onPress={imageUpload}
+            />
+            <ImageBackground
+                style={styles.firstImage}
+                // key={index}
+                source={{ uri: selectPhoto }}
+            >
+            </ImageBackground>
+            {/* -------------gallery AND RECENTS----------------- */}
+            <View style={styles.detailsView}>
+                <View>
+                    <Text style={styles.galleryTxt}>{strings.GALLERY}</Text>
                 </View>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Text style={styles.recentTxt}>{strings.RECENTS}</Text>
+                    <TouchableOpacity style={styles.downwardArrow}>
+                        <Image source={imagePath.downwardArrow} />
+                    </TouchableOpacity>
+                </View>
+            </View>
 
+            <ScrollView>
                 {/* ------------------------Image view-------------------- */}
                 <FlatList data={photos}
                     scrollEnabled={true}
@@ -202,6 +233,8 @@ const styles = StyleSheet.create({
         width: width,
         height: width,
         // borderRadius:width/2
+        opacity: 0.85,
+        position: 'relative'
     },
     galleryPhoto: {
         width: width / 3,
@@ -214,6 +247,18 @@ const styles = StyleSheet.create({
         position: 'relative',
         left: moderateScale(width - 100),
         bottom: moderateScale(80)
+    },
+    tickBox: {
+        position: 'absolute',
+        right: 20,
+        height: 10,
+        width: 10,
+        backgroundColor: 'pink'
+
+    },
+    tick: {
+        height: 10,
+        width: 10, backgroundColor: 'red'
     }
 });
 

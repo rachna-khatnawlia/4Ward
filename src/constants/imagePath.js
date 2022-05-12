@@ -32,10 +32,13 @@ export default {
   share: require('../assets/images/ic_direction.png'),
   userProfile: require('../assets/images/ic_usrr_1.png'),
   key: require('../assets/images/ic_key.png'),
-  logout: require('../assets/images/ic_logout.png'),  
+  logout: require('../assets/images/ic_logout.png'),
   cross: require('../assets/images/ic_cross.png'),
   edit: require('../assets/images/ic_edit.png'),
-  camera:require('../assets/images/camera.png'),
-  plus:require('../assets/images/ic_plus.png'),
+  camera: require('../assets/images/camera.png'),
+  plus: require('../assets/images/ic_plus.png'),
+  tick: require('../assets/images/ic_grey_tick.png'),
+  forwardArrow: require('../assets/images/arrowForward.png'),
+
 
 };

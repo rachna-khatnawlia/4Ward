@@ -1,7 +1,7 @@
 import { store } from "../store";
 import types from "../types";
 import { apiPost } from "../../utils/utils";
-import { EDIT_PROFILE_API, LOGIN_API, SIGNUP_API, UPDATE_PASSWORD_API } from "../../config/urls";
+import { EDIT_PROFILE_API, LOGIN_API, SIGNUP_API, SINGLE_IMAGE_POST_API, UPDATE_PASSWORD_API } from "../../config/urls";
 
 const { dispatch } = store;
 
@@ -60,4 +60,9 @@ export const Intro = (data) => {
       type: types.INTRO,
       payload: data,
   })
-};
+}
+
+// ----------------Single Image Upload Api Action-------------------
+export const singleImageApi = (data, header) => {
+  return apiPost(SINGLE_IMAGE_POST_API, data,header)
+}
