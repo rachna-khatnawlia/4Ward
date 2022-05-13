@@ -19,9 +19,12 @@ import ImagePicker from 'react-native-image-crop-picker';
 const EditProfile = ({ navigation }) => {
     const userData = useSelector(state => state.UserStatus.userLoginState);
     console.log("userDeatils on home page", userData);
+
+    const [isLoading, setIsLoading] = useState(true);
+
     // -------------------------------Updata API data-------------------------------------
     const [upDateData, setUpdateData] = useState({
-        profileImage,
+        post:userData?.profile,
         imageType: null,
         firstName: userData?.first_name,
         lastName: userData?.last_name,
@@ -30,23 +33,50 @@ const EditProfile = ({ navigation }) => {
         phoneCode: '+91',
     })
 
-    const { firstName, lastName, email, phone, phoneCode, profileImage } = upDateData;
+    const { firstName, lastName, email, phone, phoneCode, post } = upDateData;
     const updateState = (data) => setUpdateData(() => ({ ...upDateData, ...data }))
 
     // ------------------------------Update Entered Password Function----------------------
+      const imageUpload = (image) => {
+        setIsLoading(true);
+
+        let apiData = new FormData()
+        apiData.append('image', {
+            uri: image,
+            name: `${(Math.random() + 1).toString(36).substring(7)}.jpg`,
+            type: 'image/jpeg',
+        })
+        console.log("single pic API data : ", apiData)
+        let header = { "Content-Type": "multipart/form-data" }
+        actions.singleImageApi(apiData, header)
+            .then(res => {
+                console.log("single image api res_+++++", res)
+                alert("single image api hit successfully....!!!")
+                updateState({ post: res.data})
+                setIsLoading(false);
+            })
+            .catch(err => {
+                console.log(err, 'err');
+                alert(err?.message);
+            });
+    }
+
+    // ------------------------------Update Entered Password Function----------------------
     const onEditProfile = async () => {
-
-        let editAPIdata = {
-            image: profileImage,
-            first_name: firstName,
-            last_name: lastName,
-            email: email,
-            phone: phone
-        }
-        console.log("Edit API data : ", editAPIdata)
-
-        actions
-            .editProfile(editAPIdata)
+        console.log("image", post)
+        let form = new FormData();
+        form.append('first_name', firstName);
+        form.append('last_name', lastName);
+        form.append('email', email);
+        form.append('image', {
+          uri: post,
+          name: `${(Math.random() + 1).toString(36).substring(7)}.jpg`,
+          type: null,
+        });
+        
+        console.log("udate profile API data : ", form)
+        let header = { "Content-Type": "multipart/form-data" }
+        actions.editProfile(form, header)
             .then(res => {
                 console.log("Edit api res_+++++", res)
                 alert("Updated Profile successfully....!!!")
@@ -66,10 +96,7 @@ const EditProfile = ({ navigation }) => {
             cropping: true
         }).then(image => {
             console.log(image, "my image>>>>>>");
-            updateState({
-                profileImage: image?.sourceURL || image?.path,
-                imageType: image?.mime
-            })
+            imageUpload(image.path)
         });
     }
 
@@ -80,7 +107,7 @@ const EditProfile = ({ navigation }) => {
                 <BackWardArrow txtOnHeader={strings.PROFILE} />
 
                 <View style={{ marginVertical: moderateScaleVertical(20) }}>
-                    <Image source={(profileImage) ? { uri: profileImage } : imagePath.profilePic2} style={styles.profileImage} resizeMode='stretch' />
+                    <Image source={(post) ? { uri: post } : imagePath.profilePic2} style={styles.profileImage} resizeMode='stretch' />
                     <TouchableOpacity onPress={ImgPicker}>
                         <Image source={imagePath.edit} style={styles.editProfile} />
                     </TouchableOpacity>
