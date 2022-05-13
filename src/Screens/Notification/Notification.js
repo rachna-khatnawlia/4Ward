@@ -7,6 +7,7 @@ import HomeHeader from '../../Components/HomeHeader';
 import imagePath from '../../constants/imagePath';
 import strings from '../../constants/lang';
 import colors from '../../styles/colors';
+import WrapperContainer from '../../navigation/WrapperContainer';
 
 // create a component
 const Notification = () => {
@@ -56,7 +57,7 @@ const Notification = () => {
         )
     }
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: colors.themeColor, }}>
+        <WrapperContainer>
 
             <HomeHeader headerText={strings.NOTIFICATION} />
             <FlatList
@@ -64,7 +65,7 @@ const Notification = () => {
                 renderItem={renderItem}
             />
 
-        </SafeAreaView>
+        </WrapperContainer>
     );
 };
 

@@ -8,6 +8,7 @@ import HomeHeader from '../../Components/HomeHeader';
 import strings from '../../constants/lang';
 import colors from '../../styles/colors';
 import { moderateScale } from '../../styles/responsiveSize';
+import WrapperContainer from '../../navigation/WrapperContainer';
 
 const Search = () => {
     const locations = [
@@ -47,8 +48,7 @@ const Search = () => {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: colors.themeColor }}>
-
+        <WrapperContainer>
             <ScrollView>
                 {/* ----------------------Input Field----------------- */}
                 <CommonInput
@@ -69,7 +69,7 @@ const Search = () => {
                 />
             </ScrollView>
 
-        </SafeAreaView>
+        </WrapperContainer>
     );
 };
 

@@ -11,5 +11,6 @@ export default {
   greyUploadTime: '#B5B0B0',
   greyManualLocation: '#A5A5A5',
   greyLocation: '#C7C8C7',
-  greyTutText:  '#999999'
+  greyTutText:  '#999999',
+  whiteOpacity22: 'rgba(255,255,255,0.22)'
 };

@@ -2,7 +2,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
 import imagePath from '../constants/imagePath';
 import strings from '../constants/lang';
 import navigationStrings from '../navigation/navigationStrings';
@@ -15,10 +14,12 @@ import { height, moderateScale, moderateScaleVertical, textScale, width } from '
 // create a component
 export const HomePageFlatList = () => {
     const [post, setPost] = useState()
-
+    const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
+        setIsLoading(true)
         actions.getPost().then((res) => {
             // console.log(res.data, "getPostData++++++++++")
+            setIsLoading(false);
             setPost(res.data)
         })
     }, [])

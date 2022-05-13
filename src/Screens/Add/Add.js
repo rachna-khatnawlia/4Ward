@@ -11,6 +11,7 @@ import navigationStrings from '../../navigation/navigationStrings';
 import fontFamily from '../../styles/fontFamily';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import actions from '../../redux/actions';
+import WrapperContainer from '../../navigation/WrapperContainer';
 
 // create a component
 const Add = ({ navigation }) => {
@@ -136,12 +137,12 @@ const Add = ({ navigation }) => {
 
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: colors.themeColor, position: 'relative' }}>
+        <WrapperContainer>
 
             <HomeHeader headerText={strings.SELECT_PIC} forwardImage={true}
                 onPress={imageUpload}
             />
-            <ScrollView>
+            <ScrollView style={{marginBottom:moderateScale(108)}}>
                 <ImageBackground
                     style={styles.firstImage}
                     // key={index}
@@ -170,9 +171,7 @@ const Add = ({ navigation }) => {
                         // console.log("index of images is:", index)
 
                         return (
-                            <TouchableOpacity
-                                onPress={() => imageToSwap(element)}
-                            >
+                            <TouchableOpacity onPress={() => imageToSwap(element)}>
                                 <Image
                                     key={index}
                                     source={{ uri: element.item.node.image.uri }}
@@ -190,7 +189,7 @@ const Add = ({ navigation }) => {
             </TouchableOpacity>
 
 
-        </SafeAreaView>
+        </WrapperContainer>
     );
 };
 
@@ -241,7 +240,7 @@ const styles = StyleSheet.create({
         width: width / 6,
         position: 'relative',
         left: moderateScale(width - 100),
-        bottom: moderateScale(80)
+        bottom: moderateScale(200)
     },
     tickBox: {
         position: 'absolute',
