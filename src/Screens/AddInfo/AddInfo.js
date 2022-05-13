@@ -28,6 +28,7 @@ const AddInfo = ({ navigation, route }) => {
     const updateState = (data) => setpostData(() => ({ ...postData, ...data }))
 
     console.log("concatenated array", post)
+    const [isLoading, setIsLoading] = useState(false);
 
     // --------------------------------------LAUNCH CAMERA----------------------------
     const launchCamera = () => {
@@ -76,6 +77,8 @@ const AddInfo = ({ navigation, route }) => {
         );
 
     }
+
+    //--------------------------------delete image on cross button click--------------
     const cancelImage = (index) => {
         console.log("indexxxxxxx>>>>", index)
         let newArray = [...post];
@@ -84,8 +87,9 @@ const AddInfo = ({ navigation, route }) => {
 
     }
 
-
+    //---------------------------upload single image and  concat in array-------------
     const imageUpload = (image) => {
+        setIsLoading(true);
         let apiData = new FormData()
         apiData.append('image', {
             uri: image,
@@ -98,6 +102,7 @@ const AddInfo = ({ navigation, route }) => {
             .then(res => {
                 console.log("single image api res_+++++", res)
                 alert("single image api hit successfully....!!!")
+                setIsLoading(false);
                 updateState({ post: post.concat(res.data) })
             })
             .catch(err => {
@@ -105,22 +110,29 @@ const AddInfo = ({ navigation, route }) => {
                 alert(err?.message);
             });
     }
-    const _postApi = () => {
-        let apiData = {
-            images: post,
-            description: description,
-            latitude: "3.222",
-            longitude: "9.45682",
-            location_name: location,
-            type: "normal"
-        }
-        console.log("Post API data : ", apiData)
 
-        actions.post(apiData)
+    //--------------------------Send post on POST button--------------------
+    const _postApi = () => {
+        setIsLoading(true);
+        let apiData = new FormData();
+        post.map((item) => {
+            // console.log('item', item);
+            apiData.append('images[]', item)
+        });
+        apiData.append('description', description)
+        apiData.append('latitude', 3.222)
+        apiData.append('longitude', 9.45682)
+        apiData.append('location_name', location)
+        apiData.append('type', 11)
+
+        console.log("Post API data : ", apiData)
+        let header = { "Content-Type": "multipart/form-data" }
+        actions.post(apiData, header)
             .then(res => {
-                console.log("Edit api res_+++++", res)
-                alert("post successful....!!!")
-                navigation.navigate(navigationStrings.HOME)
+                console.log("post api res_+++++", res)
+                alert(res?.message);
+                setIsLoading(false);
+                navigation.navigate(navigationStrings.HOME, console.log(apiData))
             })
             .catch(err => {
                 console.log(err, 'err');
@@ -133,7 +145,7 @@ const AddInfo = ({ navigation, route }) => {
             <ScrollView>
                 <BackWardArrow txtOnHeader={strings.ADD_INFO} />
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    <View style={{ marginHorizontal: moderateScale(24), marginBottom: moderateScale(7), flexDirection: 'row', }}>
+                    <View style={{ marginHorizontal: moderateScale(24), marginBottom: moderateScale(7), flexDirection: 'row' }}>
 
                         {
                             post ? post.map((element, index) => {
@@ -192,7 +204,11 @@ const styles = StyleSheet.create({
 
         marginRight: moderateScale(12)
     },
-    crossIcon: { position: 'absolute', right: 5, top: -100 }
+    crossIcon: {
+        position: 'absolute',
+        right: 5,
+        top: -100
+    }
 });
 
 //make this component available to the app

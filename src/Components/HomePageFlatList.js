@@ -1,11 +1,12 @@
 //import liraries
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import imagePath from '../constants/imagePath';
 import strings from '../constants/lang';
 import navigationStrings from '../navigation/navigationStrings';
+import actions from '../redux/actions';
 import colors from '../styles/colors';
 import fontFamily from '../styles/fontFamily';
 import { height, moderateScale, moderateScaleVertical, textScale, width } from '../styles/responsiveSize';
@@ -13,7 +14,14 @@ import { height, moderateScale, moderateScaleVertical, textScale, width } from '
 
 // create a component
 export const HomePageFlatList = () => {
-    console.log(height, width)
+    const [post, setPost] = useState()
+
+    useEffect(() => {
+        actions.getPost().then((res) => {
+            // console.log(res.data, "getPostData++++++++++")
+            setPost(res.data)
+        })
+    }, [])
     const DATA = [
         {
             id: "1",
@@ -51,21 +59,22 @@ export const HomePageFlatList = () => {
     ];
 
     const navigation = useNavigation()
-    const renderItem = ({ item }) => {
+    const renderItem = (element, index) => {
+        console.log("element to render in flatlist", element)
         return (
             <View style={styles.flatListContainer}>
 
                 {/* -------------------------Profile Photo, name, location and options icon------------ */}
                 <View style={styles.profileNameContainer}>
                     <View style={styles.profilePhotoBox}>
-                        <Image source={item.profile} style={styles.profilePhoto} resizeMode='contain' />
+                        <Image source={{ uri: element.item.user.profile }} style={styles.profilePhoto} resizeMode='stretch' />
                     </View>
                     <View style={styles.nameLocation}>
                         <View>
-                            <Text style={styles.name}>{item.name}</Text>
+                            <Text style={styles.name}>{element.item.user.first_name} {element.item.user.last_name}</Text>
                         </View>
                         <View>
-                            <Text style={styles.location}>{item.location}</Text>
+                            <Text style={styles.location}>{element.item.location_name}</Text>
                         </View>
                     </View>
                     <TouchableOpacity style={styles.optionsBox}>
@@ -74,17 +83,17 @@ export const HomePageFlatList = () => {
                 </View>
 
                 {/* ---------------------------------------Posted Image------------------------------- */}
-                <TouchableOpacity onPress={() => navigation.navigate(navigationStrings.POST_DETAILS, { item: item })}>
-                    <Image source={item.image} style={styles.postedPic} resizeMode="cover" />
+                <TouchableOpacity onPress={() => navigation.navigate(navigationStrings.POST_DETAILS, { item: element })}>
+                    <Image source={element.item.images.file} style={styles.postedPic} resizeMode="cover" />
                 </TouchableOpacity>
 
                 {/* -----------------------------------Caption area---------------------------------- */}
                 <View style={styles.captionArea}>
-                    <Text style={styles.captionTxt}>{item.caption}</Text>
-                    <Text style={styles.uploadTimeTxt}>{item.uploaded}</Text>
+                    <Text style={styles.captionTxt}>{element.item.description}</Text>
+                    <Text style={styles.uploadTimeTxt}>{element.item.time_ago}</Text>
                     <View style={styles.likeComment}>
-                        <Text style={styles.likeCommentTxt}>{item.comments}</Text>
-                        <Text style={styles.likeCommentTxt}>{item.likes}</Text>
+                        <Text style={styles.likeCommentTxt}>{element.item.comment_count} Comments</Text>
+                        <Text style={styles.likeCommentTxt}>{element.item.like_count} Likes</Text>
                         <TouchableOpacity style={{ alignSelf: 'center' }}>
                             <Image source={imagePath.share} />
                         </TouchableOpacity>
@@ -96,8 +105,8 @@ export const HomePageFlatList = () => {
 
     return (
         <FlatList
-            data={DATA}
-            renderItem={renderItem}
+            data={post}
+            renderItem={(element, index) => renderItem(element, index)}
         />
     )
 }
@@ -120,9 +129,10 @@ const styles = StyleSheet.create({
         marginRight: moderateScale(16),
     },
     profilePhoto: {
-        height: height / 20,
-        width: width / 10,
+        height: width / 8.3,
+        width: width / 8.3,
         borderRadius: moderateScale(50),
+        // backgroundColor:'yello'
     },
     nameLocation: {
         flex: 0.9,

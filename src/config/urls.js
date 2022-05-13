@@ -8,3 +8,5 @@ export const EDIT_PROFILE_API = getApiUrl('/edit_profile');
 export const UPDATE_PASSWORD_API = getApiUrl('/change_password');
 export const SINGLE_IMAGE_POST_API = getApiUrl('/img_upload');
 export const POST_SEND_API = getApiUrl('/post_send');
+
+export const GET_POST_API = getApiUrl('/posts')

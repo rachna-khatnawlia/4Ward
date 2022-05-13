@@ -112,7 +112,7 @@ const Add = ({ navigation }) => {
 
 
     const imageUpload = () => {
-   
+
         let apiData = new FormData()
         apiData.append('image', {
             uri: selectPhoto,
@@ -125,8 +125,6 @@ const Add = ({ navigation }) => {
         actions.singleImageApi(apiData, header)
             .then(res => {
                 console.log("single image api res_+++++", res)
-             
-                // return;
                 navigation.navigate(navigationStrings.ADD_INFO, { image: res.data })
             })
             .catch(err => {
@@ -143,26 +141,26 @@ const Add = ({ navigation }) => {
             <HomeHeader headerText={strings.SELECT_PIC} forwardImage={true}
                 onPress={imageUpload}
             />
-            <ImageBackground
-                style={styles.firstImage}
-                // key={index}
-                source={{ uri: selectPhoto }}
-            >
-            </ImageBackground>
-            {/* -------------gallery AND RECENTS----------------- */}
-            <View style={styles.detailsView}>
-                <View>
-                    <Text style={styles.galleryTxt}>{strings.GALLERY}</Text>
-                </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={styles.recentTxt}>{strings.RECENTS}</Text>
-                    <TouchableOpacity style={styles.downwardArrow}>
-                        <Image source={imagePath.downwardArrow} />
-                    </TouchableOpacity>
-                </View>
-            </View>
-
             <ScrollView>
+                <ImageBackground
+                    style={styles.firstImage}
+                    // key={index}
+                    source={{ uri: selectPhoto }}
+                >
+                </ImageBackground>
+                {/* -------------gallery AND RECENTS----------------- */}
+                <View style={styles.detailsView}>
+                    <View>
+                        <Text style={styles.galleryTxt}>{strings.GALLERY}</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Text style={styles.recentTxt}>{strings.RECENTS}</Text>
+                        <TouchableOpacity style={styles.downwardArrow}>
+                            <Image source={imagePath.downwardArrow} />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
                 {/* ------------------------Image view-------------------- */}
                 <FlatList data={photos}
                     scrollEnabled={true}

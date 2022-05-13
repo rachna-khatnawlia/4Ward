@@ -1,7 +1,7 @@
 import { store } from "../store";
 import types from "../types";
-import { apiPost } from "../../utils/utils";
-import { EDIT_PROFILE_API, LOGIN_API, POST_SEND_API, SIGNUP_API, SINGLE_IMAGE_POST_API, UPDATE_PASSWORD_API } from "../../config/urls";
+import { apiGet, apiPost } from "../../utils/utils";
+import { EDIT_PROFILE_API, GET_POST_API, LOGIN_API, POST_SEND_API, SIGNUP_API, SINGLE_IMAGE_POST_API, UPDATE_PASSWORD_API } from "../../config/urls";
 
 const { dispatch } = store;
 
@@ -57,8 +57,8 @@ export const UpdatePassword = (data) => {
 export const Intro = (data) => {
   console.log("data>>>>>>>>>>>>>>>>>>", data)
   dispatch({
-      type: types.INTRO,
-      payload: data,
+    type: types.INTRO,
+    payload: data,
   })
 }
 
@@ -67,6 +67,10 @@ export const singleImageApi = (data, header) => {
   return apiPost(SINGLE_IMAGE_POST_API, data, header)
 }
 
-export const post = (data) =>{
-  return apiPost(POST_SEND_API, data);
+export const post = (data, header) => {
+  return apiPost(POST_SEND_API, data, header)
+}
+
+export const getPost = (data) => {
+  return apiGet(GET_POST_API, data)
 }

@@ -4,7 +4,7 @@ import {
   StyleSheet, Text, View
 } from 'react-native';
 
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import { store } from './src/redux/store';
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
 import { getItem, getLoginLocally } from './src/utils/utils';
@@ -42,7 +42,6 @@ const App = () => {
 
       {/* <StatusBar /> */}
       <Provider store={store}>
-
         <Routes />
       </Provider>
 

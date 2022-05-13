@@ -9,6 +9,7 @@ export default {
   INTRO: 'appIntroSlider',
 
   SINGLE_IMAGE_API:'Single_Image_Api',
-  SEND_POST:'Send_Post',
+  SUBMIT_POST:'Submit_Post',
+
 };
 

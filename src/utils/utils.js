@@ -145,9 +145,9 @@ export function apiPost(endPoint, data, headers = {}) {
 //     return apiReq(endPoint, data, 'delete', headers);
 // }
 
-// export function apiGet(endPoint, data, headers = {}, requestOptions) {
-//     return apiReq(endPoint, data, 'get', headers, requestOptions);
-// }
+export function apiGet(endPoint, data, headers = {}, requestOptions) {
+    return apiReq(endPoint, data, 'get', headers, requestOptions);
+}
 
 // export function apiPut(endPoint, data, headers = {}) {
 //     return apiReq(endPoint, data, 'put', headers);

@@ -34,7 +34,7 @@ export default function BottomTabNavigation() {
                     tabBarIcon: ({ focused }) => (
                         <Image
                             source={imagePath.home}
-                            style={[styles.tabIcon, { tintColor: focused ? colors.themeredColor : colors.white, }]}
+                            style={[style.tabIcon, { tintColor: focused ? colors.themeredColor : colors.white, }]}
                         />
                     ),
                 }}
@@ -45,7 +45,7 @@ export default function BottomTabNavigation() {
                     tabBarIcon: ({ focused }) => (
                         <Image
                             source={imagePath.search}
-                            style={[styles.tabIcon, { tintColor: focused ? colors.themeredColor : colors.white, }]}
+                            style={[style.tabIcon, { tintColor: focused ? colors.themeredColor : colors.white, }]}
                         />
                     ),
                 }}
@@ -56,7 +56,7 @@ export default function BottomTabNavigation() {
                     tabBarIcon: ({ focused }) => (
                         <Image
                             source={imagePath.add}
-                            style={[styles.tabIcon, { tintColor: focused ? colors.themeredColor : colors.white, }]}
+                            style={[style.tabIcon, { tintColor: focused ? colors.themeredColor : colors.white, }]}
                         />
                     ),
                 }}
@@ -67,7 +67,7 @@ export default function BottomTabNavigation() {
                     tabBarIcon: ({ focused }) => (
                         <Image
                             source={imagePath.notification}
-                            style={[styles.tabIcon, { tintColor: focused ? colors.themeredColor : colors.white, }]}
+                            style={[style.tabIcon, { tintColor: focused ? colors.themeredColor : colors.white, }]}
                         />
                     ),
                 }}
@@ -78,7 +78,7 @@ export default function BottomTabNavigation() {
                     tabBarIcon: ({ focused }) => (
                         <Image
                             source={imagePath.profile}
-                            style={[styles.tabIcon, { tintColor: focused ? colors.themeredColor : colors.white, }]}
+                            style={[style.tabIcon, { tintColor: focused ? colors.themeredColor : colors.white, }]}
                         />
                     ),
                 }}

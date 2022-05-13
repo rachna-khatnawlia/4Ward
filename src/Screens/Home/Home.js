@@ -7,7 +7,6 @@ import colors from '../../styles/colors';
 
 // create a component
 const Home = ({route}) => {
-    
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: colors.themeColor }}>
             <HomeHeader logoImage={true} locationImage={true} />
