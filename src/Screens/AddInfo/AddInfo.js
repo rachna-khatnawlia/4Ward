@@ -11,6 +11,7 @@ import imagePath from '../../constants/imagePath';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import actions from '../../redux/actions';
 import navigationStrings from '../../navigation/navigationStrings';
+import WrapperContainer from '../../Components/WrapperContainer';
 // create a component
 const AddInfo = ({ navigation, route }) => {
     const image = route?.params?.image;
@@ -90,6 +91,7 @@ const AddInfo = ({ navigation, route }) => {
     //---------------------------upload single image and  concat in array-------------
     const imageUpload = (image) => {
         setIsLoading(true);
+
         let apiData = new FormData()
         apiData.append('image', {
             uri: image,
@@ -102,8 +104,8 @@ const AddInfo = ({ navigation, route }) => {
             .then(res => {
                 console.log("single image api res_+++++", res)
                 alert("single image api hit successfully....!!!")
-                setIsLoading(false);
                 updateState({ post: post.concat(res.data) })
+                setIsLoading(false);
             })
             .catch(err => {
                 console.log(err, 'err');
@@ -141,7 +143,7 @@ const AddInfo = ({ navigation, route }) => {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: colors.themeColor }}>
+        <WrapperContainer isLoading={isLoading} withModal={isLoading}>
             <ScrollView>
                 <BackWardArrow txtOnHeader={strings.ADD_INFO} />
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -186,7 +188,7 @@ const AddInfo = ({ navigation, route }) => {
                     onPress={_postApi}
                 />
             </KeyboardAvoidingView>
-        </SafeAreaView>
+        </WrapperContainer>
     );
 };
 

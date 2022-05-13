@@ -7,7 +7,7 @@ import HomeHeader from '../../Components/HomeHeader';
 import imagePath from '../../constants/imagePath';
 import strings from '../../constants/lang';
 import colors from '../../styles/colors';
-import WrapperContainer from '../../navigation/WrapperContainer';
+import WrapperContainer from '../../Components/WrapperContainer';
 
 // create a component
 const Notification = () => {

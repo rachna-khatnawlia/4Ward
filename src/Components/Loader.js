@@ -4,7 +4,6 @@ import { BarIndicator } from 'react-native-indicators';
 import colors from '../styles/colors';
 import { height, width } from '../styles/responsiveSize';
 
-
 const LoadingComponent = () => {
   return (
     <View

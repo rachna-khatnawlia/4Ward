@@ -11,7 +11,7 @@ import navigationStrings from '../../navigation/navigationStrings';
 import fontFamily from '../../styles/fontFamily';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import actions from '../../redux/actions';
-import WrapperContainer from '../../navigation/WrapperContainer';
+import WrapperContainer from '../../Components/WrapperContainer';
 
 // create a component
 const Add = ({ navigation }) => {
@@ -23,6 +23,7 @@ const Add = ({ navigation }) => {
     const { photos, selectPhoto } = state;
     const updateState = (data) => setState((state) => ({ ...state, ...data }))
     // console.log('show photo', selectPhoto);
+    const [isLoading, setIsLoading] = useState(false)
 
     // --------------------------------Android Permissions--------------------------
     const hasAndroidPermission = async () => {
@@ -113,6 +114,7 @@ const Add = ({ navigation }) => {
 
 
     const imageUpload = () => {
+        setIsLoading(true)
 
         let apiData = new FormData()
         apiData.append('image', {
@@ -127,6 +129,7 @@ const Add = ({ navigation }) => {
             .then(res => {
                 console.log("single image api res_+++++", res)
                 navigation.navigate(navigationStrings.ADD_INFO, { image: res.data })
+                setIsLoading(false)
             })
             .catch(err => {
                 console.log(err, 'err');
@@ -137,7 +140,7 @@ const Add = ({ navigation }) => {
 
 
     return (
-        <WrapperContainer>
+        <WrapperContainer isLoading={isLoading} withModal={isLoading}>
 
             <HomeHeader headerText={strings.SELECT_PIC} forwardImage={true}
                 onPress={imageUpload}

@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { View, ScrollView, StyleSheet, Text, FlatList, Image, TouchableOpacity } from 'react-native';
 import HomeHeader from '../../Components/HomeHeader';
 import imagePath from '../../constants/imagePath';
-import WrapperContainer from '../../navigation/WrapperContainer';
 import colors from '../../styles/colors';
 import strings from '../../constants/lang/index';
 import navigationStrings from '../../navigation/navigationStrings';
@@ -11,7 +10,7 @@ import fontFamily from '../../styles/fontFamily';
 import { height, moderateScale, moderateScaleVertical, textScale, width } from '../../styles/responsiveSize';
 import actions from '../../redux/actions';
 import { useNavigation } from '@react-navigation/native';
-
+import WrapperContainer from '../../Components/WrapperContainer';
 
 // create a component
 const Home = ({ route }) => {
@@ -108,7 +107,7 @@ const Home = ({ route }) => {
     return (
         <WrapperContainer isLoading={isLoading} withModal={isLoading}>
             <HomeHeader logoImage={true} locationImage={true} />
-            <ScrollView>
+            <ScrollView style={{marginBottom:109}}>
                 <View>
                     <FlatList
                         data={post}

@@ -13,11 +13,13 @@ import { commonStyle } from '../../styles/commonStyles';
 import actions from '../../redux/actions';
 import { moderateScale } from '../../styles/responsiveSize';
 import { styles } from './style';
+import WrapperContainer from '../../Components/WrapperContainer';
 
 // create a component
 const Login1 = ({ navigation }) => {
 
     //--------------Fields ustate---------------
+    const [isLoading, setIsLoading] = useState(true);
     const [loginData, setloginData] = useState({
         phone: '',
         password: '',
@@ -29,6 +31,7 @@ const Login1 = ({ navigation }) => {
 
     //---------------Login Function-------------
     const handleLogin = async (data) => {
+        setIsLoading(true)
         let apiData = {
             phone: phone,
             phone_code: "+91",
@@ -42,6 +45,7 @@ const Login1 = ({ navigation }) => {
             // console.log("Login api result +++++", res)
             alert("User Login successfully....!!!");
             navigation.navigate(navigationStrings.BOTTOM_TAB)
+            setIsLoading(false)
         } catch (error) {
             console.log("error raised", error)
             alert(error?.message)
@@ -49,7 +53,7 @@ const Login1 = ({ navigation }) => {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: colors.themeColor }}>
+        <WrapperContainer>
             <ScrollView>
                 <BackWardArrow />
                 <View style={commonStyle.welcome}>
@@ -98,7 +102,7 @@ const Login1 = ({ navigation }) => {
                     onPress={handleLogin}
                 />
             </KeyboardAvoidingView>
-        </SafeAreaView>
+        </WrapperContainer>
     );
 };
 

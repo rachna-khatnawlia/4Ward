@@ -10,7 +10,7 @@ import strings from '../../constants/lang';
 import navigationStrings from '../../navigation/navigationStrings';
 import actions from '../../redux/actions';
 import colors from '../../styles/colors';
-import { height } from '../../styles/responsiveSize';
+import WrapperContainer from '../../Components/WrapperContainer';
 
 // create a component
 const Profile = ({ navigation }) => {
