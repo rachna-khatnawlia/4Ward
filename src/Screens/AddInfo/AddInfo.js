@@ -28,7 +28,7 @@ const AddInfo = ({ navigation, route }) => {
     const { description, location, post, imageType } = postData;
     const updateState = (data) => setpostData(() => ({ ...postData, ...data }))
 
-    console.log("concatenated array", post)
+    console.log("concatenated array", post, post.length)
     const [isLoading, setIsLoading] = useState(false);
 
     // --------------------------------------LAUNCH CAMERA----------------------------
@@ -90,27 +90,32 @@ const AddInfo = ({ navigation, route }) => {
 
     //---------------------------upload single image and  concat in array-------------
     const imageUpload = (image) => {
-        setIsLoading(true);
+        if (post.length <= 4) {
 
-        let apiData = new FormData()
-        apiData.append('image', {
-            uri: image,
-            name: `${(Math.random() + 1).toString(36).substring(7)}.jpg`,
-            type: 'image/jpeg',
-        })
-        console.log("single pic API data : ", apiData)
-        let header = { "Content-Type": "multipart/form-data" }
-        actions.singleImageApi(apiData, header)
-            .then(res => {
-                console.log("single image api res_+++++", res)
-                alert("single image api hit successfully....!!!")
-                updateState({ post: post.concat(res.data) })
-                setIsLoading(false);
+            setIsLoading(true);
+
+            let apiData = new FormData()
+            apiData.append('image', {
+                uri: image,
+                name: `${(Math.random() + 1).toString(36).substring(7)}.jpg`,
+                type: 'image/jpeg',
             })
-            .catch(err => {
-                console.log(err, 'err');
-                alert(err?.message);
-            });
+            console.log("single pic API data : ", apiData)
+            let header = { "Content-Type": "multipart/form-data" }
+            actions.singleImageApi(apiData, header)
+                .then(res => {
+                    // console.log("single image api res_+++++", res)
+                    // alert("single image api hit successfully....!!!")
+                    updateState({ post: post.concat(res.data) })
+                    setIsLoading(false);
+                })
+                .catch(err => {
+                    console.log(err, 'err');
+                    alert(err?.message);
+                });
+        } else {
+            alert("you can post maximum 5 pics at a time.")
+        }
     }
 
     //--------------------------Send post on POST button--------------------

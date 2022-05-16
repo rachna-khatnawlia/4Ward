@@ -25,7 +25,6 @@ const EditProfile = ({ navigation }) => {
     // -------------------------------Updata API data-------------------------------------
     const [upDateData, setUpdateData] = useState({
         post:userData?.profile,
-        imageType: null,
         firstName: userData?.first_name,
         lastName: userData?.last_name,
         email: userData?.email,
@@ -63,6 +62,8 @@ const EditProfile = ({ navigation }) => {
 
     // ------------------------------Update Entered Password Function----------------------
     const onEditProfile = async () => {
+        setIsLoading(true);
+
         console.log("image", post)
         let form = new FormData();
         form.append('first_name', firstName);
@@ -81,6 +82,7 @@ const EditProfile = ({ navigation }) => {
                 console.log("Edit api res_+++++", res)
                 alert("Updated Profile successfully....!!!")
                 navigation.goBack();
+                setIsLoading(false);
             })
             .catch(err => {
                 console.log(err, 'err');

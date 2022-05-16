@@ -71,6 +71,6 @@ export const post = (data, header) => {
   return apiPost(POST_SEND_API, data, header)
 }
 
-export const getPost = (data) => {
-  return apiGet(GET_POST_API, data)
+export const getPost = (query = '') => {
+  return apiGet(GET_POST_API + query)
 }

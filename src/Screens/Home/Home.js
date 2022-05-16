@@ -16,14 +16,19 @@ import WrapperContainer from '../../Components/WrapperContainer';
 const Home = ({ route }) => {
     const [post, setPost] = useState()
     const [isLoading, setIsLoading] = useState(true);
+    const [count, setCount] = useState(0)
+
     useEffect(() => {
+        let apiData = `?skip=${count}`;
         setIsLoading(true)
-        actions.getPost().then((res) => {
+        actions
+            .getPost(apiData)
+            .then((res) => {
             // console.log(res.data, "getPostData++++++++++")
             setIsLoading(false);
             setPost(res.data)
-        })
-    }, [])
+            })
+        }, [count])
     const DATA = [
         {
             id: "1",
@@ -61,8 +66,8 @@ const Home = ({ route }) => {
     ];
 
     const navigation = useNavigation()
-    const renderItem = (element, index) => {
-        console.log("element to render in flatlist", element)
+    const renderItem = (element) => {
+        console.log("element to render in flatlist", element.item.images.file, element.item.images.file.length)
         return (
             <View style={styles.flatListContainer}>
 
@@ -107,7 +112,7 @@ const Home = ({ route }) => {
     return (
         <WrapperContainer isLoading={isLoading} withModal={isLoading}>
             <HomeHeader logoImage={true} locationImage={true} />
-            <ScrollView style={{marginBottom:109}}>
+            <ScrollView style={{marginBottom:109}} showsVerticalScrollIndicator={false}>
                 <View>
                     <FlatList
                         data={post}
