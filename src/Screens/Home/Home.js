@@ -15,15 +15,16 @@ import Carousel, { Pagination } from 'react-native-snap-carousel';
 
 // create a component
 const Home = ({ route }) => {
+    // -------------useStates-----------------
     const [post, setPost] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [count, setCount] = useState(0);
     const [snapState, setSnapState] = useState(0);
     const [refresh, setRefresh] = useState(false);
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log("updated post data", post)
-    },[post])
+    }, [post])
 
     useEffect(() => {
         if (isLoading || refresh) {
@@ -32,9 +33,9 @@ const Home = ({ route }) => {
                 console.log("GET POST DATA+++++++++++++++++", res?.data)
                 setIsLoading(false)
                 setRefresh(false)
-                if(refresh){
+                if (refresh) {
                     setPost(res?.data)
-                }else{
+                } else {
                     setPost([...post, ...res?.data])
                 }
             }).catch((error) => {
@@ -43,6 +44,7 @@ const Home = ({ route }) => {
         }
     }, [isLoading, refresh])
 
+    // --------------------like API-------------------
     const _likePost = (element) => {
         const id = element.item.id;
         let likeStatus = Number(element.item.like_status) ? 0 : 1
@@ -77,6 +79,16 @@ const Home = ({ route }) => {
             })
     }
 
+    const _commentPost = (element) => {
+        navigation.navigate(
+            navigationStrings.SHOW_COMMENTS,
+            {
+                item:element
+            }
+        )
+    }
+
+    //-----------------------on refresh page--------------
     const _refresh = () => {
         setCount(0)
         setRefresh(true)
@@ -122,9 +134,9 @@ const Home = ({ route }) => {
                                     onSnapToItem={index => setSnapState(index)}
                                     renderItem={(elem, index) => {
                                         return (
-                                            <TouchableOpacity 
-                                                onPress={() => navigation.navigate(navigationStrings.POST_DETAILS, 
-                                                { item: element, picShow:elem.item })}
+                                            <TouchableOpacity
+                                                onPress={() => navigation.navigate(navigationStrings.POST_DETAILS,
+                                                    { item: element, picShow: elem.item })}
                                             >
                                                 <Image source={{ uri: elem.item }} style={styles.postedPic} resizeMode="cover" />
                                             </TouchableOpacity>
@@ -160,7 +172,9 @@ const Home = ({ route }) => {
                     <Text style={styles.captionTxt}>{element.item.description}</Text>
                     <Text style={styles.uploadTimeTxt}>{element.item.time_ago}</Text>
                     <View style={styles.likeComment}>
-                        <Text style={styles.likeCommentTxt}>{element.item.comment_count} Comments</Text>
+                        <TouchableOpacity onPress={() => _commentPost(element)}>
+                            <Text style={styles.likeCommentTxt}>{element.item.comment_count} Comments</Text>
+                        </TouchableOpacity>
                         <TouchableOpacity onPress={() => _likePost(element)}>
                             <Text style={styles.likeCommentTxt}>{element.item.like_count} Likes</Text>
                         </TouchableOpacity>
@@ -176,7 +190,7 @@ const Home = ({ route }) => {
     return (
         <WrapperContainer isLoading={isLoading} withModal={isLoading}>
             <HomeHeader logoImage={true} locationImage={true} />
-            <View style={{ paddingBottom: moderateScale(170) }}>
+            <View style={{ paddingBottom: moderateScale(120) }}>
                 <FlatList
                     data={post}
                     renderItem={(element, index) => renderItem(element, index)}

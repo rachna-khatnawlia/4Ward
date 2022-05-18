@@ -17,7 +17,7 @@ const WrapperContainer = ({
       <SafeAreaView style={{flex: 1,backgroundColor: statusBarColor,}}>
         <StatusBar backgroundColor={statusBarColor} barStyle={barStyle} />
         <Loader isLoading={isLoading} withModal={withModal} />
-        <View>{children}</View>
+       {children}
       </SafeAreaView>
     );
   };
