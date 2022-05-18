@@ -4,70 +4,62 @@ import { View, ScrollView, StyleSheet, Text, FlatList, Image, TouchableOpacity }
 import HomeHeader from '../../Components/HomeHeader';
 import imagePath from '../../constants/imagePath';
 import colors from '../../styles/colors';
-import strings from '../../constants/lang/index';
 import navigationStrings from '../../navigation/navigationStrings';
 import fontFamily from '../../styles/fontFamily';
 import { height, moderateScale, moderateScaleVertical, textScale, width } from '../../styles/responsiveSize';
 import actions from '../../redux/actions';
 import { useNavigation } from '@react-navigation/native';
 import WrapperContainer from '../../Components/WrapperContainer';
+import { isArray } from 'lodash';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
 
 // create a component
 const Home = ({ route }) => {
-    const [post, setPost] = useState()
+    const [post, setPost] = useState();
     const [isLoading, setIsLoading] = useState(true);
-    const [count, setCount] = useState(0)
+    const [count, setCount] = useState(0);
+    const [like, setLike] = useState(0);
+    const [snapState, setSnapState] = useState(0);
 
     useEffect(() => {
-        let apiData = `?skip=${count}`;
+        let apidata = `?skip=${count}`
         setIsLoading(true)
+        actions.getPost(apidata, {}).then((res) => {
+            console.log("GET POST DATA+++++++++++++++++", res)
+            setIsLoading(false)
+            setPost(res?.data)
+        }).catch((error) => {
+            console.log(error, "erorroro");
+        })
+    }, [count])
+
+    const _likePost = (element) => {
+        const id = element.item.id;
+        console.log(id, like);
+        if (like === 0) {
+            setLike(like + 1)
+        } else {
+            setLike(like - 1)
+        }
+
+        const apiData = {
+            post_id: id,
+            status: like
+        }
+        console.log(`like apiData+++++++++++++`, apiData);
         actions
-            .getPost(apiData)
+            .likePost(apiData)
             .then((res) => {
-            // console.log(res.data, "getPostData++++++++++")
-            setIsLoading(false);
-            setPost(res.data)
+                console.log("like Api response", res)
             })
-        }, [count])
-    const DATA = [
-        {
-            id: "1",
-            profile: imagePath.profilePic1,
-            name: strings.HOME_NAME1,
-            location: strings.HOME_LOC,
-            image: imagePath.homeFlatListPic4,
-            caption: strings.HOME_CAPTION,
-            uploaded: strings.HOME_UPLOAD_TIME,
-            comments: strings.HOME_COMMENTS,
-            likes: strings.HOME_LIKES,
-        },
-        {
-            id: "2",
-            profile: imagePath.profilePic2,
-            name: strings.HOME_NAME2,
-            location: strings.HOME_LOC,
-            image: imagePath.homeFlatListPic1,
-            caption: strings.HOME_CAPTION,
-            uploaded: strings.HOME_UPLOAD_TIME,
-            comments: strings.HOME_COMMENTS,
-            likes: strings.HOME_LIKES,
-        },
-        {
-            id: "3",
-            profile: imagePath.profilePic1,
-            name: strings.HOME_NAME3,
-            location: strings.HOME_LOC,
-            image: imagePath.homeFlatListPic3,
-            caption: strings.HOME_CAPTION,
-            uploaded: strings.HOME_UPLOAD_TIME,
-            comments: strings.HOME_COMMENTS,
-            likes: strings.HOME_LIKES,
-        },
-    ];
+            .catch((error) => {
+                console.log(error)
+            })
+    }
 
     const navigation = useNavigation()
-    const renderItem = (element) => {
-        console.log("element to render in flatlist", element.item.images.file, element.item.images.file.length)
+    const renderItem = (element, index) => {
+        console.log("element to render in flatlist", element, element.item.images.file.length)
         return (
             <View style={styles.flatListContainer}>
 
@@ -90,9 +82,50 @@ const Home = ({ route }) => {
                 </View>
 
                 {/* ---------------------------------------Posted Image------------------------------- */}
-                <TouchableOpacity onPress={() => navigation.navigate(navigationStrings.POST_DETAILS, { item: element })}>
-                    <Image source={element.item.images.file} style={styles.postedPic} resizeMode="cover" />
-                </TouchableOpacity>
+                <View>
+                    {
+                        element?.item?.images?.file &&
+                            isArray(element?.item?.images?.file) &&
+                            element?.item?.images?.file.length ? (
+                            <>
+                                <Carousel
+                                    data={element?.item?.images?.file}
+                                    sliderWidth={moderateScale(width - 60)}
+                                    itemWidth={moderateScale(width - 5)}
+                                    scrollEnabled={true}
+                                    horizontal
+                                    onSnapToItem={index => setSnapState(index)}
+                                    renderItem={elem => {
+                                        return (
+                                            <TouchableOpacity onPress={() => navigation.navigate(navigationStrings.POST_DETAILS, { item: element })}>
+                                                <Image source={{ uri: elem.item }} style={styles.postedPic} resizeMode="cover" />
+                                            </TouchableOpacity>
+                                        )
+                                    }}
+                                />
+                            </>
+                        ) : null
+                    }
+                    {
+                        <Pagination
+                            dotsLength={
+                                element?.item?.images?.file &&
+                                    isArray(element?.item?.images?.file) &&
+                                    element?.item?.images?.file.length > 1
+                                    ? element?.item?.images?.file.length
+                                    : []
+                            }
+                            activeDotIndex={snapState}
+                            containerStyle={{ paddingVertical: 0 }}
+                            dotColor={colors.themeredColor}
+                            dotStyle={{ width: moderateScale(8), height: moderateScale(8), borderRadius: width / 2, marginHorizontal: -5 }}
+                            inactiveDotStyle={{ width: moderateScale(17), height: moderateScale(17), borderRadius: width / 2, marginHorizontal: -10 }}
+                            inactiveDotColor={'black'}
+                            inactiveDotOpacity={0.4}
+                            activeOpacity={0.8}
+                        />
+                    }
+                </View>
 
                 {/* -----------------------------------Caption area---------------------------------- */}
                 <View style={styles.captionArea}>
@@ -100,7 +133,9 @@ const Home = ({ route }) => {
                     <Text style={styles.uploadTimeTxt}>{element.item.time_ago}</Text>
                     <View style={styles.likeComment}>
                         <Text style={styles.likeCommentTxt}>{element.item.comment_count} Comments</Text>
-                        <Text style={styles.likeCommentTxt}>{element.item.like_count} Likes</Text>
+                        <TouchableOpacity onPress={() => _likePost(element)}>
+                            <Text style={styles.likeCommentTxt}>{element.item.like_count} Likes</Text>
+                        </TouchableOpacity>
                         <TouchableOpacity style={{ alignSelf: 'center' }}>
                             <Image source={imagePath.share} />
                         </TouchableOpacity>
@@ -109,17 +144,27 @@ const Home = ({ route }) => {
             </View>
         )
     }
+
+
+    const _onEndReached = () => {
+        console.log('list ended');
+    }
+
     return (
         <WrapperContainer isLoading={isLoading} withModal={isLoading}>
             <HomeHeader logoImage={true} locationImage={true} />
-            <ScrollView style={{marginBottom:109}} showsVerticalScrollIndicator={false}>
-                <View>
-                    <FlatList
-                        data={post}
-                        renderItem={(element, index) => renderItem(element, index)}
-                    />
-                </View>
-            </ScrollView >
+            {/* <ScrollView style={{ marginBottom: 109 }} showsVerticalScrollIndicator={false}> */}
+            <View>
+                <FlatList
+                    data={post}
+                    renderItem={(element, index) => renderItem(element, index)}
+                    onEndReached={({ }) => {
+                        console.log('llistn endededne');
+                    }}
+                    onEndReachedThreshold={0.5}
+                />
+            </View>
+            {/* </ScrollView > */}
         </WrapperContainer>
     );
 };
@@ -173,12 +218,16 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end'
     },
     postedPic: {
+        // alignSelf: 'center',
+        // height: height / 2.5,
+        // width: height/3,
+        width: moderateScale(width - 20),
+        height: moderateScale(width - 40),
+        marginVertical: moderateScaleVertical(10),
         alignSelf: 'center',
-        height: height / 2.5,
-        width: width - 62,
     },
     captionArea: {
-        paddingVertical: moderateScaleVertical(12),
+        paddingBottom: moderateScale(20),
         paddingHorizontal: width / 20
     },
     captionTxt: {

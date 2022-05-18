@@ -1,7 +1,7 @@
 import { store } from "../store";
-import types from "../types";
 import { apiGet, apiPost } from "../../utils/utils";
-import { EDIT_PROFILE_API, GET_POST_API, LOGIN_API, POST_SEND_API, SIGNUP_API, SINGLE_IMAGE_POST_API, UPDATE_PASSWORD_API } from "../../config/urls";
+import { EDIT_PROFILE_API, GET_POST_API, LOGIN_API, POST_LIKE_API, POST_SEND_API, SIGNUP_API, SINGLE_IMAGE_POST_API, UPDATE_PASSWORD_API } from "../../config/urls";
+import types from "../types";
 
 const { dispatch } = store;
 
@@ -71,6 +71,20 @@ export const post = (data, header) => {
   return apiPost(POST_SEND_API, data, header)
 }
 
-export const getPost = (query = '') => {
-  return apiGet(GET_POST_API + query)
+export const getPost = (query='',data={}) =>{
+ 
+return new Promise((resolve, reject) => {
+  apiGet(GET_POST_API+query, data)
+    .then((res) => { 
+      resolve(res);
+    })
+    .catch(error => {
+      reject(error);
+    });
+});
+
+}
+
+export const likePost = (data) =>{
+  return apiPost(POST_LIKE_API, data)
 }

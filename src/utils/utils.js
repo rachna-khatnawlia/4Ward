@@ -52,9 +52,6 @@ export const removeLoginLocally = async () => {
 //     });
 // }
 
-
-
-
 //---------------------------Working with API---------------------------------
 const { dispatch, getState } = store;
 
@@ -69,7 +66,6 @@ export async function getHeaders() {
     }
     return {};
 }
-
 
 export async function apiReq(
     endPoint,

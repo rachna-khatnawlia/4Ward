@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import Routes from './src/navigation/Routes';
-import {
-  StyleSheet, Text, View
-} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 import { Provider, useSelector } from 'react-redux';
 import { store } from './src/redux/store';
@@ -18,18 +16,19 @@ const App = () => {
   useEffect(() => {
     GoogleSignin.configure();
 
-    getItem('introdata').then((res)=>{
-      console.log(res,"getItem>>>res");
-      if(res != null){
-        actions.Intro(res)
-      }
-    })
-
     getLoginLocally().then((res) => {
       console.log("GetLoginValue", res);
       dispatch({
         type: types.LOGIN,
         payload: res
+      })
+
+      getItem('introdata').then((res) => {
+        console.log(res, "getItem>>>res");
+        if (res != null) {
+
+          actions.Intro(res)
+        }
       })
     })
     setTimeout(() => {
@@ -39,19 +38,11 @@ const App = () => {
 
   return (
     <View style={{ flex: 1 }}>
-
-      {/* <StatusBar /> */}
       <Provider store={store}>
         <Routes />
       </Provider>
-
-
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-
-});
 
 export default App;
