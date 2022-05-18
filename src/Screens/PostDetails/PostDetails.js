@@ -8,24 +8,26 @@ import { View, Text, SafeAreaView, TouchableOpacity, Image, ImageBackground } fr
 
 // create a component
 const PostDetails = ({ navigation, route }) => {
-    const profile = route?.params?.item.profile;
-    const fullName = route?.params?.item.name;
-    const image = route?.params?.item.image;
-    const location = route?.params?.item.location;
-    const caption = route?.params?.item.caption;
-    const uploaded = route?.params?.item.uploaded;
+    console.log(route?.params?.picShow)
+    const profile = route?.params?.item?.item?.user?.profile;
+    const fname = route?.params?.item?.item?.user?.first_name;
+    const lname = route?.params?.item?.item?.name?.last_name;
+    const image = route?.params?.picShow;
+    const location = route?.params?.item?.item?.location_name;
+    const caption = route?.params?.item?.item?.description;
+    const uploaded = route?.params?.item?.item?.time_ago;
     return (
         <View style={styles.screen}>
-            <ImageBackground source={image} style={styles.imgBackground} resizeMode="stretch">
+            <ImageBackground source={{uri:image}} style={styles.imgBackground} resizeMode="stretch">
                 <SafeAreaView style={{ justifyContent: 'space-between', flex: 1 }}>
 
                     {/* ------------------------Profile Pic, name & location----------------------------- */}
                     <View style={styles.nameLocationContainer}>
                         <View style={styles.profilePhotoBox}>
-                            <Image source={profile} style={styles.profilePic} />
+                            <Image source={{uri:profile}} style={styles.profilePic} />
                         </View>
                         <View style={styles.nameLocation}>
-                            <Text style={styles.name}>{fullName}</Text>
+                            <Text style={styles.name}>{fname} {lname}</Text>
                             <Text style={styles.location}>{location}</Text>
                         </View>
                         <TouchableOpacity style={styles.optionsBox} onPress={() => navigation.goBack()}>

@@ -41,7 +41,8 @@ export const styles = StyleSheet.create({
     location: {
         fontFamily: fontFamily.barlowRegular,
         fontSize: textScale(13),
-        color: colors.white,
+        // color: colors.white,
+        color:'black',
         // paddingTop:moderateScale(1)
     },
     optionsBox: {

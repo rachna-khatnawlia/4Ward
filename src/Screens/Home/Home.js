@@ -1,6 +1,6 @@
 //import liraries
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, StyleSheet, Text, FlatList, Image, TouchableOpacity } from 'react-native';
+import { View, ScrollView, StyleSheet, Text, FlatList, Image, TouchableOpacity, RefreshControl } from 'react-native';
 import HomeHeader from '../../Components/HomeHeader';
 import imagePath from '../../constants/imagePath';
 import colors from '../../styles/colors';
@@ -10,51 +10,76 @@ import { height, moderateScale, moderateScaleVertical, textScale, width } from '
 import actions from '../../redux/actions';
 import { useNavigation } from '@react-navigation/native';
 import WrapperContainer from '../../Components/WrapperContainer';
-import { isArray } from 'lodash';
+import { cloneDeep, isArray } from 'lodash';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
 // create a component
 const Home = ({ route }) => {
-    const [post, setPost] = useState();
+    const [post, setPost] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [count, setCount] = useState(0);
-    const [like, setLike] = useState(0);
     const [snapState, setSnapState] = useState(0);
+    const [refresh, setRefresh] = useState(false);
+
+    useEffect(()=>{
+        console.log("updated post data", post)
+    },[post])
 
     useEffect(() => {
-        let apidata = `?skip=${count}`
-        setIsLoading(true)
-        actions.getPost(apidata, {}).then((res) => {
-            console.log("GET POST DATA+++++++++++++++++", res)
-            setIsLoading(false)
-            setPost(res?.data)
-        }).catch((error) => {
-            console.log(error, "erorroro");
-        })
-    }, [count])
+        if (isLoading || refresh) {
+            let apidata = `?skip=${count}`
+            actions.getPost(apidata, {}).then((res) => {
+                console.log("GET POST DATA+++++++++++++++++", res?.data)
+                setIsLoading(false)
+                setRefresh(false)
+                if(refresh){
+                    setPost(res?.data)
+                }else{
+                    setPost([...post, ...res?.data])
+                }
+            }).catch((error) => {
+                console.log(error, "erorroro");
+            })
+        }
+    }, [isLoading, refresh])
 
     const _likePost = (element) => {
         const id = element.item.id;
-        console.log(id, like);
-        if (like === 0) {
-            setLike(like + 1)
-        } else {
-            setLike(like - 1)
-        }
+        let likeStatus = Number(element.item.like_status) ? 0 : 1
+        console.log("id and like status", id, likeStatus);
 
         const apiData = {
             post_id: id,
-            status: like
+            status: likeStatus
         }
         console.log(`like apiData+++++++++++++`, apiData);
+
         actions
             .likePost(apiData)
             .then((res) => {
                 console.log("like Api response", res)
+                let newArray = cloneDeep(post)
+                newArray = newArray.map((item, index) => {
+                    if (item?.id == id) {
+                        item.like_status = likeStatus,
+                            item.like_count = likeStatus ? Number(item?.like_count) + 1 : Number(item?.like_count) - 1;
+                        return item
+                    }
+                    else {
+                        return item
+                    }
+                })
+                setPost(newArray)
+                console.log(newArray, "")
             })
             .catch((error) => {
                 console.log(error)
             })
+    }
+
+    const _refresh = () => {
+        setCount(0)
+        setRefresh(true)
     }
 
     const navigation = useNavigation()
@@ -95,9 +120,12 @@ const Home = ({ route }) => {
                                     scrollEnabled={true}
                                     horizontal
                                     onSnapToItem={index => setSnapState(index)}
-                                    renderItem={elem => {
+                                    renderItem={(elem, index) => {
                                         return (
-                                            <TouchableOpacity onPress={() => navigation.navigate(navigationStrings.POST_DETAILS, { item: element })}>
+                                            <TouchableOpacity 
+                                                onPress={() => navigation.navigate(navigationStrings.POST_DETAILS, 
+                                                { item: element, picShow:elem.item })}
+                                            >
                                                 <Image source={{ uri: elem.item }} style={styles.postedPic} resizeMode="cover" />
                                             </TouchableOpacity>
                                         )
@@ -145,26 +173,33 @@ const Home = ({ route }) => {
         )
     }
 
-
-    const _onEndReached = () => {
-        console.log('list ended');
-    }
-
     return (
         <WrapperContainer isLoading={isLoading} withModal={isLoading}>
             <HomeHeader logoImage={true} locationImage={true} />
-            {/* <ScrollView style={{ marginBottom: 109 }} showsVerticalScrollIndicator={false}> */}
-            <View>
+            <View style={{ paddingBottom: moderateScale(170) }}>
                 <FlatList
                     data={post}
                     renderItem={(element, index) => renderItem(element, index)}
                     onEndReached={({ }) => {
-                        console.log('llistn endededne');
+                        alert('list ended');
+                        console.log("count+++++++", count);
+                        setCount(count + 8);
+                        setIsLoading(true);
                     }}
                     onEndReachedThreshold={0.5}
+                    refreshControl={
+                        <RefreshControl
+                            onRefresh={_refresh}
+                            refreshing={refresh}
+                            title="Pull to refresh"
+                            tintColor={colors.themeredColor}
+                            titleColor="#fff"
+                        />
+                    }
+                    extraData={post}
+
                 />
             </View>
-            {/* </ScrollView > */}
         </WrapperContainer>
     );
 };
