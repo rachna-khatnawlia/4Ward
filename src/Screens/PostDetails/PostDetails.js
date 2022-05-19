@@ -8,7 +8,7 @@ import { View, Text, SafeAreaView, TouchableOpacity, Image, ImageBackground } fr
 
 // create a component
 const PostDetails = ({ navigation, route }) => {
-    console.log(route?.params?.picShow)
+    // console.log(route?.params?.picShow)
     const profile = route?.params?.item?.item?.user?.profile;
     const fname = route?.params?.item?.item?.user?.first_name;
     const lname = route?.params?.item?.item?.name?.last_name;
@@ -16,6 +16,7 @@ const PostDetails = ({ navigation, route }) => {
     const location = route?.params?.item?.item?.location_name;
     const caption = route?.params?.item?.item?.description;
     const uploaded = route?.params?.item?.item?.time_ago;
+    
     return (
         <View style={styles.screen}>
             <ImageBackground source={{uri:image}} style={styles.imgBackground} resizeMode="stretch">

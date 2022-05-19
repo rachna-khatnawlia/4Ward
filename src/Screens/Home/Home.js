@@ -1,12 +1,12 @@
 //import liraries
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, StyleSheet, Text, FlatList, Image, TouchableOpacity, RefreshControl } from 'react-native';
+import { View, StyleSheet, Text, FlatList, Image, TouchableOpacity, RefreshControl } from 'react-native';
 import HomeHeader from '../../Components/HomeHeader';
 import imagePath from '../../constants/imagePath';
 import colors from '../../styles/colors';
 import navigationStrings from '../../navigation/navigationStrings';
 import fontFamily from '../../styles/fontFamily';
-import { height, moderateScale, moderateScaleVertical, textScale, width } from '../../styles/responsiveSize';
+import { moderateScale, moderateScaleVertical, textScale, width } from '../../styles/responsiveSize';
 import actions from '../../redux/actions';
 import { useNavigation } from '@react-navigation/native';
 import WrapperContainer from '../../Components/WrapperContainer';

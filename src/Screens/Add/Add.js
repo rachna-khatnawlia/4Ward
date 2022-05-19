@@ -145,7 +145,7 @@ const Add = ({ navigation }) => {
             <HomeHeader headerText={strings.SELECT_PIC} forwardImage={true}
                 onPress={imageUpload}
             />
-            <ScrollView style={{marginBottom:moderateScale(108)}}>
+            <ScrollView>
                 <ImageBackground
                     style={styles.firstImage}
                     // key={index}
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
         width: width / 6,
         position: 'relative',
         left: moderateScale(width - 100),
-        bottom: moderateScale(200)
+        bottom: moderateScale(100)
     },
     tickBox: {
         position: 'absolute',
