@@ -58,4 +58,7 @@ export default {
     ADD_INFO:'Add info',
     WRITE_DESCRIPTION_HERE:'Write description here...',
     ADD_LOCATION:'Add location',
+    COMMENTS:'Comments',
+    COMMENTED_BY:'Commented By',
+    PULL_TO_REFRESH: "Pull to refresh",
 }   
