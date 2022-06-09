@@ -355,6 +355,8 @@ PODS:
     - React
   - react-native-image-picker (4.8.2):
     - React-Core
+  - react-native-maps (0.31.1):
+    - React-Core
   - react-native-safe-area-context (4.2.5):
     - RCT-Folly
     - RCTRequired
@@ -534,6 +536,7 @@ DEPENDENCIES:
   - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
   - react-native-heic-converter (from `../node_modules/react-native-heic-converter`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
+  - react-native-maps (from `../node_modules/react-native-maps`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
@@ -637,6 +640,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-heic-converter"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
+  react-native-maps:
+    :path: "../node_modules/react-native-maps"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-splash-screen:
@@ -736,6 +741,7 @@ SPEC CHECKSUMS:
   react-native-fbsdk: 8e92c7a334fd8d9c2b5d8b8fcd7ae2c314161099
   react-native-heic-converter: dab6fa746df207995c145cdd3cebb989ca799a1b
   react-native-image-picker: 1ccfc97709f680a7167ccb758c32466b466c96e2
+  react-native-maps: 8b8bfada2c86205a7f5a07dd1f92f29b33ea83aa
   react-native-safe-area-context: ebf8c413eb8b5f7c392a036a315eb7b46b96845f
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
   React-perflogger: 30ab8d6db10e175626069e742eead3ebe8f24fd5

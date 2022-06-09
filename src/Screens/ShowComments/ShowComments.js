@@ -1,4 +1,5 @@
 //import liraries
+import { reverse } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, TouchableOpacity, RefreshControl, KeyboardAvoidingView, Platform, FlatList } from 'react-native';
 import Button from '../../Components/ButtonComponent';
@@ -30,6 +31,7 @@ const ShowComments = ({ navigation, route }) => {
     const [refresh, setRefresh] = useState(false);
 
     useEffect(() => {
+        // console.log("comments+++++++", );
         if (isLoading || refresh) {
 
             let apidata = `?post_id=${post_id}&skip=${count}`
@@ -45,6 +47,7 @@ const ShowComments = ({ navigation, route }) => {
                         setComment([...comment, ...res.data]);
                     }
                     setIsLoading(false)
+                    setRefresh(false)
                 })
                 .catch(err => {
                     console.log("comment error", err);
@@ -107,7 +110,7 @@ const ShowComments = ({ navigation, route }) => {
     return (
         <WrapperContainer isLoading={isLoading} withModal={isLoading}>
             {/* --------------_Comments Heading--------------- */}
-            <Text style={[styles.name, styles.commentsHeading ]}>{strings.COMMENTS}</Text>
+            <Text style={[styles.name, styles.commentsHeading]}>{strings.COMMENTS}</Text>
             <View style={styles.commentcontainer}>
                 <View style={styles.nameLocationContainer}>
                     <Image source={{ uri: profile }} style={styles.profilePic} />
@@ -140,7 +143,7 @@ const ShowComments = ({ navigation, route }) => {
                         titleColor="#fff"
                     />
                 }
-            // inverted={true}
+                // inverted={true}
             />
 
             {/* ------------CommentInput and Button----------------- */}
