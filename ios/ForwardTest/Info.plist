@@ -27,12 +27,31 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>fb933118164037218</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
 				<string>com.googleusercontent.apps.908914972548-96k72cl3afvabs5ombanfgqnugfi5pq7</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>FacebookAppID</key>
+	<string>933118164037218</string>
+	<key>FacebookDisplayName</key>
+	<string>FORWARD</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -46,40 +65,16 @@
 			</dict>
 		</dict>
 	</dict>
-  
-  <key>CFBundleURLTypes</key>
-  <array>
-    <dict>
-    <key>CFBundleURLSchemes</key>
-    <array>
-      <string>fb933118164037218</string>
-    </array>
-    </dict>
-  </array>
-  <key>FacebookAppID</key>
-  <string>933118164037218</string>
-  <key>FacebookDisplayName</key>
-  <string>FORWARD</string>
-  
-  <key>LSApplicationQueriesSchemes</key>
-  <array>
-    <string>fbapi</string>
-    <string>fb-messenger-api</string>
-    <string>fbauth2</string>
-    <string>fbshareextension</string>
-  </array>
-  
 	<key>NSCameraUsageDescription</key>
-  	<string>Require Camera Permission</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Require Microphone Permission</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Require Gallery Permission</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Require Gallery Permission</string>
-
+	<string>Require Camera Permission</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Require Microphone Permission</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Require Gallery Permission</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Require Gallery Permission</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Barlow-Bold.ttf</string>
